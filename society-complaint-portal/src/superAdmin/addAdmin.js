@@ -21,7 +21,7 @@ const AddAdmin = () =>{
     password:''
    })
 
-   function nameHandler(event){
+   function nameHandler(event){ //name handler
      setUserInputs({
         ...userInputs,
         name: event.target.value
