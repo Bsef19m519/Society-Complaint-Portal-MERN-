@@ -1,0 +1,87 @@
+.Complaint-form-container{
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+  margin-left: 225px;
+  margin-right: 225px;
+  padding: 20px;
+  background-color: navy;
+}
+.complaint-button{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 10px;
+}
+
+.register-txt{
+  text-align: center;
+  color: navy;
+  font-weight: 500;
+  font-size: 45px;
+  margin-left: 260px;
+  margin-right: 260px;
+}
+
+.register-txt:hover{
+  background-color: navy;
+  border: 2px solid white;
+  border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    font-size: 45px;
+}
+
+
+/* form {
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    height: 75vh;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  }
+  h1{
+    color: navy;
+    font-weight: 500;
+    font-size: 45px;
+}
+h1:hover{
+    background-color: navy;
+    color: white;
+    font-weight: 600;
+    font-size: 45px;
+}
+
+  .inputs-container{
+    
+    border-radius: 5px;
+    background-color: navy;
+  }
+
+  input[type="file"] {
+    background-color: transparent;
+    cursor: grab;
+    font-size: 15px;
+    border-radius: 10px;
+    color: #fff;
+    
+  }
+
+  label{
+    color: white;
+    font-size: 20px;
+    font-weight: 400px;
+  }
+  
+  .input-container {
+    gap: 8px;
+    margin: 10px;
+  }
+  
+  
+  
+  
+   */

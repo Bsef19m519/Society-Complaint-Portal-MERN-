@@ -1,0 +1,23 @@
+.homeDiv{
+    margin-top: 110px;
+    display: flex;
+    color: white;
+    /* border:2px solid red; */
+    border-radius: 20px;
+    width: 1100px;
+    margin-left: 85px;
+    padding: 0px 0px 0px 50px;
+    font-size: 20px;
+    word-spacing: 15px;
+    text-align: justify;
+    line-height: 40px;
+}
+
+.homePara{
+    /* border: 2px solid black; */
+    margin-right: 20px;
+}
+.complaintPic{
+    width: 300px;
+    border-radius: 20px;
+}

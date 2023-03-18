@@ -1,0 +1,7 @@
+.App-header {
+  background-image: url('backgroundImage.png');
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: black;
+}

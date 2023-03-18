@@ -1,0 +1,100 @@
+ .form-container{
+  margin-left: 550px;
+  margin-top: 150px;
+  /* border: 2px solid yellow; */
+  
+ }
+ 
+ .loginDiv{
+  color: white;
+  font-weight: 600;
+  padding: 10px;
+ }
+ .loginForm{
+   border: 2px solid white; 
+   border-radius: 10px;
+  width: 220px;
+  background-color: navy;
+ }
+ .login-txt{
+    color: white;
+    font-size: 25px;
+    font-weight: 500px;
+    padding-left: 10px;
+ }
+ 
+ 
+ 
+ /* .app {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 82vh;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  } 
+  
+  input[type="text"],
+  input[type="password"] {
+    height: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  input[type="submit"] {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    background: #01d28e;
+    border: 1px solid #01d28e;
+    color: #fff;
+    padding: 10px 20px;
+  }
+  
+  input[type="submit"] {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    background: #01d28e;
+    border: 1px solid #01d28e;
+    color: #fff;
+    padding: 10px 20px;
+  }
+  
+  input[type="submit"]:hover {
+    background: #6cf0c2;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+  label{
+    color: white;
+  }
+  
+   .login-form {
+    background-color: white;
+    padding: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+  } 
+  
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .title {
+    font-size: 25px;
+    color: white;
+    
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px;
+  }
+   */
