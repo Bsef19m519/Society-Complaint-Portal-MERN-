@@ -1,0 +1,24 @@
+.headingDiv{
+    text-align: center;
+    justify-content: center;
+    line-height: 50px;
+    letter-spacing: 3px;
+    /* border: 2px solid red; */
+}
+.paraDiv{
+    
+     /* border: 2px solid black;  */
+    font-size: 20px;
+    justify-content: center;
+    align-content: center;
+    padding-left:130px;
+    padding-right:130px;
+    justify-content: center;
+    text-align: justify;
+
+}
+.smallPara{
+    color: navy;
+    font-size: 16px;
+    margin-top: -30px;
+}

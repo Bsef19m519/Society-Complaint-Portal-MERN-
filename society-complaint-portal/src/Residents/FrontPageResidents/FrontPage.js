@@ -1,6 +1,6 @@
 import React from 'react';
 import './FrontPage.css'
-import ScreenBtn from './Button/ScreenButton';
+import ScreenBtn from '../../components/Button/ScreenButton';
 import { useNavigate } from 'react-router-dom';
 
 const FrontPage = () => {

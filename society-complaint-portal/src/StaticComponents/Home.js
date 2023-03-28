@@ -1,17 +1,23 @@
 import React from "react";
 import "./Home.css";
-import complaint from "./complaint4.jpg"
+import home5 from "./home5.jpg";
+import About from "./About";
+import Service from "./Service";
+import Footer from "../components/Footer/Footer";
+// import Header from "../components/Header/Header";
+// import complaint from "./complaint4.jpg"
 
-const Home = () => {
-    return(
-        <>
-        <div className="homeDiv">
-            <p className="homePara"><b><i>Society Complaint Portal</i></b> is a FCIT-student's owned Complaint Portal which is basically a website that runs on both desktops and mobiles. It is a tool where the residence of a society can registered their complaint against the other residence of the society. A person can register the complaint anonymously. Actions will be taken on the complaint within a week and if they are not taken, the admins would be punished accordingly.</p>
-            <img className = "complaintPic" src = {complaint} alt = "complaint pic"/>
-        </div>
-        
-        </>
-    );
-}
+const Home = ({ aboutRef, serviceRef, goAbout }) => {
+  return (
+    <>
+      <div className="homeDiv">
+        <img className="complaintPic" src={home5} alt="home5 pic" />
+      </div>
+      <About aboutRef={aboutRef} />
+      <Service serviceRef={serviceRef} />
+      <Footer />
+    </>
+  );
+};
 
 export default Home;

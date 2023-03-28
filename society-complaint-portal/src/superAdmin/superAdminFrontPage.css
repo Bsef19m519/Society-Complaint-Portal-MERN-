@@ -1,0 +1,35 @@
+.SAcontainerDiv {
+  background-image: url("../components/Login/pmdu-bg1.jpg");
+  background-repeat: no-repeat;
+  background-size: 1320px 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SA-content-container-div {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  width: 400px;
+  height: 550px;
+  background-color: #cccccc;
+}
+
+.SA-screen-button-div {
+  margin-left: 15px;
+  margin-right: 10px;
+}
+.SAloginIcon {
+  margin-left: 145px;
+  margin-top: 20px;
+  width: 100px;
+  border: 2px solid white;
+  border-radius: 300px;
+}
+
+.SAlogin-txt {
+  color: black;
+  margin-left: 110px;
+  margin-top: -3px;
+}

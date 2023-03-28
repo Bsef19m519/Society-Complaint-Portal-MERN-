@@ -1,0 +1,56 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 545px;
+  background-image: url("pmdu-bg1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* border: 10px solid yellow; */
+}
+
+.loginDiv {
+  color: black;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.loginForm input {
+  width: 270px;
+  height: 25px;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.loginForm {
+  border: 2px solid white;
+  border-radius: 10px;
+  width: 300px;
+  height: 450px;
+  background-color: #cccccc;
+}
+.login-txt {
+  color: black;
+  margin-left: 110px;
+  margin-top: -3px;
+}
+
+.loginIcon {
+  margin-left: 95px;
+  margin-top: 20px;
+  width: 100px;
+  border: 2px solid white;
+  border-radius: 300px;
+}
+
+.login-faicons {
+  color: black;
+}
+hr {
+  border: 1px solid white;
+  width: 270px;
+}
+
+.loginDiv:screenbutton {
+  margin-left: 300px;
+}

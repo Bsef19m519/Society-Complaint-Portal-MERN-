@@ -1,5 +1,5 @@
 import React from "react";
-import ScreenBtn from "../Button/ScreenButton";
+import ScreenBtn from "../components/Button/ScreenButton";
 import './AddComplaint.css'
 import { useNavigate } from "react-router-dom";
 

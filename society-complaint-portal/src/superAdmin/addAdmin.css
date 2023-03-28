@@ -1,0 +1,51 @@
+.SA-addAdmin-container-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 542px;
+  background-image: url("../components/Login/pmdu-bg1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.SA-addAdmin-form {
+  border: 2px solid white;
+  border-radius: 10px;
+  width: 300px;
+  height: 450px;
+  background-color: #cccccc;
+}
+.SA-Addadmin-loginIcon {
+  margin-left: 95px;
+  margin-top: 20px;
+  width: 100px;
+  border: 2px solid white;
+  border-radius: 300px;
+}
+
+.SA-Addadmin-login-txt {
+  color: black;
+  margin-left: 55px;
+  margin-top: -3px;
+}
+
+.SA-addAdmin-form input {
+  width: 270px;
+  height: 25px;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.SA-AddAdmin-faicons {
+  color: black;
+}
+
+.SA-Addadmin-singlediv-container {
+  margin-left: 10px;
+}
+
+.SA-Addadmin-singleButton-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}

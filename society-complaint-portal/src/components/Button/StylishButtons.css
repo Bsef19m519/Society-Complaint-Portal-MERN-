@@ -1,0 +1,12 @@
+.stylish-btn-div {
+  width: 370px;
+  text-align: left;
+  padding: 23px;
+  border: 1px solid cyan;
+  border-radius: 15px;
+  background-color: blue;
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  cursor: pointer;
+}

@@ -1,35 +1,59 @@
-import React , {useState } from "react";
+import React, { useState } from "react";
 import ScreenBtn from "../components/Button/ScreenButton";
 import { useNavigate } from "react-router-dom";
+import "./DeleteAdmin.css";
+import loginIcon from "../components/Header/SCP3.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-const DeleteAdmin = () =>{
+const DeleteAdmin = () => {
+  //navigate to others component
+  let navigate = useNavigate();
+  const sAdminHomePage = () => {
+    navigate("/super-adminfp");
+  };
 
+  //handling input state
+  const [email, setEmail] = useState("");
+  function emailHandler(event) {
+    event.preventDefault();
+    setEmail(event.target.value);
+  }
 
-//navigate to others component
-   let navigate = useNavigate();
-   const sAdminHomePage = () => {
-      navigate("/super-adminfp")
-   }
-
-   //handling input state
-    const [email , setEmail] = useState('');
-    function emailHandler(event){
-        event.preventDefault();
-        setEmail(event.target.value)
-    }
-
-    return(
-        <div>
-            <form>
-            <div>
-                <label>Email:</label><br/>
-                <input type="email" name="adminEmail" value={email} onChange={emailHandler} required autoFocus/>
-                <ScreenBtn type="submit">Delete Admin</ScreenBtn>
-                <ScreenBtn type="button" onClick={sAdminHomePage} >Go Back</ScreenBtn>
-          </div>
-            </form>
+  return (
+    <div className="SA-Deleteadmin-container-div">
+      <form className="SA-DeleteAdmin-form-container">
+        <img
+          className="SA-DeleteAdmin-loginIcon"
+          src={loginIcon}
+          alt="SCP pic"
+        />
+        <h2 className="SA-DeleteAdmin-login-txt"> Delete Admin</h2>
+        <div className="SA-DeleteAdmin-singlediv-container">
+          <FontAwesomeIcon
+            className="SA-DeleteAdmin-faicons"
+            icon={faEnvelope}
+          ></FontAwesomeIcon>
+          <br />
+          <input
+            placeholder="Delete By Email"
+            type="email"
+            name="adminEmail"
+            value={email}
+            onChange={emailHandler}
+            required
+            autoFocus
+          />
         </div>
-    );
-}
+        <div className="SA-DeleteAdmin-singleButton-container">
+          <ScreenBtn type="submit">Delete Admin</ScreenBtn>
+          <ScreenBtn type="button" onClick={sAdminHomePage}>
+            Go Back
+          </ScreenBtn>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default DeleteAdmin;

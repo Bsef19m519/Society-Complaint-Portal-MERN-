@@ -1,0 +1,53 @@
+.SA-UpdateAdmin-containerdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../components/Login/pmdu-bg1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.SA-UpdateAdmin-form {
+  border: 2px solid white;
+  border-radius: 10px;
+  width: 300px;
+  height: 500px;
+  background-color: #cccccc;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.SA-Updateadmin-loginIcon {
+  margin-left: 95px;
+  margin-top: 20px;
+  width: 100px;
+  border: 2px solid white;
+  border-radius: 300px;
+}
+
+.SA-Updateadmin-login-txt {
+  color: black;
+  margin-left: 66px;
+  margin-top: -3px;
+}
+
+.SA-UpdateAdmin-form input {
+  width: 270px;
+  height: 25px;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.SA-UpdateAdmin-faicons {
+  color: black;
+}
+
+.SA-Updateadmin-singlediv-container {
+  margin-left: 10px;
+}
+
+.SA-Updateadmin-singleButton-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}

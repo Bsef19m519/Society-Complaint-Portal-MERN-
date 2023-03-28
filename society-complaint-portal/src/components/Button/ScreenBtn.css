@@ -1,16 +1,10 @@
-button {
-    background-image: url("../../backgroundImage.png");
-    padding: 10px;
-    border: 2px solid navy;
-    border-radius: 30px;
-    color: navy;
-    font-size: 19px;
-    font-weight: 600;
-    width: 200px;
-    cursor: pointer;
-}
-
-button:hover{
-    background-image: none;
-    
+.screen-btn-div {
+  background-color: black;
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  font-size: 19px;
+  font-weight: 400;
+  cursor: pointer;
 }
