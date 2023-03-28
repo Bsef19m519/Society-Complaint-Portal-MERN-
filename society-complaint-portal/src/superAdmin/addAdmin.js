@@ -27,6 +27,7 @@ const AddAdmin = () => {
   });
 
   function nameHandler(event) {
+    //name handler
     setUserInputs({
       ...userInputs,
       name: event.target.value,
