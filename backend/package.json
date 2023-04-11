@@ -1,33 +1,14 @@
 {
   "name": "society_complaint_portal",
   "version": "1.0.0",
-  "description": "The backend of society complaint portal",
+  "description": "A complaint portal for residential societies",
   "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
-    "test": "jest --watchAll --verbose"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Hamza",
+  "author": "Muhammad Hamza Maqsood",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.0",
-    "config": "^3.3.9",
-    "express": "^4.18.2",
-    "express-async-errors": "^3.1.1",
-    "fawn": "^2.1.5",
-    "joi": "^17.9.1",
-    "joi-objectid": "^4.0.2",
-    "jsonwebtoken": "^9.0.0",
-    "lodash": "^4.17.21",
-    "moment": "^2.29.4",
-    "mongoose": "^7.0.3",
-    "winston": "^3.8.2",
-    "winston-mongodb": "^5.1.1"
-  },
-  "devDependencies": {
-    "jest": "^29.5.0",
-    "supertest": "^6.3.3"
+    "express": "^4.18.2"
   }
 }
