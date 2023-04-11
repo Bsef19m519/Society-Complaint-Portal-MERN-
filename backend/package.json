@@ -9,6 +9,7 @@
   "author": "Muhammad Hamza Maqsood",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3"
   }
 }
