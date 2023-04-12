@@ -1,7 +1,8 @@
 const express = require('express'); //importing express
 const app = express();              //creating express application
 
-require('./startup/routes')(app);   //importing routes
+require('./startup/routes')(app);   //importing routes and calling it
+require('./startup/db')();      //connecting to database
 
 const port = process.env.PORT || 3000;  //defining port
 

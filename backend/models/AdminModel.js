@@ -1,43 +1,48 @@
 const mongoose = require("mongoose");
+const joi = require('joi');
 
-const AdminSchema = mongoose.Schema({
-    Name: {
+const adminSchema = mongoose.Schema({
+    name: {
         type: String,
         required: true,
-        
+        minLength: 3,
+        maxLength: 20
     },
-    Email: {
+    email: {
         type: String,
+        unique: true,
         required: true,
-        lowercase:true
+        email: true
     },
-    PhoneNumber: {
+    phone: {
         type: Number,
         required: true,
-        unique: true,
-        minLength:11
     },
-    Address: {
-        type: String,
-        required: true,
-        
+    address: {
+        type: String,    
     },
-    CNIC: {
+    cnic: {
         type: Number,
-        required: true,
-        unique: true
     },
-    Password: {
+    password: {
         type: String,
         required: true,
-        unique: true,
-        minLength:11,
-        maxLength:20
+        minLength:8,
+        maxLength:30
 
     },
-
-
 })
 
-const AdminCollection = new mongoose.model("AdminCollection", AdminSchema);
-module.exports=AdminCollection;
+function validateAdmin(admin) {
+    const schema = joi.object({
+        name: joi.string().min(3).max(20).required(),
+        email: joi.string().email().required(),
+        password: joi.string().min(8).max(30).required(),
+        phone: joi.number().required()
+    });
+    return schema.validate(admin);
+}
+
+const Admin = new mongoose.model("Admin", adminSchema);
+module.exports.Admin=Admin;
+module.exports.validateAdmin=validateAdmin;

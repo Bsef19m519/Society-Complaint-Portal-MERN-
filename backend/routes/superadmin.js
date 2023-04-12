@@ -1,32 +1,49 @@
 const express = require('express');
-const joi = require('joi');
+const {Admin, validateAdmin} = require('../models/adminModel');
 const router = express.Router();
 
 //dealing with get requests
-router.get('/', (req,res)=>{
-    res.send('hello world');
+router.get('/admin/:email', async(req,res)=>{
+    try{
+        const admin = await Admin.find({email:req.params.email});
+        if (!admin)
+            res.status(404).send('The admin with the given email was not found.');
+        else
+            res.send(admin);
+    }
+    catch(err)
+    {
+        res.status(500).send(err.message);
+    }
 })
-router.get('/admins', (req,res)=>{
-    res.send({name: 'Ali', email: 'ali@ali.com', password: '34343434'});
-})
-router.get('/admins/:email', (req,res)=>{
-    res.send(req.params.email);
+router.get('/admins', async(req,res)=>{
+    try{
+        const admin = await AdminCollection.find().sort('name');
+        res.send(admin)
+    }
+    catch(err)
+    {
+        res.status(500).send(err.details[0].message);
+    }
 })
 
-    //dealing with post requests
-router.post('/admins', (req,res)=>{
-    const schema = joi.object({
-        name: joi.string().min(3).max(20).required(),
-        email: joi.string().email().required(),
-        password: joi.string().min(8).max(30).required(),
-        phone: joi.number().required()
-    });
-    const result = schema.validate(req.body);
-    if(!result.error)
-        res.send("ok");
-    else{
-        console.log(result.error);
-        res.status(400).send(result.error.message);
+
+
+//dealing with post requests
+router.post('/admin', async(req,res)=>{
+    try{
+        const { error } = validateAdmin(req.body); 
+        if (error)return res.status(400).send(error.details[0].message);
+        
+        const admin = new Admin(req.body);
+        await admin.validate();
+        await admin.save();
+        res.send(admin);
+    }
+    catch(err)
+    {
+        res.status(500).send(err.message);
+        console.log(err.message);
     }
 });
 module.exports=router;
