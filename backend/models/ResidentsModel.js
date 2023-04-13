@@ -1,47 +1,63 @@
 const mongoose = require("mongoose");
+const joi = require('joi');
 
 
-const ResidentSchema = mongoose.Schema({
-    Name: {
+const residentSchema = mongoose.Schema({
+    name: {
         type: String,
         required: true,
+        minLength: 3,
+        maxLength: 20
     },
-    Email: {
+    email: {
         type: String,
-        required: true,
         unique: true,
-        lowercase:true
-
+        required: true,
+        email: true
 
     },
-    PhoneNumber: {
+    phone: {
         type: Number,
-        required: true,
         unique: true,
-        minLength:11
+        required: true,
 
     },
-    Address: {
+    address: {
         type: String,
-        required: true,
+        required:true
+    
     },
-    CNIC: {
+    cnic: {
         type: Number,
+        unique: true,
         required: true,
-        unique: true
+
+
 
     },
-    Password: {
+    password: {
         type: String,
         required: true,
-        unique: true,
-        minLength:11,
-        maxLength:20
+        minLength:8,
+        maxLength:30
 
     },
 
 
 })
 
-const ResidentsCollection = new mongoose.model("ResidentsCollection", ResidentSchema);
-module.exports=ResidentsCollection;
+function validateResidents(resident) {
+    const schema = joi.object({
+        name: joi.string().min(3).max(20).required(),
+        email: joi.string().email().required(),
+        password: joi.string().min(8).max(30).required(),
+        phone: joi.number().required(),
+        address:joi.string().required().max(50),
+        cnic:joi.number().required().max(13)
+    });
+    return schema.validate(resident);
+}
+
+const Residents= new mongoose.model("Residents", residentSchema);
+module.exports.Residents=Residents;
+module.exports.validateResidents=validateResidents;

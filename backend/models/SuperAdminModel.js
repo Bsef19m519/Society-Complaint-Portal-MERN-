@@ -1,39 +1,57 @@
 const mongoose = require("mongoose");
+const joi = require('joi');
 
-const SuperAdminSchema = mongoose.Schema({
-    Name: {
+
+const superAdminSchema = mongoose.Schema({
+    name: {
         type: String,
         required: true,
+        minLength: 3,
+        maxLength: 20
     
     },
-    Email: {
+    email: {
         type: String,
-        required: true,
-        lowercase:true,
-        unique:true
-
-    },
-    PhoneNumber: {
-        type: Number,
-        required: true,
-        unique: true
-    },
-    
-    CNIC: {
-        type: Number,
-        required: true,
-        unique: true
-    },
-    Password: {
-        type: String,
-        required: true,
         unique: true,
-        minLength:11,
-        maxLength:20
+        required: true,
+        email: true
+
+    },
+    phone: {
+        type: Number,
+        required: true,
+
+    },
+    
+    cnic: {
+        type: Number,
+        unique:true,
+        required:true
+    },
+    password: {
+        type: String,
+        required: true,
+        minLength:8,
+        maxLength:30
+        
     },
 
 
 })
+function validateSuperAdmin(superAdmin) {
+    const schema = joi.object({
+        name: joi.string().min(3).max(20).required(),
+        email: joi.string().email().required(),
+        password: joi.string().min(8).max(30).required(),
+        phone: joi.number().required(),
+        cnic:joi.number().required().max(13),
+        
+    });
+    return schema.validate(superAdmin);
+}
 
-const SuperAdminCollection = new mongoose.model("SuperAdminCollection", SuperAdminSchema);
-module.exports=SuperAdminCollection;
+
+const SuperAdmin = new mongoose.model("SuperAdmin", superAdminSchema);
+module.exports.SuperAdmin=SuperAdmin;
+
+module.exports.validateSuperAdmin=validateSuperAdmin;
