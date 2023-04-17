@@ -6,7 +6,9 @@ header {
   background-color: transparent;
   font-weight: 500;
   font-size: 20px;
-  border-bottom: 2px solid rgb(0, 0, 0);
+  /* border-bottom: 2px solid rgb(0, 0, 0); */
+  /* border: 2px solid red; */
+  width: 98%;
 }
 
 .logo img {
@@ -22,6 +24,7 @@ nav ul {
 }
 
 nav a {
+  /* border: 3px solid yellow; */
   display: block;
   padding: 10px 14px;
   color: BLACK;

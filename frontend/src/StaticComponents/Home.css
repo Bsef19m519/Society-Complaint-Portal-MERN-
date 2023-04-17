@@ -1,16 +1,16 @@
-.homeDiv{
-    /* background-image: url('home5.jpg');
+.homeDiv {
+  /* background-image: url('home5.jpg');
     background-repeat: no-repeat; */
-    height: 600px;
-    color: black;
-    /* border:2px solid red; */
-    width: 100%;
-    font-size: 15px;
-    word-spacing: 15px;
-    text-align: justify;
-    line-height: 40px;
-    margin-bottom: -170px;
+  height: 600px;
+  color: black;
+  /* border:2px solid red; */
+  width: 100%;
+  font-size: 15px;
+  word-spacing: 15px;
+  text-align: justify;
+  line-height: 40px;
+  margin-bottom: -170px;
 }
-.complaintPic{
-    width: 1311px;
+.complaintPic {
+  width: 100%;
 }
