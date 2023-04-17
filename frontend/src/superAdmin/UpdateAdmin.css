@@ -1,7 +1,6 @@
 .SA-UpdateAdmin-containerdiv {
   display: flex;
   justify-content: center;
-  align-items: center;
   background-image: url("../components/Login/pmdu-bg1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -11,7 +10,7 @@
   border: 2px solid white;
   border-radius: 10px;
   width: 300px;
-  height: 500px;
+  height: 600px;
   background-color: #cccccc;
   margin-top: 60px;
   margin-bottom: 40px;

@@ -8,6 +8,8 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { faPerson } from "@fortawesome/free-solid-svg-icons";
 import { faMobile } from "@fortawesome/free-solid-svg-icons";
+import { faIdCard } from "@fortawesome/free-solid-svg-icons";
+import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
 
 const AddAdmin = () => {
   let navigate = useNavigate();
@@ -15,17 +17,27 @@ const AddAdmin = () => {
     navigate("/super-adminfp");
   };
 
+  //creating ref for dom validation
   const nameRef = useRef(null);
   const passwordRef = useRef(null);
+  const cnfrmpasswordRef = useRef(null);
   const phoneRef = useRef(null);
+  const cnicRef = useRef(null);
+  const addressRef = useRef(null);
+  const emailRef = useRef(null);
 
+  //state management
   const [userInputs, setUserInputs] = useState({
     name: "",
     email: "",
     phone: "",
     password: "",
+    address: "",
+    CNIC: "",
   });
+  const [cPassword, setCpassword] = useState("");
 
+  //function handlers
   function nameHandler(event) {
     //name handler
     setUserInputs({
@@ -51,28 +63,82 @@ const AddAdmin = () => {
       password: event.target.value,
     });
   }
+  function CpasswordHandler(event) {
+    setCpassword(event.target.value);
+  }
+  function cnicHandler(event) {
+    setUserInputs({
+      ...userInputs,
+      CNIC: event.target.value,
+    });
+  }
+  function addressHandler(event) {
+    setUserInputs({
+      ...userInputs,
+      address: event.target.value,
+    });
+  }
 
+  //submithandler function
   function submitHandler(event) {
     event.preventDefault();
 
+    //client side validation
     if (nameRef.current.value.trim() === "") {
       alert("please fill the name field ");
+      return false;
+    } else if (emailRef.current.value.trim() === "") {
+      alert("email can not be empty");
+      return false;
+    } else if (
+      cnicRef.current.value.trim() === "" ||
+      cnicRef.current.value.length < 15
+    ) {
+      alert(
+        "CNIC can not be empty and must be of 15 length including special characters"
+      );
+      return false;
+    } else if (addressRef.current.value.trim() === "") {
+      alert("address field can not be empty");
       return false;
     } else if (phoneRef.current.value.length < 11) {
       alert("length must be atleast of 11 characters");
       return false;
+    } else if (passwordRef.current.value.trim() === "") {
+      alert("password can not be empty");
+      return false;
     } else if (passwordRef.current.value.length < 8) {
       alert("length must be atleast of 8 characters");
       return false;
+    } else if (passwordRef.current.value !== cnfrmpasswordRef.current.value) {
+      alert("password and confirm password must be same");
+      return false;
     }
 
-    console.log(userInputs);
+    //sending data to backend
+    fetch("http://localhost:3000/api/superadmin/admins", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInputs),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+
+    // console.log(userInputs);
+    // console.log(cPassword);
+    //setting values to null after submit
     setUserInputs({
       name: "",
       email: "",
       phone: "",
       password: "",
+      CNIC: "",
+      address: "",
     });
+    setCpassword("");
   }
 
   return (
@@ -87,7 +153,7 @@ const AddAdmin = () => {
           ></FontAwesomeIcon>
           <br />
           <input
-            placeholder="Enter Valid Name"
+            placeholder="Enter Name"
             type="text"
             name="adminName"
             ref={nameRef}
@@ -105,9 +171,40 @@ const AddAdmin = () => {
           <input
             placeholder="Enter Valid Email"
             type="email"
+            ref={emailRef}
             name="adminEmail"
             value={userInputs.email}
             onChange={emailHandler}
+          />
+        </div>
+        <div className="SA-Addadmin-singlediv-container">
+          <FontAwesomeIcon
+            className="SA-AddAdmin-faicons"
+            icon={faIdCard}
+          ></FontAwesomeIcon>
+          <br />
+          <input
+            placeholder="CNIC xxxxx-xxxxxxx-x"
+            type="text"
+            name="adminCnic"
+            value={userInputs.CNIC}
+            ref={cnicRef}
+            onChange={cnicHandler}
+          />
+        </div>
+        <div className="SA-Addadmin-singlediv-container">
+          <FontAwesomeIcon
+            className="SA-AddAdmin-faicons"
+            icon={faAddressBook}
+          ></FontAwesomeIcon>
+          <br />
+          <input
+            placeholder="Enter Address"
+            type="text"
+            name="adminAddress"
+            value={userInputs.address}
+            ref={addressRef}
+            onChange={addressHandler}
           />
         </div>
         <div className="SA-Addadmin-singlediv-container">
@@ -117,7 +214,7 @@ const AddAdmin = () => {
           ></FontAwesomeIcon>
           <br />
           <input
-            placeholder="Enter Valid Phone-Number"
+            placeholder="Phone-Number 03xxxxxxxxx"
             type="number"
             ref={phoneRef}
             name="adminPhone"
@@ -138,6 +235,21 @@ const AddAdmin = () => {
             name="adminPassword"
             value={userInputs.password}
             onChange={passwordHandler}
+          />
+        </div>
+        <div className="SA-Addadmin-singlediv-container">
+          <FontAwesomeIcon
+            className="SA-AddAdmin-faicons"
+            icon={faLock}
+          ></FontAwesomeIcon>
+          <br />
+          <input
+            placeholder="Re-Enter Password"
+            type="password"
+            ref={cnfrmpasswordRef}
+            name="confrmadminPassword"
+            value={cPassword}
+            onChange={CpasswordHandler}
           />
         </div>
         <div className="SA-Addadmin-singleButton-container">
