@@ -16,7 +16,7 @@ const ViewAdmin = () => {
   //managing input states
   const [email, setEmail] = useState("");
   function emailHandler(event) {
-    event.preventDefalt();
+    event.preventDefault();
     setEmail(event.target.value);
   }
 
