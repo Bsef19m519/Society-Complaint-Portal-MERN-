@@ -33,7 +33,7 @@ const AddAdmin = () => {
     phone: "",
     password: "",
     address: "",
-    CNIC: "",
+    cnic: "",
   });
   const [cPassword, setCpassword] = useState("");
 
@@ -69,7 +69,7 @@ const AddAdmin = () => {
   function cnicHandler(event) {
     setUserInputs({
       ...userInputs,
-      CNIC: event.target.value,
+      cnic: event.target.value,
     });
   }
   function addressHandler(event) {
@@ -135,7 +135,7 @@ const AddAdmin = () => {
       email: "",
       phone: "",
       password: "",
-      CNIC: "",
+      cnic: "",
       address: "",
     });
     setCpassword("");
@@ -187,7 +187,7 @@ const AddAdmin = () => {
             placeholder="CNIC xxxxx-xxxxxxx-x"
             type="text"
             name="adminCnic"
-            value={userInputs.CNIC}
+            value={userInputs.cnic}
             ref={cnicRef}
             onChange={cnicHandler}
           />

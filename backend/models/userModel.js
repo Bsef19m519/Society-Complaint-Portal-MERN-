@@ -11,7 +11,6 @@ const userSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
-        minLength: 5,
         maxLength: 30
     },
     email: {
@@ -43,7 +42,6 @@ const userSchema = mongoose.Schema({
     address: {
         type: String,    
         required:true,
-        minLength: 5,
         maxLength: 50
     },
 })
@@ -58,12 +56,12 @@ const userSchema = mongoose.Schema({
  */
 function validateUser(user){
     const schema = joi.object({
-        name: joi.string().min(5).max(30).required(),
+        name: joi.string().max(30).required(),
         email: joi.string().email().required(),
         password: joi.string().min(8).max(30).required(),
         phone: joi.string().length(11).pattern(/^[0-9]+$/).required(),
         cnic:joi.string().length(13).pattern(/^[0-9]+$/).required(), 
-        address:joi.string().required().min(5).max(50),
+        address:joi.string().required().max(50),
     });
     return schema.validate(user);
 }
