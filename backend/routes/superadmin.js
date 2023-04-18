@@ -31,27 +31,35 @@ router.post('/admins', async (req, res) => {
 });
 
 //dealing with put requests
-router.put('/admins/:id', async (req, res) => {
+router.put('/admins/:email', async (req, res) => {
     const { error } = validateUser(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     
     try
     {
-        const admin = await Admin.findByIdAndUpdate(req.params.id, req.body , { new: true });
-        if (!admin) return res.status(404).send('The admin with the given ID was not found.');
-        res.send(admin);
+        const adminCollection = await Admin.find({email:req.params.email});
+        if (!adminCollection || adminCollection.length==0) return res.status(404).send('The admin with the given email was not found.');
+        
+        //just getting first result; doesn't matter as email is unique and there would be one or zero record always
+        const admin = adminCollection[0];
+        for(let key in req.body){
+            admin[key]=req.body[key];
+        }
+        const result = await admin.save();
+        console.log(result);
+        res.send(result);
     }
     catch (err) {
         res.status(400).send(err.message);
-        console.log(err.message);
+        console.log(err);
     }
 });
 
 //dealing with delete requests
-router.delete('/admins/:id', async (req, res) => {
-    const admin = await Admin.findByIdAndRemove(req.params.id);  
-    if (!admin) return res.status(404).send('The admin with the given ID was not found.');  
-    res.send(admin);
+router.delete('/admins/:email', async (req, res) => {
+    const result = await Admin.deleteOne({email:req.params.email});  
+    if (!result) return res.status(404).send('The admin with the given email was not found.');  
+    res.send(result);
 });
 
 module.exports = router;    
