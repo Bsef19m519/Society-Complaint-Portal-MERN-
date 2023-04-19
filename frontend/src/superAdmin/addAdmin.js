@@ -92,10 +92,10 @@ const AddAdmin = () => {
       return false;
     } else if (
       cnicRef.current.value.trim() === "" ||
-      cnicRef.current.value.length < 15
+      cnicRef.current.value.length !== 13
     ) {
       alert(
-        "CNIC can not be empty and must be of 15 length including special characters"
+        "CNIC can not be empty and must be of 13 length including special characters"
       );
       return false;
     } else if (addressRef.current.value.trim() === "") {
@@ -184,7 +184,7 @@ const AddAdmin = () => {
           ></FontAwesomeIcon>
           <br />
           <input
-            placeholder="CNIC xxxxx-xxxxxxx-x"
+            placeholder="CNIC xxxxxxxxxxxxx"
             type="text"
             name="adminCnic"
             value={userInputs.cnic}
