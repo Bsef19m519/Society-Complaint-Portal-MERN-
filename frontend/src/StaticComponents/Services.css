@@ -1,46 +1,44 @@
-.wrapperDiv{
-    background-image: url("landingPage3.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 50px;
+.wrapperDiv {
+  background-image: url("landingPage3.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 50px;
 }
 
-.servicesDiv{
-    display: flex;
-    color: black;
-    /* border: 2px solid red; */
-    padding-left: 98px;
-    padding-right: 98px;
-    justify-content: space-between;
-    
-   
+.servicesDiv {
+  display: flex;
+  color: black;
+  /* border: 2px solid red; */
+  padding-left: 98px;
+  padding-right: 98px;
+  justify-content: space-between;
 }
 
-.service-txt{
-    font-size: 20px;
-    font-weight: 100px;
-    word-spacing: 5px;
-    text-align: left;
-    padding-left: 15px;
-    padding-right: 15x;
+.service-txt {
+  font-size: 20px;
+  font-weight: 100px;
+  word-spacing: 5px;
+  text-align: left;
+  padding-left: 15px;
+  padding-right: 15x;
 }
 
-.service-Div{
-    margin-top: 20px;
-    width: 280px;
-    height: 320px;
-    text-align: center;
-    margin-left: 10px;
-    border: 2px solid white;  
-    border-radius: 8px;
-    box-shadow: 4px 4px cyan;
+.service-Div {
+  margin-top: 20px;
+  width: 280px;
+  height: 320px;
+  text-align: center;
+  margin-left: 10px;
+  border: 2px solid white;
+  border-radius: 8px;
+  box-shadow: 4px 4px cyan;
 }
 
-.s-txt{
-    text-align: center;
-    color: black;
-    line-height: 50px;
-    letter-spacing: 3px;
+.s-txt {
+  text-align: center;
+  color: black;
+  line-height: 50px;
+  letter-spacing: 3px;
 }
 
 /* .s-txt:hover{
@@ -52,17 +50,16 @@
     border-radius: 10px;
 } */
 
-.serviceImg{
-    margin-top: 20px;
-    align-content: center;
-    width: 90px;
-    border: 5px solid white;
-    border-radius: 50px;
-    box-shadow: 2px 2px black;
+.serviceImg {
+  margin-top: 20px;
+  align-content: center;
+  width: 90px;
+  border: 5px solid white;
+  border-radius: 50px;
+  box-shadow: 2px 2px black;
 }
 
-.showCasePic{
-    height: 200px;
-    opacity: 0.8;
+.showCasePic {
+  height: 200px;
+  opacity: 0.8;
 }
-

@@ -16,13 +16,27 @@ const ViewAdmin = () => {
   //managing input states
   const [email, setEmail] = useState("");
   function emailHandler(event) {
-    event.preventDefault();
     setEmail(event.target.value);
   }
 
+  const getUserData = (email) => {
+    fetch(`http://localhost:3000/api/superadmin/admins/email=${email}`)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  };
+
+  //submit handler
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    getUserData(email);
+
+    setEmail("");
+  };
+
   return (
     <div className="SA-Searchadmin-container-div">
-      <form className="SA-searchAdmin-form-container">
+      <form className="SA-searchAdmin-form-container" onSubmit={submitHandler}>
         <img
           className="SA-searchAdmin-loginIcon"
           src={loginIcon}

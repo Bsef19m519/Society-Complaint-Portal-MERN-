@@ -20,7 +20,7 @@ const UpdateAdmin = () => {
   const nameRef = useRef(null);
   const passwordRef = useRef(null);
   const phoneRef = useRef(null);
-  const IdRef = useRef(null);
+  const preEmailRef = useRef(null);
   const cnicRef = useRef(null);
   const addressRef = useRef(null);
   const cnfrmPasswordRef = useRef(null);
@@ -31,12 +31,18 @@ const UpdateAdmin = () => {
     email: "",
     phone: "",
     password: "",
-    ID: "",
-    CNIC: "",
+    preEmail: "",
+    cnic: "",
     address: "",
   });
   const [cPassword, setCpassword] = useState("");
 
+  function preEmailHandler(event) {
+    setUserInputs({
+      ...userInputs,
+      preEmail: event.target.value,
+    });
+  }
   function nameHandler(event) {
     setUserInputs({
       ...userInputs,
@@ -61,16 +67,11 @@ const UpdateAdmin = () => {
       password: event.target.value,
     });
   }
-  function IDHandler(event) {
+
+  function cnicHandler(event) {
     setUserInputs({
       ...userInputs,
-      ID: event.target.value,
-    });
-  }
-  function CnicHandler(event) {
-    setUserInputs({
-      ...userInputs,
-      CNIC: event.target.value,
+      cnic: event.target.value,
     });
   }
   function addressHandler(event) {
@@ -86,7 +87,10 @@ const UpdateAdmin = () => {
   function submitHandler(event) {
     event.preventDefault();
 
-    if (nameRef.current.value.trim() === "") {
+    if (preEmailRef.current.value.trim() === "") {
+      alert("Please Entered Already setted emqail");
+      return false;
+    } else if (nameRef.current.value.trim() === "") {
       alert("please fill the name field ");
       return false;
     } else if (emailRef.current.value.trim() === "") {
@@ -94,11 +98,9 @@ const UpdateAdmin = () => {
       return false;
     } else if (
       cnicRef.current.value.trim() === "" ||
-      cnicRef.current.value.length < 15
+      cnicRef.current.value.length !== 13
     ) {
-      alert(
-        "CNIC can not be empty and must be of 15 length including special characters"
-      );
+      alert("cnic can not be empty and must be of 13 length ");
       return false;
     } else if (addressRef.current.value.trim() === "") {
       alert("address field can not be empty");
@@ -117,15 +119,28 @@ const UpdateAdmin = () => {
       return false;
     }
 
-    console.log(userInputs);
-    console.log(cPassword);
+    //sending data to backend
+    fetch("http://localhost:3000/api/superadmin/admins", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInputs),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+
+    // console.log(userInputs);
+    // console.log(cPassword);
     setUserInputs({
       name: "",
       email: "",
       phone: "",
       password: "",
-      CNIC: "",
+      cnic: "",
       address: "",
+      preEmail: "",
     });
     setCpassword("");
   }
@@ -141,21 +156,25 @@ const UpdateAdmin = () => {
         <h2 className="SA-Updateadmin-login-txt"> Update Admin</h2>
 
         <div className="SA-Updateadmin-singlediv-container">
-          <FontAwesomeIcon
+          {/* <FontAwesomeIcon
             className="SA-UpdateAdmin-faicons"
-            icon={faIdCard}
+            icon={faEnvelope}
           ></FontAwesomeIcon>
-          <br />
+          <label className="updateAdminLabel">
+            <b>Admin Email:</b>
+          </label>
+          <br /> */}
+
           <input
-            placeholder="Enter Valid ID"
-            type="text"
-            ref={IdRef}
-            name="adminID"
-            value={userInputs.ID}
-            onChange={IDHandler}
+            placeholder="Enter Previous Existing Email"
+            type="email"
+            ref={preEmailRef}
+            name="adminpemail"
+            value={userInputs.preEmail}
+            onChange={preEmailHandler}
           />
         </div>
-
+        <hr />
         <div>
           <div className="SA-Updateadmin-singlediv-container">
             <FontAwesomeIcon
@@ -164,13 +183,12 @@ const UpdateAdmin = () => {
             ></FontAwesomeIcon>
             <br />
             <input
-              placeholder="Enter Valid Name"
+              placeholder="Enter Name"
               type="text"
               name="adminName"
               ref={nameRef}
               value={userInputs.name}
               onChange={nameHandler}
-              autoFocus
             />
           </div>
 
@@ -197,12 +215,12 @@ const UpdateAdmin = () => {
             ></FontAwesomeIcon>
             <br />
             <input
-              placeholder="CNIC xxxxx-xxxxxxx-x"
+              placeholder="CNIC xxxxxxxxxxxxx"
               type="text"
-              name="adminCnic"
-              value={userInputs.CNIC}
+              name="admincnic"
+              value={userInputs.cnic}
               ref={cnicRef}
-              onChange={CnicHandler}
+              onChange={cnicHandler}
             />
           </div>
 
@@ -229,7 +247,7 @@ const UpdateAdmin = () => {
             ></FontAwesomeIcon>
             <br />
             <input
-              placeholder="Enter Valid Phone-Number"
+              placeholder="Phone-Number 03xxxxxxxxx"
               type="number"
               ref={phoneRef}
               name="adminPhone"

@@ -6,6 +6,10 @@
   background-size: cover;
 }
 
+.updateAdminLabel {
+  font-size: 15px;
+}
+
 .SA-UpdateAdmin-form {
   border: 2px solid white;
   border-radius: 10px;
