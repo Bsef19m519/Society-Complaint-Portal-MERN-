@@ -66,6 +66,10 @@ function validateUser(user){
     return schema.validate(user);
 }
 
+
+
+
+
 //exporting modules
 module.exports.SuperAdmin=new mongoose.model("superAdmins", userSchema);
 module.exports.Admin=new mongoose.model("admins", userSchema);
