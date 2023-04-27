@@ -14,10 +14,10 @@ const ViewAdmin = () => {
   };
 
   //managing input states
-  const [email, setEmail] = useState("");
-  function emailHandler(event) {
-    setEmail(event.target.value);
-  }
+  // const [email, setEmail] = useState("");
+  // function emailHandler(event) {
+  //   setEmail(event.target.value);
+  // }
 
   const getUserData = (email) => {
     fetch(`http://localhost:3000/api/superadmin/admins/email=${email}`)
@@ -29,9 +29,10 @@ const ViewAdmin = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    getUserData(email);
+    const emailParam = event.target.elements.email.value;
+    getUserData(emailParam);
 
-    setEmail("");
+    // setEmail("");
   };
 
   return (
@@ -53,8 +54,8 @@ const ViewAdmin = () => {
             placeholder="Search By Admin Email"
             type="email"
             name="adminEmail"
-            value={email}
-            onChange={emailHandler}
+            // value={email}
+            // onChange={emailHandler}
             required
             autoFocus
           />
