@@ -33,24 +33,34 @@ const complaintSchema = mongoose.Schema({
     },
     generationDate:{
         type: Date,
-        default: Date.now
-    },
-    acknowledgeDate:{
-        type: Date,
-        
-    },
-    finalizeDate:
-    {
-        type: Date,
-    
-
+        default: Date.now,
+        required:true
     },
     complaintStatus :{
         type:String,
         enum:['accepted', 'rejected', 'acknowledged', 'pending']
 
-    }
+    },
+    acknowledgeDate:{
+        type: Date,
+        required:  function(){
+            if (complaintStatus=="rejected"){return true};
+            if (complaintStatus=="acknowledged"){return true}
+            if (complaintStatus=="accepted"){return true}
+        }
+            
+    },
+    finalizeDate:
+    {
+        type: Date,
+        required:  function( ){
+            if (complaintStatus=="rejected"){return true}
+        
+            if (complaintStatus=="accepted") {return true}
+        }
+            
 
+    }
 })
 
 
@@ -61,9 +71,9 @@ function validateComplaint(complaint){
         complainerId: joi.string().unique().required(),
         description: joi.string().min(10).max(100).required(),
         proofId: joi.string().required().unique(),
-        generationDate:joi.date().format("DD/MM/YYYY"),
-        acknowledgeDate:joi.date().format("DD/MM/YYYY"),
-        finalizeDate:joi.date().format("DD/MM/YYYY"),
+        generationDate:joi.date().format("DD/MM/YYYY").required(),
+        acknowledgeDate:joi.date().format("DD/MM/YYYY").required(),
+        finalizeDate:joi.date().format("DD/MM/YYYY").required(),
         complaintStatus:joi.string().only(['accepted', 'rejected', 'acknowledged', 'pending'])
     });
     return schema.validate(complaint);}
