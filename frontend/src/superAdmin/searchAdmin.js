@@ -14,25 +14,34 @@ const ViewAdmin = () => {
   };
 
   //managing input states
-  // const [email, setEmail] = useState("");
-  // function emailHandler(event) {
-  //   setEmail(event.target.value);
-  // }
+  const [email, setEmail] = useState("");
 
-  const getUserData = (email) => {
-    fetch(`http://localhost:3000/api/superadmin/admins/email=${email}`)
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  };
+  //email handler
+  async function emailHandler(event) {
+    setEmail(event.target.value);
+  }
+
+  // const getUserData = () => {
+  //   fetch(`http://localhost:3000/api/superadmin/admins/email=${email}`)
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data));
+  // };
 
   //submit handler
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
-    const emailParam = event.target.elements.email.value;
-    getUserData(emailParam);
+    // const emailParam = event.target.elements.email.value;
+    const response = await fetch(
+      `http://localhost:3000/api/superadmin/admins/email?email=${email}`,
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    console.log(data);
 
-    // setEmail("");
+    setEmail("");
   };
 
   return (
@@ -54,8 +63,8 @@ const ViewAdmin = () => {
             placeholder="Search By Admin Email"
             type="email"
             name="adminEmail"
-            // value={email}
-            // onChange={emailHandler}
+            value={email}
+            onChange={emailHandler}
             required
             autoFocus
           />

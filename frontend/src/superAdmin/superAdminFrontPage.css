@@ -1,7 +1,7 @@
 .SAcontainerDiv {
   background-image: url("../components/Login/pmdu-bg1.jpg");
   background-repeat: no-repeat;
-  background-size: 1320px 700px;
+  background-size: 100% 700px;
   display: flex;
   justify-content: center;
   align-items: center;
