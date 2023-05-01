@@ -1,11 +1,10 @@
 .SA-Searchadmin-container-div {
+  display: flex;
+  justify-content: center;
   background-image: url("../components/Login/pmdu-bg1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  justify-content: center;
-
-  height: 542px;
+  height: 570px;
 }
 .SA-searchAdmin-form-container {
   margin-top: 70px;
