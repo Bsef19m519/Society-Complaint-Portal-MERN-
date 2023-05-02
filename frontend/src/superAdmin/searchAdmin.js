@@ -18,6 +18,7 @@ const ViewAdmin = () => {
   //managing input states
   const [email, setEmail] = useState(""); //managing email state
   const [tableData, setTableData] = useState([]); //managing table data state
+  const [message, setMessage] = useState(""); //managing error message state
 
   //email handler
   async function emailHandler(event) {
@@ -41,9 +42,18 @@ const ViewAdmin = () => {
         headers: { ...getHeader().get("Authorization") },
       }
     );
-    const data = await response.json();
-    console.log(data);
-    setTableData(data);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      if (data.length === 0) {
+        setMessage("No Record Registered Against This Email.");
+      } else {
+        // setMessage("Record Registered Against This Email.");
+        setTableData(data);
+      }
+    } else {
+      setMessage("Error: Search Operation Failed.");
+    }
 
     setEmail("");
   };
@@ -82,6 +92,9 @@ const ViewAdmin = () => {
             <ScreenBtn type="button" onClick={sAdminHomePage}>
               Go Back
             </ScreenBtn>
+          </div>
+          <div className="superAdmin-search-message">
+            {message && <p>{message}</p>}
           </div>
         </form>
       </div>

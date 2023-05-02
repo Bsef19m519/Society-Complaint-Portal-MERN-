@@ -15,6 +15,7 @@ const DeleteAdmin = () => {
 
   //handling input state
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   function emailHandler(event) {
     setEmail(event.target.value);
   }
@@ -23,14 +24,22 @@ const DeleteAdmin = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(
-      `http://localhost:3000/api/superadmin/admins/${email}`,
-      {
-        method: "DELETE",
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/superadmin/admins/${email}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        setMessage("Record Deleted Successfully.");
+      } else {
+        setMessage("Error: Deletion operation did'nt perform.");
       }
-    );
-    const data = await response.json();
-    console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
 
     setEmail("");
   };
@@ -65,6 +74,9 @@ const DeleteAdmin = () => {
           <ScreenBtn type="button" onClick={sAdminHomePage}>
             Go Back
           </ScreenBtn>
+        </div>
+        <div className="superAdmin-delete-message">
+          {message && <p>{message}</p>}
         </div>
       </form>
     </div>

@@ -14,7 +14,7 @@
   border: 2px solid white;
   border-radius: 10px;
   width: 300px;
-  height: 650px;
+  height: 670px;
   background-color: #cccccc;
   margin-top: 60px;
   margin-bottom: 40px;
@@ -53,4 +53,11 @@
   display: flex;
   justify-content: space-between;
   margin: 10px;
+}
+
+.superAdmin-Update-message {
+  padding-left: 2px;
+  color: white;
+  background-color: black;
+  margin: -10px 7px 7px 7px;
 }

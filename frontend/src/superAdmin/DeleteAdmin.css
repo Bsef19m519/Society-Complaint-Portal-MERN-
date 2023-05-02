@@ -49,3 +49,11 @@
   margin-right: 25px;
   margin-left: 13px;
 }
+
+.superAdmin-delete-message {
+  /* border: 2px solid black; */
+  margin: -10px 7px 7px 7px;
+  padding-left: 2px;
+  color: white;
+  background-color: black;
+}

@@ -89,3 +89,10 @@
 .data-table tr:hover {
   background-color: #e6e6e6;
 }
+
+.superAdmin-search-message {
+  padding-left: 2px;
+  color: white;
+  background-color: black;
+  margin: -10px 7px 7px 7px;
+}

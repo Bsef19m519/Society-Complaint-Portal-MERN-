@@ -36,6 +36,7 @@ const AddAdmin = () => {
     cnic: "",
   });
   const [cPassword, setCpassword] = useState("");
+  const [message, setMessage] = useState("");
 
   //function handlers
   function nameHandler(event) {
@@ -123,7 +124,14 @@ const AddAdmin = () => {
       },
       body: JSON.stringify(userInputs),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          setMessage("Record Inserted Successfully");
+        } else {
+          setMessage("Error: Insertion Operation Failed");
+        }
+        return response.json();
+      })
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
 
@@ -257,6 +265,9 @@ const AddAdmin = () => {
           <ScreenBtn type="button" onClick={sAdminHomePage}>
             Go Back
           </ScreenBtn>
+        </div>
+        <div className="superAdmin-Add-message">
+          {message && <p>{message}</p>}
         </div>
       </form>
     </div>

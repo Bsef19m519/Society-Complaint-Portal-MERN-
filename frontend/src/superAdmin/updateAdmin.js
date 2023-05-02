@@ -36,6 +36,7 @@ const UpdateAdmin = () => {
   });
   const [cPassword, setCpassword] = useState("");
   const [preEmail, setPreEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   function preEmailHandler(event) {
     setPreEmail(event.target.value);
@@ -124,7 +125,14 @@ const UpdateAdmin = () => {
       },
       body: JSON.stringify(userInputs),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          setMessage("Record Updated Successfully");
+        } else {
+          setMessage("Error: Update Operation Failed");
+        }
+        return response.json();
+      })
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
 
@@ -289,6 +297,9 @@ const UpdateAdmin = () => {
               Go Back
             </ScreenBtn>
           </div>
+        </div>
+        <div className="superAdmin-Update-message">
+          {message && <p>{message}</p>}
         </div>
       </form>
     </div>
