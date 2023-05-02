@@ -4,8 +4,12 @@ import { useNavigate } from "react-router-dom";
 import "./SearchAdmin.css";
 import loginIcon from "../components/Header/SCP3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChampagneGlasses,
+  faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
 import TableData from "./showTableData";
+import getHeader from "../utils";
 
 const ViewAdmin = () => {
   //navigate to other component
@@ -35,9 +39,10 @@ const ViewAdmin = () => {
 
     // const emailParam = event.target.elements.email.value;
     const response = await fetch(
-      "http://localhost:3000/api/superadmin/admins/arbutt863@gmail.com",
+      `http://localhost:3000/api/superadmin/admins/${email}`,
       {
         method: "GET",
+        headers: { ...getHeader().get("Authorization") },
       }
     );
     const data = await response.json();

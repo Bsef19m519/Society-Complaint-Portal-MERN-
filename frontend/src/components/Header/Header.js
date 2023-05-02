@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 // import Login from "./Login";
 
 const Header = ({ goAbout }) => {
+  const serviceSectio = () => {
+    document.getElementById("admin-service").scrollIntoView();
+  };
   return (
     <header>
       <div className="logo">
@@ -20,7 +23,7 @@ const Header = ({ goAbout }) => {
               Home
             </Link>
           </li>
-          <li>
+          <li onClick={() => serviceSectio()}>
             <span onClick={() => goAbout("about")} className="linkStyle">
               About
             </span>

@@ -9,7 +9,7 @@ import "./Services.css";
 // import Img from "./landingPage1.jpeg";
 const Service = ({ serviceRef }) => {
   return (
-    <div ref={serviceRef}>
+    <div ref={serviceRef} id="admin-service">
       <h1 className="s-txt">Services We Provide</h1>
       <div className="wrapperDiv">
         <div className="servicesDiv">
