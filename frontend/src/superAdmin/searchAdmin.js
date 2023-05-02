@@ -4,11 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./SearchAdmin.css";
 import loginIcon from "../components/Header/SCP3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChampagneGlasses,
-  faEnvelope,
-} from "@fortawesome/free-solid-svg-icons";
-import TableData from "./showTableData";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+// import TableData from "./showTableData";
 import getHeader from "../utils";
 
 const ViewAdmin = () => {
@@ -37,7 +34,6 @@ const ViewAdmin = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    // const emailParam = event.target.elements.email.value;
     const response = await fetch(
       `http://localhost:3000/api/superadmin/admins/${email}`,
       {

@@ -31,17 +31,14 @@ const UpdateAdmin = () => {
     email: "",
     phone: "",
     password: "",
-    preEmail: "",
     cnic: "",
     address: "",
   });
   const [cPassword, setCpassword] = useState("");
+  const [preEmail, setPreEmail] = useState("");
 
   function preEmailHandler(event) {
-    setUserInputs({
-      ...userInputs,
-      preEmail: event.target.value,
-    });
+    setPreEmail(event.target.value);
   }
   function nameHandler(event) {
     setUserInputs({
@@ -120,7 +117,7 @@ const UpdateAdmin = () => {
     }
 
     //sending data to backend
-    fetch("http://localhost:3000/api/superadmin/admins", {
+    fetch(`http://localhost:3000/api/superadmin/admins/${preEmail}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -140,9 +137,9 @@ const UpdateAdmin = () => {
       password: "",
       cnic: "",
       address: "",
-      preEmail: "",
     });
     setCpassword("");
+    setPreEmail("");
   }
 
   return (
@@ -170,7 +167,7 @@ const UpdateAdmin = () => {
             type="email"
             ref={preEmailRef}
             name="adminpemail"
-            value={userInputs.preEmail}
+            value={preEmail}
             onChange={preEmailHandler}
           />
         </div>

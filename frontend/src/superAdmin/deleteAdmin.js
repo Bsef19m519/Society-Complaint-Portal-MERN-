@@ -16,13 +16,28 @@ const DeleteAdmin = () => {
   //handling input state
   const [email, setEmail] = useState("");
   function emailHandler(event) {
-    event.preventDefault();
     setEmail(event.target.value);
   }
 
+  //submit handler
+  const submitHandler = async (event) => {
+    event.preventDefault();
+
+    const response = await fetch(
+      `http://localhost:3000/api/superadmin/admins/${email}`,
+      {
+        method: "DELETE",
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+
+    setEmail("");
+  };
+
   return (
     <div className="SA-Deleteadmin-container-div">
-      <form className="SA-DeleteAdmin-form-container">
+      <form className="SA-DeleteAdmin-form-container" onSubmit={submitHandler}>
         <img
           className="SA-DeleteAdmin-loginIcon"
           src={loginIcon}
