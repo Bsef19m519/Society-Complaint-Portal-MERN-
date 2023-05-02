@@ -261,9 +261,9 @@ const AddAdmin = () => {
           />
         </div>
         <div className="SA-Addadmin-singleButton-container">
-          <ScreenBtn type="submit">Add Admin</ScreenBtn>
+          <ScreenBtn type="submit">Add </ScreenBtn>
           <ScreenBtn type="button" onClick={sAdminHomePage}>
-            Go Back
+            Back
           </ScreenBtn>
         </div>
         <div className="superAdmin-Add-message">

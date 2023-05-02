@@ -292,9 +292,9 @@ const UpdateAdmin = () => {
             />
           </div>
           <div className="SA-Updateadmin-singleButton-container">
-            <ScreenBtn type="submit">Update Admin</ScreenBtn>
+            <ScreenBtn type="submit">Update </ScreenBtn>
             <ScreenBtn type="button" onClick={sAdminHomePage}>
-              Go Back
+              Back
             </ScreenBtn>
           </div>
         </div>

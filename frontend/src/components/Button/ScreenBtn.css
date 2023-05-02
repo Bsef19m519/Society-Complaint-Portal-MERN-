@@ -1,10 +1,11 @@
 .screen-btn-div {
   background-color: black;
-  padding: 5px;
+  padding: 3px;
   border: 1px solid white;
   border-radius: 5px;
   color: white;
   font-size: 19px;
   font-weight: 400;
+  width: 100px;
   cursor: pointer;
 }

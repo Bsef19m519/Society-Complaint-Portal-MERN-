@@ -3,9 +3,9 @@
   justify-content: center;
   align-items: center;
   height: 600px;
-  background-image: url("pmdu-bg1.jpg");
+  background-image: url("bg1.jpeg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 800px;
   /* border: 10px solid yellow; */
 }
 

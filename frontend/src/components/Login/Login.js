@@ -105,7 +105,7 @@ const Login = () => {
           <div className="loginDiv">
             <ScreenBtn type="submit">Sign In</ScreenBtn>
             <ScreenBtn type="button" onClick={SAnextPage}>
-              Super Admin
+              SA
             </ScreenBtn>
           </div>
         </form>

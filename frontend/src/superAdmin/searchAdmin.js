@@ -88,9 +88,9 @@ const ViewAdmin = () => {
             />
           </div>
           <div className="SA-searchAdmin-singlebutton-container">
-            <ScreenBtn type="submit">Search Admin</ScreenBtn>
+            <ScreenBtn type="submit">Search </ScreenBtn>
             <ScreenBtn type="button" onClick={sAdminHomePage}>
-              Go Back
+              Back
             </ScreenBtn>
           </div>
           <div className="superAdmin-search-message">

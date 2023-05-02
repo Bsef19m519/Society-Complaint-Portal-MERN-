@@ -70,9 +70,9 @@ const DeleteAdmin = () => {
           />
         </div>
         <div className="SA-DeleteAdmin-singleButton-container">
-          <ScreenBtn type="submit">Delete Admin</ScreenBtn>
+          <ScreenBtn type="submit">Delete</ScreenBtn>
           <ScreenBtn type="button" onClick={sAdminHomePage}>
-            Go Back
+            Back
           </ScreenBtn>
         </div>
         <div className="superAdmin-delete-message">
