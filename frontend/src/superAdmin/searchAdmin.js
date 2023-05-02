@@ -48,7 +48,7 @@ const ViewAdmin = () => {
       if (data.length === 0) {
         setMessage("No Record Registered Against This Email.");
       } else {
-        // setMessage("Record Registered Against This Email.");
+        setMessage("");
         setTableData(data);
       }
     } else {
