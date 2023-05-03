@@ -1,7 +1,7 @@
 .SA-Searchadmin-container-div {
   display: flex;
   justify-content: center;
-  background-image: url("../components/Login/pmdu-bg1.jpg");
+  background-image: url("../components/Login/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 570px;

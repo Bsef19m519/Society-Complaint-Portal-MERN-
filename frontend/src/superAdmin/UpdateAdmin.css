@@ -1,7 +1,7 @@
 .SA-UpdateAdmin-containerdiv {
   display: flex;
   justify-content: center;
-  background-image: url("../components/Login/pmdu-bg1.jpg");
+  background-image: url("../components/Login/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -57,7 +57,7 @@
 
 .superAdmin-Update-message {
   padding-left: 2px;
-  color: white;
-  background-color: black;
+  color: black;
+  font-style: italic;
   margin: -10px 7px 7px 7px;
 }

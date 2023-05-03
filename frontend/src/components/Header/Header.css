@@ -3,12 +3,13 @@ header {
   justify-content: space-between;
   /* align-items: center; */
   padding: 2px;
-  background-color: transparent;
+  background-color: white;
+
   font-weight: 500;
   font-size: 20px;
   /* border-bottom: 2px solid rgb(0, 0, 0); */
   /* border: 2px solid red; */
-  width: 98%;
+  width: 99.73%;
 }
 
 .logo img {

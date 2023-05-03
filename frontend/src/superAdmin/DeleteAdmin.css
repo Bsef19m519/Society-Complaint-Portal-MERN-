@@ -1,5 +1,5 @@
 .SA-Deleteadmin-container-div {
-  background-image: url("../components/Login/pmdu-bg1.jpg");
+  background-image: url("../components/Login/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -54,6 +54,6 @@
   /* border: 2px solid black; */
   margin: -10px 7px 7px 7px;
   padding-left: 2px;
-  color: white;
-  background-color: black;
+  color: black;
+  font-style: italic;
 }

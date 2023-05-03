@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   height: 842px;
-  background-image: url("../components/Login/pmdu-bg1.jpg");
+  background-image: url("../components/Login/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -52,7 +52,7 @@
 
 .superAdmin-Add-message {
   padding-left: 2px;
-  color: white;
-  background-color: black;
+  color: black;
   margin: -10px 7px 7px 7px;
+  font-style: italic;
 }
