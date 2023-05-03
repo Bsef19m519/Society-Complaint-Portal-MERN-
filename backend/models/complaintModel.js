@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const joi = require('joi');
 
-const { Resident, validateUser } = require('../models/userModel');
+const { Resident, validateUser } = require('./userModel');
 
 //Schema for Complaints 
 const complaintSchema = mongoose.Schema({
