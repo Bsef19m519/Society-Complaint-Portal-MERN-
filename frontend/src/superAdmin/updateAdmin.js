@@ -86,7 +86,7 @@ const UpdateAdmin = () => {
     event.preventDefault();
 
     if (preEmailRef.current.value.trim() === "") {
-      alert("Please Entered Already setted emqail");
+      alert("Please Enter Already setted email");
       return false;
     } else if (nameRef.current.value.trim() === "") {
       alert("please fill the name field ");
@@ -103,14 +103,19 @@ const UpdateAdmin = () => {
     } else if (addressRef.current.value.trim() === "") {
       alert("address field can not be empty");
       return false;
-    } else if (phoneRef.current.value.length < 11) {
-      alert("length must be atleast of 11 characters");
+    } else if (phoneRef.current.value.length !== 11) {
+      alert(" phone number length must be of 11 characters");
       return false;
-    } else if (passwordRef.current.value.trim() === "") {
+    }
+    //  } else if (phoneRef.current.value >= 0) {
+    //   alert(" phone number must be valid");
+    //   return false;
+    // }
+    else if (passwordRef.current.value.trim() === "") {
       alert("password field can not be empty");
       return false;
     } else if (passwordRef.current.value.length < 8) {
-      alert("length must be atleast of 8 characters");
+      alert(" password length must be atleast of 8 characters");
       return false;
     } else if (passwordRef.current.value !== cnfrmPasswordRef.current.value) {
       alert("password and confirm password must be same");
