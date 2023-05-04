@@ -31,9 +31,13 @@ const DeleteAdmin = () => {
           method: "DELETE",
         }
       );
-
       if (response.ok) {
-        setMessage("Record Deleted Successfully.");
+        const data = await response.json();
+        if (data.deletedCount === 1) {
+          setMessage("Record Deleted Successfully.");
+        } else {
+          setMessage("Record Does Not Exist.");
+        }
       } else {
         setMessage("Error: Deletion operation did'nt perform.");
       }
