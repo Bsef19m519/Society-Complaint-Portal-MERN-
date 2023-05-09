@@ -71,7 +71,8 @@ function validateUser(user){
 
 
 //exporting modules
-module.exports.SuperAdmin=new mongoose.model("superAdmins", userSchema);
+module.exports.userSchema = userSchema;
 module.exports.Admin=new mongoose.model("admins", userSchema);
+module.exports.ComplaintOfficer=new mongoose.model("complaintOfficer", userSchema);
 module.exports.Resident=new mongoose.model("residents", userSchema);
 module.exports.validateUser=validateUser;
