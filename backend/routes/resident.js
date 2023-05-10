@@ -1,3 +1,4 @@
+const auth = require('../middleware/auth');
 const express = require('express');
 const _ = require('lodash');
 const { Complaint, validateComplaint } = require('../models/complaintModel');
@@ -5,7 +6,7 @@ const {Resident} = require('../models/userModel');
 const router = express.Router();
 
 //dealing with post requests
-router.post('/complaints', async (req, res) => {
+router.post('/complaints', auth, async (req, res) => {
     const { error } = validateComplaint(req.body); //joi validation
     if (error) return res.status(400).send(error.details[0].message);
 

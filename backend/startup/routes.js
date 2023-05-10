@@ -3,6 +3,7 @@ const cors = require('cors');
 const admin = require('../routes/admin');
 const complaintOfficer = require('../routes/complaintOfficer');
 const resident = require('../routes/resident');
+const auth = require('../routes/auth');
 
 /**
  * The method uses server application to
@@ -16,4 +17,5 @@ module.exports = function(app) {    //the method will be called in index.js
   app.use('/api/admin', admin);
   app.use('/api/complaintOfficer', complaintOfficer);
   app.use('/api/resident', resident);
+  app.use('/api/auth',auth);
 }

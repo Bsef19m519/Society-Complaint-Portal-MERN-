@@ -1,5 +1,8 @@
+const _ = require('lodash');
+const config = require('config');
+const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
-const joi = require('joi');
+const Joi = require('joi');
 
 /**
  * The object represents a common schema 
@@ -23,7 +26,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         minLength:8,
-        maxLength:30
+        maxLength:1024
     },
     phone: {
         type: String,
@@ -46,6 +49,11 @@ const userSchema = mongoose.Schema({
     },
 })
 
+userSchema.methods.generateAuthToken = function(){
+    const token = jwt.sign(_.pick(this,['_id','name','email','phone','address']), config.get('jwtPrivateKey'));
+    return token;
+}
+
 /**
  * The function validates user object by
  *  using Joi according to business rules. 
@@ -55,13 +63,13 @@ const userSchema = mongoose.Schema({
  * value and error
  */
 function validateUser(user){
-    const schema = joi.object({
-        name: joi.string().max(30).required(),
-        email: joi.string().email().required(),
-        password: joi.string().min(8).max(30).required(),
-        phone: joi.string().length(11).pattern(/^[0-9]+$/).required(),
-        cnic:joi.string().length(13).pattern(/^[0-9]+$/).required(), 
-        address:joi.string().required().max(50),
+    const schema = Joi.object({
+        name: Joi.string().max(30).required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().min(8).max(30).required(),
+        phone: Joi.string().length(11).pattern(/^[0-9]+$/).required(),
+        cnic:Joi.string().length(13).pattern(/^[0-9]+$/).required(), 
+        address:Joi.string().required().max(50),
     });
     return schema.validate(user);
 }
@@ -71,7 +79,6 @@ function validateUser(user){
 
 
 //exporting modules
-module.exports.userSchema = userSchema;
 module.exports.Admin=new mongoose.model("admins", userSchema);
 module.exports.ComplaintOfficer=new mongoose.model("complaintOfficer", userSchema);
 module.exports.Resident=new mongoose.model("residents", userSchema);

@@ -1,26 +1,30 @@
+const auth = require('../middleware/auth');
+const bcrypt = require('bcrypt');
 const express = require('express');
 const _ = require('lodash');
 const { Resident, validateUser } = require('../models/userModel');
 const router = express.Router();
 
 //dealing with get requests
-router.get('/residents/:email', async (req, res) => {
+router.get('/residents/:email', auth, async (req, res) => {
     const resident = await Resident.findOne({ email: req.params.email });
     if (!resident) return res.status(404).send('The resident with the given email was not found.');
     res.send(_.pick(resident, ['_id','name', 'email', 'cnic','phone','address']));
 })
 
-router.get('/residents', async (req, res) => {
+router.get('/residents', auth, async (req, res) => {
     const resident = await Resident.find().sort('name');
     res.send(_.pick(resident, ['_id','name', 'email', 'cnic','phone','address']));
 })
 
 //dealing with post requests
-router.post('/residents', async (req, res) => {
+router.post('/residents', auth, async (req, res) => {
     const { error } = validateUser(req.body); //joi validation
     if (error) return res.status(400).send(error.details[0].message);
 
     const resident = new Resident(_.pick(req.body,['name', 'email', 'password', 'cnic','phone','address']));
+    const salt = await bcrypt.genSalt(10);
+    resident.password = await bcrypt.hash(resident.password,salt);
     try {
         await resident.save();
         res.send(_.pick(resident, ['_id','name', 'email', 'cnic','phone','address']));
@@ -32,7 +36,7 @@ router.post('/residents', async (req, res) => {
 });
 
 //dealing with put requests
-router.put('/residents/:email', async (req, res) => {
+router.put('/residents/:email', auth, async (req, res) => {
     const { error } = validateUser(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     
@@ -50,7 +54,7 @@ router.put('/residents/:email', async (req, res) => {
 });
 
 //dealing with delete requests
-router.delete('/residents/:email', async (req, res) => {
+router.delete('/residents/:email', auth, async (req, res) => {
     
     const resident = await Resident.findOne({email:req.params.email});
     if (!resident) return res.status(404).send('The resident with the given email was not found.');
