@@ -1,17 +1,18 @@
 const express = require('express');
+const _ = require('lodash');
 const { Resident, validateUser } = require('../models/userModel');
 const router = express.Router();
 
 //dealing with get requests
 router.get('/residents/:email', async (req, res) => {
-    const resident = await Resident.find({ email: req.params.email });
+    const resident = await Resident.findOne({ email: req.params.email });
     if (!resident) return res.status(404).send('The resident with the given email was not found.');
-    res.send(resident);
+    res.send(_.pick(resident, ['_id','name', 'email', 'cnic','phone','address']));
 })
 
 router.get('/residents', async (req, res) => {
     const resident = await Resident.find().sort('name');
-    res.send(resident)
+    res.send(_.pick(resident, ['_id','name', 'email', 'cnic','phone','address']));
 })
 
 //dealing with post requests
@@ -19,10 +20,10 @@ router.post('/residents', async (req, res) => {
     const { error } = validateUser(req.body); //joi validation
     if (error) return res.status(400).send(error.details[0].message);
 
-    const resident = new Resident(req.body);
+    const resident = new Resident(_.pick(req.body,['name', 'email', 'password', 'cnic','phone','address']));
     try {
         await resident.save();
-        res.send(resident);
+        res.send(_.pick(resident, ['_id','name', 'email', 'cnic','phone','address']));
     }
     catch (err) {
         res.status(400).send(err.message);
@@ -31,15 +32,16 @@ router.post('/residents', async (req, res) => {
 });
 
 //dealing with put requests
-router.put('/residents/:id', async (req, res) => {
+router.put('/residents/:email', async (req, res) => {
     const { error } = validateUser(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     
     try
     {
-        const resident = await Resident.findByIdAndUpdate(req.params.id, req.body , { new: true });
-        if (!resident) return res.status(404).send('The resident with the given ID was not found.');
-        res.send(resident);
+        const resident = await Resident.findOne({email:req.params.email});
+        if (!resident) return res.status(404).send('The resident with the given email was not found.');
+        resident.set(_.pick(req.body,['name', 'email', 'password', 'cnic','phone','address']));
+        res.send(_.pick(resident, ['_id','name', 'email', 'cnic','phone','address']));
     }
     catch (err) {
         res.status(400).send(err.message);
@@ -48,10 +50,12 @@ router.put('/residents/:id', async (req, res) => {
 });
 
 //dealing with delete requests
-router.delete('/residents/:id', async (req, res) => {
-    const resident = await Resident.findByIdAndRemove(req.params.id);  
-    if (!resident) return res.status(404).send('The resident with the given ID was not found.');  
-    res.send(resident);
+router.delete('/residents/:email', async (req, res) => {
+    
+    const resident = await Resident.findOne({email:req.params.email});
+    if (!resident) return res.status(404).send('The resident with the given email was not found.');
+    await Resident.deleteOne({email:req.params.email});
+    res.send(_.pick(resident, ['_id','name', 'email', 'cnic','phone','address']));
 });
 
 module.exports = router;    

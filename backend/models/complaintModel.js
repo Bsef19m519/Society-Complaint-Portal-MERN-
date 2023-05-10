@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const joi = require('joi');
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 
 //Schema for Complaints 
 const complaintSchema = mongoose.Schema({
@@ -25,6 +26,7 @@ const complaintSchema = mongoose.Schema({
     },
     complaintStatus :{
         type:String,
+        default:'pending',
         enum:['resolved', 'rejected', 'acknowledged', 'pending']
     },
     acknowledgeDate:{
@@ -57,14 +59,14 @@ const complaintSchema = mongoose.Schema({
 
 
 function validateComplaint(complaint){
-    const schema = joi.object({
-        complainerId: joi.string().required(),
-        complaintType: joi.string().required(),
-        description: joi.string().min(10).max(100).required(),
-        complaintStatus:joi.string(),
-        generationDate:joi.date(),
-        acknowledgeDate:joi.date(),
-        finalizeDate:joi.date()
+    const schema = Joi.object({
+        complainerId: Joi.objectId().required(),
+        complaintType: Joi.string().required(),
+        description: Joi.string().min(10).max(100).required(),
+        complaintStatus:Joi.string(),
+        generationDate:Joi.date(),
+        acknowledgeDate:Joi.date(),
+        finalizeDate:Joi.date()
     });
     return schema.validate(complaint);}
 
