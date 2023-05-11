@@ -1,19 +1,26 @@
 const auth = require('../middleware/auth');
+const complaintOfficer = require('../middleware/complaintOfficer');
+const resident = require('../middleware/resident');
 const express = require('express');
 const _ = require('lodash');
 const { Complaint, validateComplaint } = require('../models/complaintModel');
 const {User} = require('../models/userModel');
 const router = express.Router();
 
-//dealing with post requests
-router.post('/', auth, async (req, res) => {
+                        //APIs for residents
+router.post('/', [auth,resident], async (req, res) => {
     const { error } = validateComplaint(req.body); //joi validation
     if (error) return res.status(400).send(error.details[0].message);
 
-    const complainer = await User.findById(req.body.complainer);  //finding complainer
+    const complainer = await User.findById(req.user._id);  //finding complainer
     if(!complainer) return res.status(400).send("Resident not found!");
 
-    const complaint = new Complaint(_.pick(req.body,['complainer','complaintType','description','complaintStatus']));
+    let complaint = new Complaint(
+        {
+            complainer: req.user._id,
+            complaintType : req.body.complaintType,
+            description: req.body.description
+        });
     try {
         await complaint.save();
         res.send(complaint);
@@ -30,7 +37,31 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
-router.get('/', auth, async (req, res) => {
+router.get('/me', [auth,resident], async (req,res) => {
+    console.log(req.user._id);
+    const complaint = await Complaint.find({complainer:req.user._id})
+                                    .sort('_id')
+                                    .select('-__v -complainer');
+    res.send(complaint);
+})
+
+
+
+router.get('/me/:complaintStatus', [auth,resident], async (req, res) => {
+    if(req.params.complaintStatus!='pending' && req.params.complaintStatus!='acknowledged'
+    && req.params.complaintStatus!='resolved' && req.params.complaintStatus!='rejected')
+        return res.status(400).send('invalid \'complaintStatus\' value')
+
+    const complaint = await Complaint.find({complainer:req.user._id , complaintStatus:req.params.complaintStatus})
+                                    .sort('_id')
+                                    .select('-__v -complainer');
+    res.send(complaint);
+})
+
+
+                            //APIs for complaint Officer
+
+router.get('/', [auth,complaintOfficer], async (req, res) => {
     const complaint = await Complaint.find()
                                     .sort('_id')
                                     .populate('complainer', '-password -role -__v')
@@ -38,14 +69,7 @@ router.get('/', auth, async (req, res) => {
     res.send(complaint);
 })
 
-router.get('/me', auth, async (req,res) => {
-    const complaint = await Complaint.find({'complainer':req.user._id})
-                                    .sort('_id')
-                                    .select('-__v -complainer');
-    res.send(complaint);
-})
-
-router.get('/:complaintStatus', auth, async (req, res) => {
+router.get('/:complaintStatus', [auth,complaintOfficer], async (req, res) => {
     if(req.params.complaintStatus!='pending' && req.params.complaintStatus!='acknowledged'
     && req.params.complaintStatus!='resolved' && req.params.complaintStatus!='rejected')
         return res.status(400).send('invalid \'complaintStatus\' value')
@@ -57,19 +81,9 @@ router.get('/:complaintStatus', auth, async (req, res) => {
     res.send(complaint);
 })
 
-router.get('/me/:complaintStatus', auth, async (req, res) => {
-    if(req.params.complaintStatus!='pending' && req.params.complaintStatus!='acknowledged'
-    && req.params.complaintStatus!='resolved' && req.params.complaintStatus!='rejected')
-        return res.status(400).send('invalid \'complaintStatus\' value')
 
-    const complaint = await Complaint.find({'complainer':req.user._id , complaintStatus:req.params.complaintStatus})
-                                    .sort('_id')
-                                    .populate('complainer', '-password -role -__v')
-                                    .select('-__v');
-    res.send(complaint);
-})
 
-router.put('/:id', auth, async(req,res) => {
+router.put('/:id', [auth,complaintOfficer], async(req,res) => {
     if(!req.body.complaintStatus)
         return res.status(400).send("'complaintStatus' attribute is required in request body");
 

@@ -16,7 +16,7 @@ const complaintSchema = mongoose.Schema({
         type: String,
         required: true,
         minLength: 10,
-        maxLength: 100
+        maxLength: 1000
     },
     generationDate:{
         type: Date,
@@ -58,13 +58,8 @@ const complaintSchema = mongoose.Schema({
 
 function validateComplaint(complaint){
     const schema = Joi.object({
-        complainer: Joi.objectId().required(),
         complaintType: Joi.string().required(),
-        description: Joi.string().min(10).max(100).required(),
-        complaintStatus:Joi.string(),
-        generationDate:Joi.date(),
-        acknowledgeDate:Joi.date(),
-        finalizeDate:Joi.date()
+        description: Joi.string().min(10).max(1000).required(),
     });
     return schema.validate(complaint);}
 

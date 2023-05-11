@@ -12,7 +12,7 @@ if(!config.get('jwtPrivateKey')){
     process.exit(1);
 }
 
-const port = process.env.PORT || 3000;  //defining port
+const port = process.env.PORT || 3001;  //defining port
 
 //running server on specified port
 const server = app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
