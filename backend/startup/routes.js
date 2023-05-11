@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-const admin = require('../routes/admin');
-const complaintOfficer = require('../routes/complaintOfficer');
-const resident = require('../routes/resident');
+
 const auth = require('../routes/auth');
+const user = require('../routes/user');
+const complaint = require('../routes/complaint');
 
 /**
  * The method uses server application to
@@ -14,8 +14,7 @@ module.exports = function(app) {    //the method will be called in index.js
   app.use(cors({origin:'http://localhost:3001'}));    //to allow cross-origin requests
   app.use(express.json());
   
-  app.use('/api/admin', admin);
-  app.use('/api/complaintOfficer', complaintOfficer);
-  app.use('/api/resident', resident);
   app.use('/api/auth',auth);
+  app.use('/api/users', user);
+  app.use('/api/complaints', complaint);
 }

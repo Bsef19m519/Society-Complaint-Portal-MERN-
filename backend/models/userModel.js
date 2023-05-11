@@ -6,7 +6,7 @@ const Joi = require('joi');
 
 /**
  * The object represents a common schema 
- * for super admin, admin and residents.
+ * for admin,  complaintOfficer and residents.
  * All fields are validated by using
  * Mongoose according to the business logic. 
  */
@@ -47,10 +47,15 @@ const userSchema = mongoose.Schema({
         required:true,
         maxLength: 50
     },
+    role :{
+        type:String,
+        default:'resident',
+        enum:['resident', 'complaintOfficer', 'admin']
+    }
 })
 
 userSchema.methods.generateAuthToken = function(){
-    const token = jwt.sign(_.pick(this,['_id','name','email','phone','address']), config.get('jwtPrivateKey'));
+    const token = jwt.sign(_.pick(this,['_id','name','email','phone','address','role']), config.get('jwtPrivateKey'));
     return token;
 }
 
@@ -68,8 +73,9 @@ function validateUser(user){
         email: Joi.string().email().required(),
         password: Joi.string().min(8).max(30).required(),
         phone: Joi.string().length(11).pattern(/^[0-9]+$/).required(),
-        cnic:Joi.string().length(13).pattern(/^[0-9]+$/).required(), 
-        address:Joi.string().required().max(50),
+        cnic: Joi.string().length(13).pattern(/^[0-9]+$/).required(), 
+        address: Joi.string().required().max(50),
+        role: Joi.string()
     });
     return schema.validate(user);
 }
@@ -79,7 +85,5 @@ function validateUser(user){
 
 
 //exporting modules
-module.exports.Admin=new mongoose.model("admins", userSchema);
-module.exports.ComplaintOfficer=new mongoose.model("complaintOfficer", userSchema);
-module.exports.Resident=new mongoose.model("residents", userSchema);
+module.exports.User=new mongoose.model("users", userSchema);
 module.exports.validateUser=validateUser;

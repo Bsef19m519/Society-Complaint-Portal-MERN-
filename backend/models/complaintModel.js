@@ -3,9 +3,9 @@ const Joi = require('joi');
 
 //Schema for Complaints 
 const complaintSchema = mongoose.Schema({
-    complainerId:{
+    complainer:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:'resident',
+        ref:'users',
         required:true
     },
     complaintType:{
@@ -40,7 +40,6 @@ const complaintSchema = mongoose.Schema({
             }
         }         
     },
-
     finalizeDate:
     {
         type: Date,
@@ -59,7 +58,7 @@ const complaintSchema = mongoose.Schema({
 
 function validateComplaint(complaint){
     const schema = Joi.object({
-        complainerId: Joi.objectId().required(),
+        complainer: Joi.objectId().required(),
         complaintType: Joi.string().required(),
         description: Joi.string().min(10).max(100).required(),
         complaintStatus:Joi.string(),
