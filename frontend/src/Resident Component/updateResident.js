@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ScreenBtn from "../components/Button/ScreenButton";
-import "./UpdateAdmin.css";
+import "./UpdateResident.css";
 import loginIcon from "../components/Header/SCP3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +11,7 @@ import { faMobile } from "@fortawesome/free-solid-svg-icons";
 import { faIdCard } from "@fortawesome/free-solid-svg-icons";
 import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
 
-const UpdateAdmin = () => {
+const UpdateResident = () => {
   let navigate = useNavigate();
   const sAdminHomePage = () => {
     navigate("/super-adminfp");
@@ -123,7 +123,7 @@ const UpdateAdmin = () => {
     }
 
     //sending data to backend
-    fetch(`http://localhost:3000/api/superadmin/admins/${preEmail}`, {
+    fetch(`http://localhost:3001/api/users/${preEmail}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -163,7 +163,7 @@ const UpdateAdmin = () => {
           src={loginIcon}
           alt="SCP pic"
         />
-        <h2 className="SA-Updateadmin-login-txt"> Update Admin</h2>
+        <h2 className="SA-Updateadmin-login-txt"> Update Resident</h2>
 
         <div className="SA-Updateadmin-singlediv-container">
           {/* <FontAwesomeIcon
@@ -311,4 +311,4 @@ const UpdateAdmin = () => {
   );
 };
 
-export default UpdateAdmin;
+export default UpdateResident;

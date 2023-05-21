@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import ScreenBtn from "../components/Button/ScreenButton";
 import { useNavigate } from "react-router-dom";
-import "./DeleteAdmin.css";
+import "./DeleteResident.css";
 import loginIcon from "../components/Header/SCP3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-const DeleteAdmin = () => {
+const DeleteResident = () => {
   //navigate to others component
   let navigate = useNavigate();
   const sAdminHomePage = () => {
@@ -25,12 +25,9 @@ const DeleteAdmin = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/superadmin/admins/${email}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`http://localhost:3001/api/users/${email}`, {
+        method: "DELETE",
+      });
       if (response.ok) {
         const data = await response.json();
         if (data.deletedCount === 1) {
@@ -56,7 +53,7 @@ const DeleteAdmin = () => {
           src={loginIcon}
           alt="SCP pic"
         />
-        <h2 className="SA-DeleteAdmin-login-txt"> Delete Admin</h2>
+        <h2 className="SA-DeleteAdmin-login-txt"> Delete Resident</h2>
         <div className="SA-DeleteAdmin-singlediv-container">
           <FontAwesomeIcon
             className="SA-DeleteAdmin-faicons"
@@ -87,4 +84,4 @@ const DeleteAdmin = () => {
   );
 };
 
-export default DeleteAdmin;
+export default DeleteResident;
