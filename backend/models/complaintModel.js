@@ -11,7 +11,7 @@ const complaintSchema = mongoose.Schema({
     complaintType:{
         type:String,
         required: true,
-        enum:["maintenanceIssue","securityConcerns","commonAreaProblems","noiseAndNuisance","parkingRelatedIssues","complaintAgainstAnyMember"],
+        enum:["maintenance issue","security concerns","common area problems","noise and nuisance","parking related issues","complaint against any member"],
         default:"others"
     },
     description:{
