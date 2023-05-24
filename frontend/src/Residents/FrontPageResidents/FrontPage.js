@@ -1,7 +1,8 @@
-import React from 'react';
-import './FrontPage.css'
-import ScreenBtn from '../../components/Button/ScreenButton';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import StylishButton from '../../components/Button/StylishButtons';
+import { useNavigate } from "react-router-dom";
+import "./FrontPage.css";
+import loginIcon from "../../components/Header/SCP3.png";
 
 const FrontPage = () => {
 
@@ -17,16 +18,33 @@ const FrontPage = () => {
  }
 
     return(
-        <div className='btnDiv'>
-            <h1 className='fp-txt'>Welcome To Society Complaint Portal</h1>
-                <div className='btn'>
-                    <ScreenBtn type="button" onClick = {regsterNewComplaint}>Register Complaint</ScreenBtn>
-                    <ScreenBtn type="button" onClick = {viewComplaint}>View Complaint</ScreenBtn>
-                    <ScreenBtn type="button">Notfications</ScreenBtn>
+    
+            <div className="RcontainerDiv">
+            <div className="R-content-container-div">
+                 <img className="RloginIcon" src={loginIcon} alt="SCP pic" />
+                 <h2 className="Rlogin-txt"> Welcome User</h2>
+                 
+            <div style={{ display: 'flex', gap: '10px' }}></div>
+             <div className="R-screen-button-div">
+              <StylishButton type="button" onClick={regsterNewComplaint}>
+                Register complaint
+             </StylishButton>
+             
+             <div style={{ display: 'flex', gap: '10px' }}></div>
+              <StylishButton type="button" onClick={viewComplaint}>
+                View complaint
+              </StylishButton>
+             </div>
+              </div>
             </div>
-        </div>
         
     );
 }
 
 export default FrontPage;
+
+
+
+
+
+

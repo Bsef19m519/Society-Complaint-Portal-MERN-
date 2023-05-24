@@ -1,42 +1,36 @@
-.btnDiv{
-   
-    /* background-color: navy;
-    align-items: center;
-    justify-content: center;
-    padding-left: 50px;
-    padding-top: 20px; */
- 
-    font-family: sans-serif;
+.RcontainerDiv {
+    background-image: url("../../components/Login/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 700px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-    height: 60vh;
-    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-    color: white;
-}
-.btn{
-    background-color: navy;
-    border: 2px solid white;
+    align-items: center;
+  }
+  
+  .R-content-container-div {
+    margin-top: 20px;
+    margin-bottom: 122px;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 10px;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-.fp-txt{
-    color: navy;
-    font-weight: 500;
-    font-size: 45px;
-}
-.fp-txt:hover{
-    background-color: navy;
-    color: white;
-    font-weight: 600;
-    font-size: 45px;
-}
-
+    width: 400px;
+    height: 400px;
+    background-color: #cccccc;
+  }
+  
+  .R-screen-button-div {
+    margin-left: 15px;
+    margin-right: 10px;
+  }
+  .RloginIcon {
+    margin-left: 145px;
+    margin-top: 20px;
+    width: 100px;
+    border: 2px solid white;
+    border-radius: 300px;
+  }
+  
+  .Rlogin-txt {
+    color: black;
+    margin-left: 110px;
+    margin-top: -3px;
+  }
+  
