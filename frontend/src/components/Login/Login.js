@@ -39,8 +39,8 @@ const Login = () => {
 
   //store inputs in object
   const userInputs = {
-    EmailInput: email,
-    PasswordInput: password,
+    email: email,
+    password: password,
   };
 
   //create onsubmit handler function
@@ -60,8 +60,34 @@ const Login = () => {
       return false;
     }
 
-    console.log(userInputs); //for testing purpose
-    nextPage();
+    // console.log(userInputs);
+
+    //fetch call
+    fetch("http://localhost:3001/api/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInputs),
+    })
+      .then((response) => {
+        if (response.ok) {
+          localStorage.setItem("token", response);
+          nextPage();
+        }
+        console.log(response);
+        return response.json();
+        // else {
+        // //   setMessage("Error: Insertion Operation Failed");
+        // // }
+        //return response.json();
+      })
+
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+
+    //for testing purpose
+    // console.log(userInputs);
   };
 
   return (
