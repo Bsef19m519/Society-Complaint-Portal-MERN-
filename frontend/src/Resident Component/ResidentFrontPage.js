@@ -1,7 +1,7 @@
 import React from "react";
 import StylishButton from "../components/Button/StylishButtons";
 import { useNavigate } from "react-router-dom";
-import "./superAdminFrontPage.css";
+import "./ResidentFrontPage.css";
 import loginIcon from "../components/Header/SCP3.png";
 
 const SAFrontPage = () => {
@@ -10,20 +10,20 @@ const SAFrontPage = () => {
   // let navigate3 = useNavigate();
   // let navigate4 = useNavigate();
 
-  const addNewAdmin = () => {
-    navigate("/add-admin");
+  const addNewResident = () => {
+    navigate("/add-resident");
   };
 
-  const viewAdmin = () => {
-    navigate("/view-admin");
+  const viewResident = () => {
+    navigate("/view-resident");
   };
 
-  const updateAdmin = () => {
-    navigate("/update-admin");
+  const updateResident = () => {
+    navigate("/update-resident");
   };
 
-  const deleteAdmin = () => {
-    navigate("/delete-admin");
+  const deleteResident = () => {
+    navigate("/delete-resident");
   };
 
   return (
@@ -32,17 +32,17 @@ const SAFrontPage = () => {
         <img className="SAloginIcon" src={loginIcon} alt="SCP pic" />
         <h2 className="SAlogin-txt"> Maintain Record</h2>
         <div className="SA-screen-button-div">
-          <StylishButton type="button" onClick={addNewAdmin}>
-            Add New Admin
+          <StylishButton type="button" onClick={addNewResident}>
+            Add Resident
           </StylishButton>
-          <StylishButton type="button" onClick={viewAdmin}>
-            View Admin
+          <StylishButton type="button" onClick={viewResident}>
+            View Resident
           </StylishButton>
-          <StylishButton type="button" onClick={updateAdmin}>
-            Update Admin
+          <StylishButton type="button" onClick={updateResident}>
+            Update Resident
           </StylishButton>
-          <StylishButton type="button" onClick={deleteAdmin}>
-            Delete Admin
+          <StylishButton type="button" onClick={deleteResident}>
+            Delete Resident
           </StylishButton>
         </div>
       </div>

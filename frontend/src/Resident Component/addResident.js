@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ScreenBtn from "../components/Button/ScreenButton";
-import "./addAdmin.css";
+import "./addResident.css";
 import loginIcon from "../components/Header/SCP3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +11,7 @@ import { faMobile } from "@fortawesome/free-solid-svg-icons";
 import { faIdCard } from "@fortawesome/free-solid-svg-icons";
 import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
 
-const AddAdmin = () => {
+const AddResident = () => {
   let navigate = useNavigate();
   const sAdminHomePage = () => {
     navigate("/super-adminfp");
@@ -122,7 +122,7 @@ const AddAdmin = () => {
     }
 
     //sending data to backend
-    fetch("http://localhost:3000/api/superadmin/admins", {
+    fetch("http://localhost:3001/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -158,7 +158,7 @@ const AddAdmin = () => {
     <div className="SA-addAdmin-container-div">
       <form className="SA-addAdmin-form" onSubmit={submitHandler}>
         <img className="SA-Addadmin-loginIcon" src={loginIcon} alt="SCP pic" />
-        <h2 className="SA-Addadmin-login-txt"> Add New Admin</h2>
+        <h2 className="SA-Addadmin-login-txt"> Add New Resident</h2>
         <div className="SA-Addadmin-singlediv-container">
           <FontAwesomeIcon
             className="SA-AddAdmin-faicons"
@@ -279,4 +279,4 @@ const AddAdmin = () => {
   );
 };
 
-export default AddAdmin;
+export default AddResident;

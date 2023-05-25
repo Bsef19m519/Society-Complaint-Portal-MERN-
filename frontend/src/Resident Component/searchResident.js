@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import ScreenBtn from "../components/Button/ScreenButton";
 import { useNavigate } from "react-router-dom";
-import "./SearchAdmin.css";
+import "./SearchResident.css";
 import loginIcon from "../components/Header/SCP3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 // import TableData from "./showTableData";
 import getHeader from "../utils";
 
-const ViewAdmin = () => {
+const ViewResident = () => {
   //navigate to other component
   let navigate = useNavigate();
   const sAdminHomePage = () => {
@@ -35,13 +35,10 @@ const ViewAdmin = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(
-      `http://localhost:3000/api/superadmin/admins/${email}`,
-      {
-        method: "GET",
-        headers: { ...getHeader().get("Authorization") },
-      }
-    );
+    const response = await fetch(`http://localhost:3001/api/users/${email}`, {
+      method: "GET",
+      headers: { ...getHeader().get("Authorization") },
+    });
     if (response.ok) {
       const data = await response.json();
       console.log(data);
@@ -70,7 +67,7 @@ const ViewAdmin = () => {
             src={loginIcon}
             alt="SCP pic"
           />
-          <h2 className="SA-searchAdmin-login-txt"> Search Admin</h2>
+          <h2 className="SA-searchAdmin-login-txt"> Search Resident</h2>
           <div className="SA-searchAdmin-singlediv-container">
             <FontAwesomeIcon
               className="SA-SearchAdmin-faicons"
@@ -78,7 +75,7 @@ const ViewAdmin = () => {
             ></FontAwesomeIcon>
             <br />
             <input
-              placeholder="Search By Admin Email"
+              placeholder="Search By Resident Email"
               type="email"
               name="adminEmail"
               value={email}
@@ -129,4 +126,4 @@ const ViewAdmin = () => {
   );
 };
 
-export default ViewAdmin;
+export default ViewResident;

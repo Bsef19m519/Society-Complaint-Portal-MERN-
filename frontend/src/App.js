@@ -7,17 +7,17 @@ import AddNewComplaint from "./Residents/AddComplaint";
 import FrontPage from "./Residents/FrontPageResidents/FrontPage";
 import ViewComplaint from "./Residents/ViewComplaint";
 import Service from "./StaticComponents/Service";
-import AddAdmin from "./superAdmin/addAdmin";
+import AddResident from "./Resident Component/addResident";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   // useLocation,
 } from "react-router-dom";
-import SAFrontPage from "./superAdmin/superAdminFrontPage";
-import UpdateAdmin from "./superAdmin/updateAdmin";
-import ViewAdmin from "./superAdmin/searchAdmin";
-import DeleteAdmin from "./superAdmin/deleteAdmin";
+import SAFrontPage from "./Resident Component/ResidentFrontPage";
+import UpdateResident from "./Resident Component/updateResident";
+import ViewResident from "./Resident Component/searchResident";
+import DeleteResident from "./Resident Component/deleteResident";
 import { useRef } from "react";
 // import { useLocation } from "react-router-dom";
 
@@ -58,10 +58,10 @@ function App() {
           <Route path="/front-page" element={<FrontPage />}></Route>
           <Route path="/view-complaint" element={<ViewComplaint />}></Route>
           <Route path="/super-adminfp" element={<SAFrontPage />}></Route>
-          <Route path="/add-admin" element={<AddAdmin />}></Route>
-          <Route path="/update-admin" element={<UpdateAdmin />}></Route>
-          <Route path="/view-admin" element={<ViewAdmin />}></Route>
-          <Route path="/delete-admin" element={<DeleteAdmin />}></Route>
+          <Route path="/add-resident" element={<AddResident />}></Route>
+          <Route path="/update-resident" element={<UpdateResident />}></Route>
+          <Route path="/view-resident" element={<ViewResident />}></Route>
+          <Route path="/delete-resident" element={<DeleteResident />}></Route>
         </Routes>
       </Router>
     </div>
