@@ -17,6 +17,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const emailHandler = (event) => {
     setEmail(event.target.value);
@@ -50,13 +51,15 @@ const Login = () => {
 
     //email validation
     if (emailRef.current.value.trim() === "") {
-      alert("empty email field");
+      // alert("empty email field");
+      setMessage("Error: Empty Email Field");
       return false;
     }
 
     //password length validation
     else if (passwordRef.current.value.trim().length < 8) {
-      alert("invalid password length");
+      // alert("invalid password length");
+      setMessage("Error: Empty Password Field");
       return false;
     }
 
@@ -69,6 +72,12 @@ const Login = () => {
       body: JSON.stringify(userInputs),
     })
       .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+          setMessage("Error: Wrong Credentials.");
+        } else {
+          setMessage("");
+        }
         const data = response.json();
         data
           .then((tokenObj) => {
@@ -80,10 +89,14 @@ const Login = () => {
 
             // Decode the token
             const decodedToken = jwt(token);
+            console.log(decodedToken);
             if (decodedToken.role === "admin") {
               nextPageAdmin();
             } else if (decodedToken.role === "resident") {
               nextPageResident();
+            } else if (decodedToken.role === "complaintOfficer") {
+              nextPageResident();
+            } else {
             }
             // console.log("Decoded Token:", decodedToken);
             // console.log(decodedToken.role);
@@ -140,6 +153,9 @@ const Login = () => {
             {/* <ScreenBtn type="button" onClick={SAnextPage}>
               SA
             </ScreenBtn> */}
+          </div>
+          <div className="superAdmin-Add-message">
+            {message && <p>{message}</p>}
           </div>
         </form>
       </div>

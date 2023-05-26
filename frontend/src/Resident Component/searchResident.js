@@ -86,10 +86,10 @@ const ViewResident = () => {
             />
           </div>
           <div className="SA-searchAdmin-singlebutton-container">
-            <ScreenBtn type="submit">Search </ScreenBtn>
             <ScreenBtn type="button" onClick={sAdminHomePage}>
               Back
             </ScreenBtn>
+            <ScreenBtn type="submit">Search </ScreenBtn>
           </div>
           <div className="superAdmin-search-message">
             {message && <p>{message}</p>}

@@ -86,21 +86,25 @@ const AddResident = () => {
 
     //client side validation
     if (nameRef.current.value.trim() === "") {
-      alert("please fill the name field ");
+      //alert("please fill the name field ");
+      setMessage("Error: Empty Name Field");
       return false;
     } else if (emailRef.current.value.trim() === "") {
-      alert("email can not be empty");
+      //alert("email can not be empty");
+      setMessage("Error: Empty Email Field");
       return false;
     } else if (
       cnicRef.current.value.trim() === "" ||
       cnicRef.current.value.length !== 13
     ) {
-      alert(
-        "CNIC can not be empty and must be of 13 length including special characters"
-      );
+      // alert(
+      //   "CNIC can not be empty and must be of 13 length including special characters"
+      // );
+      setMessage("Error: CNIC Must Be Non-Empty And Of 13 Characters");
       return false;
     } else if (addressRef.current.value.trim() === "") {
-      alert("address field can not be empty");
+      // alert("address field can not be empty");
+      setMessage("Error: Empty Address Field");
       return false;
     }
     // } else if (phoneRef.current.value >= 0) {
@@ -108,16 +112,20 @@ const AddResident = () => {
     //   return false;
     // }
     else if (phoneRef.current.value.length !== 11) {
-      alert(" phone number length must be of 11 characters");
+      // alert(" phone number length must be of 11 characters");
+      setMessage("Error: Phone-Number Length Must Be Of 11 Characters");
       return false;
     } else if (passwordRef.current.value.trim() === "") {
-      alert("password can not be empty");
+      // alert("password can not be empty");
+      setMessage("Error: Empty Password Field");
       return false;
     } else if (passwordRef.current.value.length < 8) {
-      alert(" password length must be atleast of 8 characters");
+      //alert(" password length must be atleast of 8 characters");
+      setMessage("Error: Password Length Must Be Atleast 8 Characters");
       return false;
     } else if (passwordRef.current.value !== cnfrmpasswordRef.current.value) {
-      alert("password and confirm password must be same");
+      //alert("password and confirm password must be same");
+      setMessage("Error: Password And Confirm Password Must Be Same");
       return false;
     }
 
@@ -267,10 +275,10 @@ const AddResident = () => {
           />
         </div>
         <div className="SA-Addadmin-singleButton-container">
-          <ScreenBtn type="submit">Add </ScreenBtn>
           <ScreenBtn type="button" onClick={sAdminHomePage}>
             Back
           </ScreenBtn>
+          <ScreenBtn type="submit">Add </ScreenBtn>
         </div>
         <div className="superAdmin-Add-message">
           {message && <p>{message}</p>}

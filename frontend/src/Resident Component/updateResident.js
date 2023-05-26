@@ -86,25 +86,31 @@ const UpdateResident = () => {
     event.preventDefault();
 
     if (preEmailRef.current.value.trim() === "") {
-      alert("Please Enter Already setted email");
+      // alert("Please Enter Already setted email");
+      setMessage("Error: Empty Email Field");
       return false;
     } else if (nameRef.current.value.trim() === "") {
-      alert("please fill the name field ");
+      // alert("please fill the name field ");
+      setMessage("Error: Empty Name Field");
       return false;
     } else if (emailRef.current.value.trim() === "") {
-      alert("email can not be empty");
+      // alert("email can not be empty");
+      setMessage("Error: Empty Email Field");
       return false;
     } else if (
       cnicRef.current.value.trim() === "" ||
       cnicRef.current.value.length !== 13
     ) {
-      alert("cnic can not be empty and must be of 13 length ");
+      // alert("cnic can not be empty and must be of 13 length ");
+      setMessage("Error: CNIC Must Be Non-Empty And Of 13 Characters");
       return false;
     } else if (addressRef.current.value.trim() === "") {
-      alert("address field can not be empty");
+      // alert("address field can not be empty");
+      setMessage("Error: Empty Address Field");
       return false;
     } else if (phoneRef.current.value.length !== 11) {
-      alert(" phone number length must be of 11 characters");
+      // alert(" phone number length must be of 11 characters");
+      setMessage("Error: Phone-Number Length Must Be Of 11 Characters");
       return false;
     }
     //  } else if (phoneRef.current.value >= 0) {
@@ -112,13 +118,16 @@ const UpdateResident = () => {
     //   return false;
     // }
     else if (passwordRef.current.value.trim() === "") {
-      alert("password field can not be empty");
+      // alert("password field can not be empty");
+      setMessage("Error: Empty Password Field");
       return false;
     } else if (passwordRef.current.value.length < 8) {
-      alert(" password length must be atleast of 8 characters");
+      // alert(" password length must be atleast of 8 characters");
+      setMessage("Error: Password Length Must Be Atleast 8 Characters");
       return false;
     } else if (passwordRef.current.value !== cnfrmPasswordRef.current.value) {
-      alert("password and confirm password must be same");
+      // alert("password and confirm password must be same");
+      setMessage("Error: Password And Confirm Password Must Be Same");
       return false;
     }
 
@@ -298,10 +307,10 @@ const UpdateResident = () => {
             />
           </div>
           <div className="SA-Updateadmin-singleButton-container">
-            <ScreenBtn type="submit">Update </ScreenBtn>
             <ScreenBtn type="button" onClick={sAdminHomePage}>
               Back
             </ScreenBtn>
+            <ScreenBtn type="submit">Update </ScreenBtn>
           </div>
         </div>
         <div className="superAdmin-Update-message">

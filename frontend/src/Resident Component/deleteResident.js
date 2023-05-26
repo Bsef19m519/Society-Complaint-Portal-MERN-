@@ -71,10 +71,10 @@ const DeleteResident = () => {
           />
         </div>
         <div className="SA-DeleteAdmin-singleButton-container">
-          <ScreenBtn type="submit">Delete</ScreenBtn>
           <ScreenBtn type="button" onClick={sAdminHomePage}>
             Back
           </ScreenBtn>
+          <ScreenBtn type="submit">Delete</ScreenBtn>
         </div>
         <div className="superAdmin-delete-message">
           {message && <p>{message}</p>}
