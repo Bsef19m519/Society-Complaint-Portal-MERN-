@@ -10,7 +10,7 @@ const DeleteResident = () => {
   //navigate to others component
   let navigate = useNavigate();
   const sAdminHomePage = () => {
-    navigate("/super-adminfp");
+    navigate("/Admin-front-page");
   };
 
   //handling input state

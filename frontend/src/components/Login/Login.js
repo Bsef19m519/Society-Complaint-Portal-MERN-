@@ -30,12 +30,11 @@ const Login = () => {
   let navigate = useNavigate();
   // let navigate1 = useNavigate();
 
-  const nextPage = () => {
-    navigate("/front-page");
+  const nextPageResident = () => {
+    navigate("/Resident-front-page");
   };
-
-  const SAnextPage = () => {
-    navigate("/super-adminfp");
+  const nextPageAdmin = () => {
+    navigate("/Admin-front-page");
   };
 
   //store inputs in object
@@ -81,6 +80,11 @@ const Login = () => {
 
             // Decode the token
             const decodedToken = jwt(token);
+            if (decodedToken.role === "admin") {
+              nextPageAdmin();
+            } else if (decodedToken.role === "resident") {
+              nextPageResident();
+            }
             // console.log("Decoded Token:", decodedToken);
             // console.log(decodedToken.role);
           })
@@ -131,11 +135,11 @@ const Login = () => {
             />
             <hr />
           </div>
-          <div className="loginDiv">
+          <div className="loginDiv-Button">
             <ScreenBtn type="submit">Sign In</ScreenBtn>
-            <ScreenBtn type="button" onClick={SAnextPage}>
+            {/* <ScreenBtn type="button" onClick={SAnextPage}>
               SA
-            </ScreenBtn>
+            </ScreenBtn> */}
           </div>
         </form>
       </div>

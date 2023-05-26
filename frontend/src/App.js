@@ -55,9 +55,9 @@ function App() {
             path="/register-complaint"
             element={<AddNewComplaint />}
           ></Route>
-          <Route path="/front-page" element={<FrontPage />}></Route>
+          <Route path="/Resident-front-page" element={<FrontPage />}></Route>
           <Route path="/view-complaint" element={<ViewComplaint />}></Route>
-          <Route path="/super-adminfp" element={<SAFrontPage />}></Route>
+          <Route path="/Admin-front-page" element={<SAFrontPage />}></Route>
           <Route path="/add-resident" element={<AddResident />}></Route>
           <Route path="/update-resident" element={<UpdateResident />}></Route>
           <Route path="/view-resident" element={<ViewResident />}></Route>

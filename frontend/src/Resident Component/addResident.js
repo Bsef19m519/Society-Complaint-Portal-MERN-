@@ -14,7 +14,7 @@ import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
 const AddResident = () => {
   let navigate = useNavigate();
   const sAdminHomePage = () => {
-    navigate("/super-adminfp");
+    navigate("/Admin-front-page");
   };
 
   //creating ref for dom validation

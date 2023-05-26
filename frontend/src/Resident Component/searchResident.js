@@ -12,7 +12,7 @@ const ViewResident = () => {
   //navigate to other component
   let navigate = useNavigate();
   const sAdminHomePage = () => {
-    navigate("/super-adminfp");
+    navigate("/Admin-front-page");
   };
 
   //managing input states

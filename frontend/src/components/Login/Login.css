@@ -30,9 +30,10 @@
   background-color: #cccccc;
 }
 .login-txt {
+  /* border: 2px solid red; */
   color: black;
-  margin-left: 110px;
-  margin-top: -3px;
+  text-align: center;
+  margin-top: -1px;
 }
 
 .loginIcon {
@@ -51,6 +52,9 @@ hr {
   width: 270px;
 }
 
-.loginDiv:screenbutton {
-  margin-left: 300px;
+.loginDiv-Button {
+  /* margin-left: 100px; */
+  /* border: 2px solid yellow; */
+  /* align-items: center; */
+  text-align: center;
 }
