@@ -27,16 +27,16 @@ const DeleteResident = () => {
     try {
       const response = await fetch(`http://localhost:3001/api/users/${email}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
       });
       if (response.ok) {
         const data = await response.json();
-        if (data.deletedCount === 1) {
-          setMessage("Record Deleted Successfully.");
-        } else {
-          setMessage("Record Does Not Exist.");
-        }
+        setMessage("Record Deleted Successfully.");
       } else {
-        setMessage("Error: Deletion operation did'nt perform.");
+        setMessage("Error: Record Not Found.");
       }
     } catch (error) {
       console.error(error);

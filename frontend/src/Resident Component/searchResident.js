@@ -37,16 +37,17 @@ const ViewResident = () => {
 
     const response = await fetch(`http://localhost:3001/api/users/${email}`, {
       method: "GET",
-      headers: { ...getHeader().get("Authorization") },
+      headers: { "x-auth-token": localStorage.getItem("token") },
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       if (data.length === 0) {
         setMessage("No Record Registered Against This Email.");
       } else {
         setMessage("");
-        setTableData(data);
+        setTableData([data]);
+        // console.log(data);
       }
     } else {
       setMessage("Error: Search Operation Failed.");

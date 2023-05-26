@@ -6,6 +6,7 @@ import loginIcon from "../Header/SCP3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
+import jwt from "jwt-decode";
 
 const Login = () => {
   //creating ref to manage dom
@@ -60,8 +61,6 @@ const Login = () => {
       return false;
     }
 
-    // console.log(userInputs);
-
     //fetch call
     fetch("http://localhost:3001/api/auth", {
       method: "POST",
@@ -71,23 +70,27 @@ const Login = () => {
       body: JSON.stringify(userInputs),
     })
       .then((response) => {
-        if (response.ok) {
-          localStorage.setItem("token", response);
-          nextPage();
-        }
-        console.log(response);
-        return response.json();
-        // else {
-        // //   setMessage("Error: Insertion Operation Failed");
-        // // }
-        //return response.json();
+        const data = response.json();
+        data
+          .then((tokenObj) => {
+            const token = tokenObj.token;
+
+            //console.log(token); for testing purpose
+            // Store the token in localStorage
+            localStorage.setItem("token", token);
+
+            // Decode the token
+            const decodedToken = jwt(token);
+            // console.log("Decoded Token:", decodedToken);
+            // console.log(decodedToken.role);
+          })
+          .catch((error) => console.error(error));
+
+        // return decodedToken;
       })
 
-      .then((data) => console.log(data))
+      //.then((data) => console.log(data))
       .catch((error) => console.error(error));
-
-    //for testing purpose
-    // console.log(userInputs);
   };
 
   return (
