@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ScreenBtn from "../components/Button/ScreenButton";
 import { useNavigate } from "react-router-dom";
 import "./DeleteResident.css";
@@ -7,6 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const DeleteResident = () => {
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  }, []);
+
   //navigate to others component
   let navigate = useNavigate();
   const sAdminHomePage = () => {
@@ -33,7 +39,7 @@ const DeleteResident = () => {
         },
       });
       if (response.ok) {
-        const data = await response.json();
+        // const data = await response.json();
         setMessage("Record Deleted Successfully.");
       } else {
         setMessage("Error: Record Not Found.");

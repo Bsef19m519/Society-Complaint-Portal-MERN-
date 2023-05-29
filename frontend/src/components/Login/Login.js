@@ -72,7 +72,7 @@ const Login = () => {
       body: JSON.stringify(userInputs),
     })
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         if (!response.ok) {
           setMessage("Error: Wrong Credentials.");
         } else {
@@ -89,7 +89,7 @@ const Login = () => {
 
             // Decode the token
             const decodedToken = jwt(token);
-            console.log(decodedToken);
+            // console.log(decodedToken);
             if (decodedToken.role === "admin") {
               nextPageAdmin();
             } else if (decodedToken.role === "resident") {

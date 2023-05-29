@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ScreenBtn from "../components/Button/ScreenButton";
 import "./UpdateResident.css";
@@ -12,6 +12,12 @@ import { faIdCard } from "@fortawesome/free-solid-svg-icons";
 import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
 
 const UpdateResident = () => {
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  }, []);
+
   let navigate = useNavigate();
   const sAdminHomePage = () => {
     navigate("/Admin-front-page");
