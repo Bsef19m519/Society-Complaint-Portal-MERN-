@@ -1,87 +1,62 @@
-.Complaint-form-container{
-  border: 2px solid white;
-  border-radius: 10px;
-  color: white;
-  font-weight: 500;
-  margin-left: 225px;
-  margin-right: 225px;
-  padding: 20px;
-  background-color: navy;
-}
-.complaint-button{
+.AddComplaint-container-div {
   display: flex;
-  flex-direction: row-reverse;
-  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../components/Login/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
-.register-txt{
-  text-align: center;
-  color: navy;
-  font-weight: 500;
-  font-size: 45px;
-  margin-left: 260px;
-  margin-right: 260px;
-}
-
-.register-txt:hover{
-  background-color: navy;
+.AddComplaint-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
   border: 2px solid white;
   border-radius: 10px;
-    color: white;
-    font-weight: 600;
-    font-size: 45px;
+  width: 350px;
+  background-color: #cccccc;
+}
+
+.AddComplaint-input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.AddComplaint-input-container label {
+  color: black;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.AddComplaint-input-container select,
+.AddComplaint-input-container textarea {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: #ffffff;
+  font-size: 16px;
+}
+
+.AddComplaint-button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.AddComplaint-button-container button {
+  width: 45%;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 
-/* form {
-    font-family: sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-    height: 75vh;
-    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  }
-  h1{
-    color: navy;
-    font-weight: 500;
-    font-size: 45px;
+.AddComplaint-singleButton-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
 }
-h1:hover{
-    background-color: navy;
-    color: white;
-    font-weight: 600;
-    font-size: 45px;
-}
-
-  .inputs-container{
-    
-    border-radius: 5px;
-    background-color: navy;
-  }
-
-  input[type="file"] {
-    background-color: transparent;
-    cursor: grab;
-    font-size: 15px;
-    border-radius: 10px;
-    color: #fff;
-    
-  }
-
-  label{
-    color: white;
-    font-size: 20px;
-    font-weight: 400px;
-  }
-  
-  .input-container {
-    gap: 8px;
-    margin: 10px;
-  }
-  
-  
-  
-  
-   */

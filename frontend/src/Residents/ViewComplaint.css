@@ -1,36 +1,69 @@
-.view-Complaint-form-container{
-  border: 2px solid white;
-  border-radius: 10px;
-  color: white;
-  font-weight: 500;
-  margin-left: 40%;
-  margin-right: 40%;
-  padding: top 40px; 
-  padding:20px;
-  background-color: navy;
-  
-}
-.view-complaint-button{
+.VC-Viewcomplaint-container-div {
   display: flex;
-  flex-direction: column;
-  align-content: center;
   justify-content: center;
-  margin-top: 10px;
-  padding-top: 10px;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("../components/Login/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
-.view-txt{
-  text-align: center;
-  color: navy;
-  font-weight: 500;
-  font-size: 45px;
-  margin-left: 260px;
-  margin-right: 260px;
-}
-.view-txt:hover{
-    background-color: navy;
+
+.VC-viewComplaint-form-container {
+  margin-top: 20px;
+  padding: 10px;
   border: 2px solid white;
   border-radius: 10px;
-    color: white;
-    font-weight: 600;
-    font-size: 45px;
+  width: 350px;
+  height: 100px;
+  background-color: #cccccc;}
+
+.VC-viewComplaint-heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.VC-viewComplaint-singlebutton-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.VC-viewComplaint-table-container {
+  margin-top: 40px;
+}
+
+.data-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  background-color: #cccccc;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid black;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: #cccccc;
+  color: black;
+}
+
+.data-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.data-table tr:hover {
+  background-color: #e6e6e6;
+}
+
+.data-table-header {
+  background-color: #cccccc;
+  color: black;
 }
