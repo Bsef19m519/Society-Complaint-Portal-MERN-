@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import './ViewComplaint.css';
-import ScreenButton from '../components/Button/ScreenButton';
-import { useNavigate } from 'react-router-dom';
-import getHeader from '../utils';
+import React, { useState, useEffect } from "react";
+import "./ViewComplaint.css";
+import ScreenButton from "../components/Button/ScreenButton";
+import { useNavigate } from "react-router-dom";
+import getHeader from "../utils";
 
 const ViewComplaint = () => {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate('/front-page');
+    navigate("/Resident-front-page");
   };
 
   const [tableData, setTableData] = useState([]);
-//fectcomplaints is not the real function. the name will be modified with respect to the name in backend.
+  //fectcomplaints is not the real function. the name will be modified with respect to the name in backend.
   useEffect(() => {
     const fetchComplaints = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/complaints', {
-          headers: { ...getHeader().get('Authorization') },
+        const response = await fetch("http://localhost:3001/api/complaints", {
+          headers: { ...getHeader().get("Authorization") },
         });
 
         if (response.ok) {
           const data = await response.json();
           setTableData(data);
         } else {
-          console.log('Error: Fetching complaints failed.');
+          console.log("Error: Fetching complaints failed.");
         }
       } catch (error) {
-        console.log('Error:', error);
+        console.log("Error:", error);
       }
     };
 

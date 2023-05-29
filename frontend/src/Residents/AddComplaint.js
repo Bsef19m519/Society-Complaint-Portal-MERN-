@@ -5,28 +5,58 @@ import "./AddComplaint.css";
 
 const AddComplaint = () => {
   const navigate = useNavigate();
-  const [complaintType, setComplaintType] = useState("");
-  const [description, setDescription] = useState("");
+
+  const [userInputs, setUserInputs] = useState({
+    complaintType: "",
+    description: "",
+  });
 
   const goBack = () => {
-    navigate("/front-page");
+    navigate("/Resident-front-page");
   };
 
-  const alertMessage = () => {
-    alert("Fake complaints will lead to a penalty against the complainer!!!");
-  };
+  // const alertMessage = () => {
+  //   alert("Fake complaints will lead to a penalty against the complainer!!!");
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(userInputs);
+    fetch("http://localhost:3001/api/complaints", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify(userInputs),
+    })
+      .then((response) => {
+        if (response.ok) {
+          //setMessage("Record Inserted Successfully");
+          alert("complaint inserted succcessfully");
+        } else {
+          //setMessage("Error: Insertion Operation Failed");
+          alert("complaint not inserted succcessfully");
+        }
+        return response.json();
+      })
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
     // Perform further actions with the complaintType and description values
   };
 
   const handleComplaintTypeChange = (event) => {
-    setComplaintType(event.target.value);
+    setUserInputs({
+      ...userInputs,
+      complaintType: event.target.value,
+    });
   };
 
   const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+    setUserInputs({
+      ...userInputs,
+      description: event.target.value,
+    });
   };
 
   return (
@@ -36,27 +66,29 @@ const AddComplaint = () => {
         <div className="AddComplaint-input-container">
           <label>Complaint Type:</label>
           <select
-            value={complaintType}
+            value={userInputs.complaintType}
             onChange={handleComplaintTypeChange}
             required
           >
             <option value="">Select an option</option>
-            <option value="Maintenance issue">Maintenance issue</option>
-            <option value="Security concerns">Security concerns</option>
-            <option value="Common area problems">Common area problems</option>
-            <option value="Noise and nuisance">Noise and nuisance</option>
-            <option value="Parking related issues">Parking related issues</option>
-            <option value="Complaint against any member">
+            <option value="maintenance issue">Maintenance issue</option>
+            <option value="security concerns">Security concerns</option>
+            <option value="common area problems">Common area problems</option>
+            <option value="noise and nuisance">Noise and nuisance</option>
+            <option value="parking related issues">
+              Parking related issues
+            </option>
+            <option value="complaint against any member">
               Complaint against any member
             </option>
-            <option value="Others">Others</option>
+            <option value="others">Others</option>
           </select>
         </div>
         <div className="AddComplaint-input-container">
           <label>Description:</label>
           <textarea
             name="description"
-            value={description}
+            value={userInputs.description}
             onChange={handleDescriptionChange}
             rows="5"
             minLength={10}
@@ -65,12 +97,10 @@ const AddComplaint = () => {
           />
         </div>
         <div className="AddComplaint-singleButton-container">
-          <ScreenBtn type="submit" onClick={alertMessage}>
-            Add 
-          </ScreenBtn>
           <ScreenBtn type="button" onClick={goBack}>
             Back
           </ScreenBtn>
+          <ScreenBtn type="submit">Add</ScreenBtn>
         </div>
       </form>
     </div>

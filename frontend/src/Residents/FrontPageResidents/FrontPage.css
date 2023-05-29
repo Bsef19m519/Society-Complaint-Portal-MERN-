@@ -1,36 +1,37 @@
 .RcontainerDiv {
-    background-image: url("../../components/Login/bg.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% 700px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .R-content-container-div {
-    margin-top: 20px;
-    margin-bottom: 122px;
-    border-radius: 10px;
-    width: 400px;
-    height: 400px;
-    background-color: #cccccc;
-  }
-  
-  .R-screen-button-div {
-    margin-left: 15px;
-    margin-right: 10px;
-  }
-  .RloginIcon {
-    margin-left: 145px;
-    margin-top: 20px;
-    width: 100px;
-    border: 2px solid white;
-    border-radius: 300px;
-  }
-  
-  .Rlogin-txt {
-    color: black;
-    margin-left: 110px;
-    margin-top: -3px;
-  }
-  
+  background-image: url("../../components/Login/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 5px solid yellow; */
+}
+
+.R-content-container-div {
+  /* border: 5px solid blue; */
+  margin-top: 20px;
+  margin-bottom: 122px;
+  border-radius: 10px;
+  width: 400px;
+  height: 450px;
+  background-color: #cccccc;
+}
+
+.R-screen-button-div {
+  margin-left: 15px;
+  margin-right: 10px;
+}
+.RloginIcon {
+  margin-left: 145px;
+  margin-top: 20px;
+  width: 100px;
+  border: 2px solid white;
+  border-radius: 300px;
+}
+
+.Rlogin-txt {
+  color: black;
+  margin-left: 110px;
+  margin-top: -3px;
+}
