@@ -6,6 +6,8 @@ import getHeader from "../utils";
 
 const ViewComplaint = () => {
   const navigate = useNavigate();
+  const [statusFilter, setStatusFilter] = useState('All'); // State to store the selected status filter
+  const [tableData, setTableData] = useState([]);
 
   const goBack = () => {
     navigate("/Resident-front-page");
@@ -29,20 +31,48 @@ const ViewComplaint = () => {
       } catch (error) {
         console.log("Error:", error);
       }
-    };
+      const response = await fetch(url, {
+        headers: { ...getHeader().get('Authorization') },
+      });
 
-    fetchComplaints();
-  }, []);
+      if (response.ok) {
+        const data = await response.json();
+        setTableData(data);
+      } else {
+        console.log('Error: Fetching complaints failed.');
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchComplaints(statusFilter);
+  }, [statusFilter]);
 
   return (
     <div className="VC-Viewcomplaint-container-div">
       <div className="VC-viewComplaint-form-container">
         <h2 className="VC-viewComplaint-heading">View Complaint Status</h2>
         <div className="VC-viewComplaint-singlebutton-container">
-          <ScreenButton type="button" onClick={goBack}>
+         
+     
+      <div className="status-filter-container">
+        <label htmlFor="status-filter">Status Filter:</label>
+        <select
+          id="status-filter"
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+        >
+          <option value="All">All</option>
+          <option value="PENDING">PENDING</option>
+          <option value="RESOLVED">RESOLVED</option>
+        </select>
+        <ScreenButton type="button" onClick={goBack}>
             Back
           </ScreenButton>
         </div>
+      </div>
       </div>
       <table className="data-table">
         <thead>
