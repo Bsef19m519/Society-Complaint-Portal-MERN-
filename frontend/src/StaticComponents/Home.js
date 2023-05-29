@@ -10,6 +10,7 @@ import Footer from "../components/Footer/Footer";
 const Home = ({ aboutRef, serviceRef, goAbout }) => {
   return (
     <>
+      {/* <Header /> */}
       <div className="homeDiv">
         <img className="complaintPic" src={home5} alt="home5 pic" />
       </div>
