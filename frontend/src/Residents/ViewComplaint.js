@@ -6,43 +6,62 @@ import getHeader from '../utils';
 
 const ViewComplaint = () => {
   const navigate = useNavigate();
+  const [statusFilter, setStatusFilter] = useState('All'); // State to store the selected status filter
+  const [tableData, setTableData] = useState([]);
 
   const goBack = () => {
     navigate('/front-page');
   };
 
-  const [tableData, setTableData] = useState([]);
-//fectcomplaints is not the real function. the name will be modified with respect to the name in backend.
-  useEffect(() => {
-    const fetchComplaints = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/api/complaints', {
-          headers: { ...getHeader().get('Authorization') },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setTableData(data);
-        } else {
-          console.log('Error: Fetching complaints failed.');
-        }
-      } catch (error) {
-        console.log('Error:', error);
+  // Fetch complaints based on the selected status filter
+  const fetchComplaints = async (status) => {
+    try {
+      let url = 'http://localhost:3001/api/complaints';
+      if (status !== 'All') {
+        url += `?status=${status}`;
       }
-    };
+      const response = await fetch(url, {
+        headers: { ...getHeader().get('Authorization') },
+      });
 
-    fetchComplaints();
-  }, []);
+      if (response.ok) {
+        const data = await response.json();
+        setTableData(data);
+      } else {
+        console.log('Error: Fetching complaints failed.');
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchComplaints(statusFilter);
+  }, [statusFilter]);
 
   return (
     <div className="VC-Viewcomplaint-container-div">
       <div className="VC-viewComplaint-form-container">
         <h2 className="VC-viewComplaint-heading">View Complaint Status</h2>
         <div className="VC-viewComplaint-singlebutton-container">
-          <ScreenButton type="button" onClick={goBack}>
+         
+     
+      <div className="status-filter-container">
+        <label htmlFor="status-filter">Status Filter:</label>
+        <select
+          id="status-filter"
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+        >
+          <option value="All">All</option>
+          <option value="PENDING">PENDING</option>
+          <option value="RESOLVED">RESOLVED</option>
+        </select>
+        <ScreenButton type="button" onClick={goBack}>
             Back
           </ScreenButton>
         </div>
+      </div>
       </div>
       <table className="data-table">
         <thead>
