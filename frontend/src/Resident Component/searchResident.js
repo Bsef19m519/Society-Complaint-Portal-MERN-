@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ScreenBtn from "../components/Button/ScreenButton";
 import { useNavigate } from "react-router-dom";
 import "./SearchResident.css";
@@ -6,9 +6,15 @@ import loginIcon from "../components/Header/SCP3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 // import TableData from "./showTableData";
-import getHeader from "../utils";
+// import getHeader from "../utils";
 
 const ViewResident = () => {
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  }, []);
+
   //navigate to other component
   let navigate = useNavigate();
   const sAdminHomePage = () => {

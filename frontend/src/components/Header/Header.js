@@ -1,22 +1,26 @@
 import React from "react";
+// import { Navbar, NavDropdown } from "react-bootstrap";
 import "./Header.css";
 import logo from "./SCP3.png";
 import { Link } from "react-router-dom";
+
 // import ScreenBtn from "../Button/ScreenButton";
 
 // import FrontPage from "./FrontPage";
 // import Login from "./Login";
 
-const Header = ({ goAbout }) => {
-  // const serviceSectio = () => {
-  //   document.getElementById("admin-service").scrollIntoView();
-  // };
+const Header = () => {
+  // let [user] = JSON.parse(localStorage.getItem("token"));
+
+  // console.warn([user]);
+
+  //console.log(props.tokenObj);
   return (
     <header>
-      <div className="logo">
-        <img src={logo} alt="Logo" />
-      </div>
       <nav>
+        <div className="logo">
+          <img src={logo} alt="Logo" />
+        </div>
         <ul>
           <li>
             <Link to="/" className="linkStyle">

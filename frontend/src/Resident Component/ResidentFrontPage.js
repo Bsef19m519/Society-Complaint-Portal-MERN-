@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import StylishButton from "../components/Button/StylishButtons";
+import ScreenBtn from "../components/Button/ScreenButton";
 import { useNavigate } from "react-router-dom";
 import "./ResidentFrontPage.css";
 import loginIcon from "../components/Header/SCP3.png";
 
 const SAFrontPage = () => {
   let navigate = useNavigate();
-  // let navigate2 = useNavigate();
-  // let navigate3 = useNavigate();
-  // let navigate4 = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      //console.log(localStorage);
+      navigate("/login");
+    }
+  });
+
+  function logOut() {
+    // console.log(localStorage.getItem("token"));
+    localStorage.removeItem("token");
+    navigate("/login");
+    // console.log(localStorage.getItem("token"));
+    //
+  }
 
   const addNewResident = () => {
     navigate("/add-resident");
@@ -44,6 +57,9 @@ const SAFrontPage = () => {
           <StylishButton type="button" onClick={deleteResident}>
             Delete Resident
           </StylishButton>
+          <div className="superAdmin-logout-button">
+            <ScreenBtn onClick={logOut}>Log Out</ScreenBtn>
+          </div>
         </div>
       </div>
     </div>
