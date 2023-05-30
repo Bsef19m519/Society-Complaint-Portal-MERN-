@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const DeleteResident = () => {
+  let navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
@@ -14,7 +15,6 @@ const DeleteResident = () => {
   }, []);
 
   //navigate to others component
-  let navigate = useNavigate();
   const sAdminHomePage = () => {
     navigate("/Admin-front-page");
   };

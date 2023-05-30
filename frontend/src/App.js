@@ -18,6 +18,7 @@ import SAFrontPage from "./Resident Component/ResidentFrontPage";
 import UpdateResident from "./Resident Component/updateResident";
 import ViewResident from "./Resident Component/searchResident";
 import DeleteResident from "./Resident Component/deleteResident";
+import ComplaintOfficer from "./Resident Component/ComplaintOfficer";
 import { useRef } from "react";
 // import { useLocation } from "react-router-dom";
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/about" element={<About />}></Route>
           <Route path="/service" element={<Service />}></Route>
           <Route path="/login" element={<Login />}></Route>
+
           <Route
             path="/register-complaint"
             element={<AddNewComplaint />}
@@ -61,6 +63,7 @@ function App() {
           <Route path="/add-resident" element={<AddResident />}></Route>
           <Route path="/update-resident" element={<UpdateResident />}></Route>
           <Route path="/view-resident" element={<ViewResident />}></Route>
+          <Route path="/Officer" element={<ComplaintOfficer />}></Route>
           <Route path="/delete-resident" element={<DeleteResident />}></Route>
         </Routes>
       </Router>

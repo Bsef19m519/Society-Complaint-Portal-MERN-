@@ -34,6 +34,9 @@ const Login = () => {
   const nextPageResident = () => {
     navigate("/Resident-front-page");
   };
+  const nextPageComplaintOfficer = () => {
+    navigate("/Officer");
+  };
   const nextPageAdmin = () => {
     navigate("/Admin-front-page");
   };
@@ -95,7 +98,7 @@ const Login = () => {
             } else if (decodedToken.role === "resident") {
               nextPageResident();
             } else if (decodedToken.role === "complaintOfficer") {
-              nextPageResident();
+              nextPageComplaintOfficer();
             } else {
             }
             // console.log("Decoded Token:", decodedToken);

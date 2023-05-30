@@ -75,10 +75,10 @@ async function addUser() {
         {
             name: "Ali Javed",
             password: pass,
-            email: "alijmalik04@gmail.com",
-            phone: "03174887641",
-            cnic: "3520131171489",
-            role: "admin",
+            email: "alijmalik05@gmail.com",
+            phone: "03174887643",
+            cnic: "3520131171487",
+            role: "resident",
             address: "Lahore"
         }
     )
@@ -87,5 +87,5 @@ async function addUser() {
     console.log(res)
 }
 
-addUser()
+// addUser()
 module.exports = router;    
