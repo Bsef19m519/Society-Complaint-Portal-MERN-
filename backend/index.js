@@ -7,7 +7,7 @@ const app = express();              //creating express application
 require('./startup/routes')(app);   //importing routes and calling it
 require('./startup/db')();      //connecting to database
 
-if(!config.get('jwtPrivateKey')){
+if (!config.get('jwtPrivateKey')) {
     console.log('FATAL ERROR: jwtPrivateKey is not defined.');
     process.exit(1);
 }
