@@ -6,7 +6,7 @@ import getHeader from "../utils";
 
 const ViewComplaint = () => {
   const navigate = useNavigate();
-  const [statusFilter, setStatusFilter] = useState('All'); // State to store the selected status filter
+  const [statusFilter, setStatusFilter] = useState("All"); // State to store the selected status filter
 
   const goBack = () => {
     navigate("/Resident-front-page");
@@ -15,52 +15,32 @@ const ViewComplaint = () => {
   const [tableData, setTableData] = useState([]);
   //fectcomplaints is not the real function. the name will be modified with respect to the name in backend.
 
-  const fetchComplaints = async () => {
-    try {
-      const response = await fetch("http://localhost:3001/api/complaints", {
-        headers: { ...getHeader().get("Authorization") },
-      });
+  // const fetchComplaints = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:3001/api/complaints", {
+  //       headers: { ...getHeader().get("Authorization") },
+  //     });
 
-      if (response.ok) {
-        const data = await response.json();
-        setTableData(data);
-      } else {
-        console.log("Error: Fetching complaints failed.");
-      }
-    } catch (error) {
-      console.log("Error:", error);
-    }
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setTableData(data);
+  //     } else {
+  //       console.log("Error: Fetching complaints failed.");
+  //     }
+  //   } catch (error) {
+  //     console.log("Error:", error);
+  //   }
+  // };
 
-    try {
-
-      const response = await fetch("http://localhost:3001/api/complaints", {
-        headers: { ...getHeader().get('Authorization') },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setTableData(data);
-      } else {
-        console.log('Error: Fetching complaints failed.');
-      }
-    }
-
-    catch (error) {
-      console.log('Error:', error);
-    }
-  }
-
-  useEffect(() => {
-    fetchComplaints(statusFilter);
-  }, [statusFilter]);
+  // useEffect(() => {
+  //   fetchComplaints(statusFilter);
+  // }, [statusFilter]);
 
   return (
     <div className="VC-Viewcomplaint-container-div">
       <div className="VC-viewComplaint-form-container">
         <h2 className="VC-viewComplaint-heading">View Complaint Status</h2>
         <div className="VC-viewComplaint-singlebutton-container">
-
-
           <div className="status-filter-container">
             <label htmlFor="status-filter">Status Filter:</label>
             <select
@@ -78,6 +58,7 @@ const ViewComplaint = () => {
           </div>
         </div>
       </div>
+
       <table className="data-table">
         <thead>
           <tr>
@@ -98,7 +79,6 @@ const ViewComplaint = () => {
       </table>
     </div>
   );
-
-}
+};
 
 export default ViewComplaint;

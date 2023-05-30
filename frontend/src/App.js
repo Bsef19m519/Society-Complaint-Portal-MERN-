@@ -27,26 +27,26 @@ function App() {
   const serviceRef = useRef();
   // const location = useLocation();
 
-  const goAbout = (section) => {
-    if (section === "about") {
-      aboutRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-    } else {
-      serviceRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-    }
-  };
+  // const goAbout = (section) => {
+  //   if (section === "about") {
+  //     aboutRef.current.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //       inline: "nearest",
+  //     });
+  //   } else {
+  //     serviceRef.current.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //       inline: "nearest",
+  //     });
+  //   }
+  // };
 
   return (
     <div className="App-header">
       <Router>
-        <Header goAbout={goAbout} />
+        <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
