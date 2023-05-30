@@ -37,8 +37,19 @@ const ComplaintOfficer = () => {
     }
 
 
+    const updateStatus = (event) => {
+        // const data = {
+        //     complaintStaus: "acknowledged"
+        // }
+        // fetch(`http://localhost:3001/api/complaints/:${event}`, {
+        //     method: 'PUT',
+        //     headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+        // })
+        //     .then(response => response.json())
+        //     .then(result => { console.log(result) })
+        //     .catch(error => { console.log("Error Changing the status") })
 
-
+    }
 
     return (
         <Box>
@@ -101,10 +112,11 @@ const ComplaintOfficer = () => {
                                     <TableCell>
                                         {c.complaintStatus === 'acknowledged' ? (
                                             <>
-                                                <Button variant="contained" sx={{ marginRight: "10px" }}>Reject</Button>
-                                                <Button variant="contained" >Resolve</Button>
+                                                <Button variant="contained" onClick={() => updateStatus(c._id)}
+                                                    sx={{ marginRight: "10px" }}>Reject</Button>
+                                                <Button variant="contained" onClick={() => updateStatus(c._id)}>Resolve</Button>
                                             </>
-                                        ) : (c.complaintStatus === 'pending' && <Button variant="contained" >Acknowledge</Button>
+                                        ) : (c.complaintStatus === 'pending' && <Button variant="contained" onClick={() => updateStatus(c._id)}>Acknowledge</Button>
                                         )}
                                     </TableCell>
                                 </TableRow>
@@ -124,7 +136,7 @@ const ComplaintOfficer = () => {
                     Logout
                 </Button>
             </Box>
-        </Box>
+        </Box >
     );
 };
 export default ComplaintOfficer;
