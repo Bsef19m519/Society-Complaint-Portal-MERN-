@@ -60,9 +60,13 @@ const Login = () => {
     }
 
     //password length validation
-    else if (passwordRef.current.value.trim().length < 8) {
+    else if (passwordRef.current.value.trim() === "") {
       // alert("invalid password length");
       setMessage("Error: Empty Password Field");
+      return false;
+    } else if (passwordRef.current.value.trim().length < 8) {
+      // alert("invalid password length");
+      setMessage("Error: Password Must Be Of Atleast 8 Length");
       return false;
     }
 
