@@ -54,8 +54,9 @@ async function createComplaint() {
             complainer: "64763c0965683a719f1553ae",
             complaintType: "noise and nuisance",
             description: "noise problems are faced",
-            complaintStatus: 'acknowledged',
-            acknowledgeDate: "2021-08-17T10:25:11.123Z"
+            complaintStatus: 'rejected',
+            acknowledgeDate: "2021-08-17T10:25:11.123Z",
+            finalizeDate: Date.now()
         }
     )
     const res = await comp.save();
@@ -88,6 +89,9 @@ router.get('/', [auth, complaintOfficer], async (req, res) => {
         .select('-__v');
     res.send(complaint);
 })
+// router.put('/', [auth, complaintOfficer], async (req, res) => {
+//     console.log(req.params.id)
+// })
 
 
 router.get('/:complaintStatus', [auth, complaintOfficer], async (req, res) => {
@@ -105,13 +109,16 @@ router.get('/:complaintStatus', [auth, complaintOfficer], async (req, res) => {
 
 
 router.put('/:id', [auth, complaintOfficer], async (req, res) => {
+
+    // console.log(req.body.complaintStatus)
+    const id = (req.params.id.slice(1))
     if (!req.body.complaintStatus)
         return res.status(400).send("'complaintStatus' attribute is required in request body");
 
     try {
-        let complaint = await Complaint.findById(req.params.id);
+        let complaint = await Complaint.findById(id);
         if (!complaint) return res.status(400).send("No complaint is found for this id");
-        if (req.body.complaintStatus == 'acknowledged') {
+        if (req.body.complaintStatus === 'acknowledged') {
             if (complaint.complaintStatus != 'pending')
                 return res.status(400).send("complaint is not in pending state");
             complaint.acknowledgeDate = Date.now();
@@ -131,5 +138,8 @@ router.put('/:id', [auth, complaintOfficer], async (req, res) => {
         console.log(err.message);
     }
 })
+
+
+
 
 module.exports = router;

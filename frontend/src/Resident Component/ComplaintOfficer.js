@@ -8,26 +8,24 @@ import { useEffect } from 'react';
 const ComplaintOfficer = () => {
     let navigate = useNavigate();
     const [tableData, setTableData] = useState([]);
+    const [checker, setChecker] = useState(false);
 
 
-    // useEffect(() => {
-    //     fetch('http://localhost:3001/api/complaints', { method: "GET", headers: { "x-auth-token": localStorage.getItem("token") }, })
-    //         .then(response => response.json())
-    //         .then(data => { setTableData(data) })
-
-    // }, []);
 
     function logOut() {
-        // console.log(localStorage.getItem("token"));
         localStorage.removeItem("token");
         navigate("/login");
-        // console.log(localStorage.getItem("token"));
-        //
     }
 
 
 
     const handleStatus = (event) => {
+        if (event === "rejected" || event === "resolved") {
+            setChecker(true);
+        }
+        else {
+            setChecker(false);
+        }
         fetch(`http://localhost:3001/api/complaints/${event}`, { method: "GET", headers: { "x-auth-token": localStorage.getItem("token") }, })
             .then(response => response.json())
             .then(data => setTableData(data))
@@ -37,17 +35,19 @@ const ComplaintOfficer = () => {
     }
 
 
-    const updateStatus = (event) => {
-        // const data = {
-        //     complaintStaus: "acknowledged"
-        // }
-        // fetch(`http://localhost:3001/api/complaints/:${event}`, {
-        //     method: 'PUT',
-        //     headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
-        // })
-        //     .then(response => response.json())
-        //     .then(result => { console.log(result) })
-        //     .catch(error => { console.log("Error Changing the status") })
+    const updateStatus = (id, status) => {
+        const data = {
+            complaintStatus: status
+        }
+        fetch(`http://localhost:3001/api/complaints/:${id}`, {
+            method: "PUT", body: JSON.stringify(data),
+            headers: { "x-auth-token": localStorage.getItem("token"), "Content-Type": "application/json" },
+        })
+            .then(response => response.json())
+            .catch(error => {
+                console.log("Cannot Process this function ", error)
+            })
+        window.location.reload()
 
     }
 
@@ -95,7 +95,7 @@ const ComplaintOfficer = () => {
                                 <TableCell>Complainer Name</TableCell>
                                 <TableCell>Complainer Email</TableCell>
                                 <TableCell>Complaint Status</TableCell>
-                                <TableCell>Actions</TableCell>
+                                {checker ? ((<TableCell>Finalize Date</TableCell>)) : (<TableCell>Actions</TableCell>)}
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -109,16 +109,17 @@ const ComplaintOfficer = () => {
                                     <TableCell>{c.complainer.name}</TableCell>
                                     <TableCell>{c.complainer.email}</TableCell>
                                     <TableCell>{c.complaintStatus}</TableCell>
-                                    <TableCell>
+
+                                    {checker ? (<TableCell>{c.finalizeDate}</TableCell>) : (<TableCell>
                                         {c.complaintStatus === 'acknowledged' ? (
                                             <>
-                                                <Button variant="contained" onClick={() => updateStatus(c._id)}
-                                                    sx={{ marginRight: "10px" }}>Reject</Button>
-                                                <Button variant="contained" onClick={() => updateStatus(c._id)}>Resolve</Button>
+                                                <Button variant="contained" onClick={() => updateStatus(c._id, "rejected")}
+                                                    sx={{ margin: "10px" }}>Reject</Button>
+                                                <Button variant="contained" sx={{ margin: "10px" }} onClick={() => updateStatus(c._id, "resolved")}>Resolve</Button>
                                             </>
-                                        ) : (c.complaintStatus === 'pending' && <Button variant="contained" onClick={() => updateStatus(c._id)}>Acknowledge</Button>
+                                        ) : (c.complaintStatus === 'pending' && <Button variant="contained" onClick={() => updateStatus(c._id, "acknowledged")}>Acknowledge</Button>
                                         )}
-                                    </TableCell>
+                                    </TableCell>)}
                                 </TableRow>
                             )) : (alert("No Records Found"))}
 
