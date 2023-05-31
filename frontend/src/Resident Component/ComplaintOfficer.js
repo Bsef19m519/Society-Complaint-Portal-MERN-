@@ -12,12 +12,16 @@ const ComplaintOfficer = () => {
 
 
 
-    function logOut() {
-        localStorage.removeItem("token");
-        navigate("/login");
-    }
 
-
+    useEffect(() => {
+        const event = "pending"
+        fetch(`http://localhost:3001/api/complaints/${event}`, { method: "GET", headers: { "x-auth-token": localStorage.getItem("token") }, })
+            .then(response => response.json())
+            .then(data => setTableData(data))
+            .catch(error => {
+                console.log("Got an error")
+            })
+    }, [])
 
     const handleStatus = (event) => {
         if (event === "rejected" || event === "resolved") {
@@ -30,7 +34,7 @@ const ComplaintOfficer = () => {
             .then(response => response.json())
             .then(data => setTableData(data))
             .catch(error => {
-                setTableData([])
+                console.log("Got an error")
             })
     }
 
@@ -48,6 +52,16 @@ const ComplaintOfficer = () => {
                 console.log("Cannot Process this function ", error)
             })
         window.location.reload()
+
+    }
+
+    const formateDate = () => {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const formattedDate = `${day}-${month}-${year}`;
+        return formattedDate; // Example output: "2023-05-31"
 
     }
 
@@ -103,14 +117,14 @@ const ComplaintOfficer = () => {
                                 <TableRow key={c.complaintType}>
                                     <TableCell>{c.complaintType}</TableCell>
                                     <TableCell>{c.description}</TableCell>
-                                    <TableCell>{c.generationDate}</TableCell>
-                                    {c.complaintStatus === 'acknowledged' ?
-                                        <TableCell>{c.acknowledgeDate}</TableCell> : <TableCell>Not Acknowledeged Yet</TableCell>}
+                                    <TableCell>{formateDate(c.generationDate)}</TableCell>
+                                    {c.complaintStatus === 'pending' ?
+                                        <TableCell>Not Acknowledeged Yet</TableCell> : <TableCell>{formateDate(c.acknowledgeDate)}</TableCell>}
                                     <TableCell>{c.complainer.name}</TableCell>
                                     <TableCell>{c.complainer.email}</TableCell>
                                     <TableCell>{c.complaintStatus}</TableCell>
 
-                                    {checker ? (<TableCell>{c.finalizeDate}</TableCell>) : (<TableCell>
+                                    {checker ? (<TableCell>{formateDate(c.finalizeDate)}</TableCell>) : (<TableCell>
                                         {c.complaintStatus === 'acknowledged' ? (
                                             <>
                                                 <Button variant="contained" onClick={() => updateStatus(c._id, "rejected")}
@@ -128,15 +142,7 @@ const ComplaintOfficer = () => {
                 </TableContainer>
             </Box>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: "40px" }}>
 
-                <Button
-                    variant={'outlined'}
-                    onClick={() => logOut()}
-                >
-                    Logout
-                </Button>
-            </Box>
         </Box >
     );
 };
