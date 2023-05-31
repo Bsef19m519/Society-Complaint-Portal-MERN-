@@ -65,18 +65,20 @@ async function createComplaint() {
 
 // createComplaint()
 router.get('/me/:complaintStatus', [auth, resident], async (req, res) => {
-    if (req.params.complaintStatus != 'pending' && req.params.complaintStatus != 'acknowledged'
-        && req.params.complaintStatus != 'resolved' && req.params.complaintStatus != 'rejected')
-    // return res.status(400).send('invalid \'complaintStatus\' value')
-    { }
+    const complaintStatus = req.params.complaintStatus.slice(1);
+    if (complaintStatus != 'pending' && complaintStatus != 'acknowledged'
+        && complaintStatus != 'resolved' && complaintStatus != 'rejected') {
+        return res.status(400).send('invalid \'complaintStatus\' value')
+    }
     else {
-        console.log("Got Pending Request")
+        const complaint = await Complaint.find({ complainer: req.user._id, complaintStatus: complaintStatus })
+            .sort('_id')
+            .select('-__v -complainer');
+        res.send(complaint);
     }
 
-    // const complaint = await Complaint.find({ complainer: req.user._id, complaintStatus: req.params.complaintStatus })
-    //     .sort('_id')
-    //     .select('-__v -complainer');
-    // res.send(complaint);
+
+
 })
 
 
@@ -110,7 +112,6 @@ router.get('/:complaintStatus', [auth, complaintOfficer], async (req, res) => {
 
 router.put('/:id', [auth, complaintOfficer], async (req, res) => {
 
-    // console.log(req.body.complaintStatus)
     const id = (req.params.id.slice(1))
     if (!req.body.complaintStatus)
         return res.status(400).send("'complaintStatus' attribute is required in request body");

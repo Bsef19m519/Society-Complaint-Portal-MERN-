@@ -9,6 +9,11 @@ const ComplaintOfficer = () => {
     let navigate = useNavigate();
     const [tableData, setTableData] = useState([]);
     const [checker, setChecker] = useState(false);
+    const [isPending, setIsPending] = useState(true);
+    const [isAckn, setIsAckn] = useState(true);
+    const [isRes, setIsRes] = useState(true);
+    const [isRej, setIsRej] = useState(true);
+
 
 
 
@@ -24,6 +29,22 @@ const ComplaintOfficer = () => {
     }, [])
 
     const handleStatus = (event) => {
+        setIsAckn(true);
+        setIsRej(true);
+        setIsRes(true);
+        setIsPending(true);
+        if (event === "pending") {
+            setIsPending(!isPending)
+        }
+        else if (event === "acknowledged") {
+            setIsAckn(!isAckn);
+        }
+        else if (event === "resolved") {
+            setIsRes(!isRes)
+        }
+        else {
+            setIsRej(!isRej)
+        }
         if (event === "rejected" || event === "resolved") {
             setChecker(true);
         }
@@ -69,25 +90,25 @@ const ComplaintOfficer = () => {
         <Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
                 <Button
-                    variant={'outlined'}
+                    variant={isPending ? 'outlined' : 'contained'}
                     onClick={() => handleStatus("pending")}
                 >
                     Pending
                 </Button>
                 <Button
-                    variant={'outlined'}
+                    variant={isAckn ? 'outlined' : 'contained'}
                     onClick={() => handleStatus("acknowledged")}
                 >
                     Acknowledged
                 </Button>
                 <Button
-                    variant={'outlined'}
+                    variant={isRes ? 'outlined' : 'contained'}
                     onClick={() => handleStatus("resolved")}
                 >
                     Resolved
                 </Button>
                 <Button
-                    variant={'outlined'}
+                    variant={isRej ? 'outlined' : 'contained'}
                     onClick={() => handleStatus("rejected")}
                 >
                     Rejected
