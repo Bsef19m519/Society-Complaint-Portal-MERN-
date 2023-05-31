@@ -22,6 +22,8 @@ const ComplaintOfficer = () => {
         if (!localStorage.getItem("token")) {
             navigate("/login")
         }
+        setIsPending(!isPending);
+
         const event = "pending"
         fetch(`http://localhost:3001/api/complaints/${event}`, { method: "GET", headers: { "x-auth-token": localStorage.getItem("token") }, })
             .then(response => response.json())
