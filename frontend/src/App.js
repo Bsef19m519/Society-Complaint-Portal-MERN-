@@ -19,10 +19,14 @@ import UpdateResident from "./Resident Component/updateResident";
 import ViewResident from "./Resident Component/searchResident";
 import DeleteResident from "./Resident Component/deleteResident";
 import ComplaintOfficer from "./Resident Component/ComplaintOfficer";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 // import { useLocation } from "react-router-dom";
 
 function App() {
+  //managing logIn state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log(isLoggedIn);
+
   const aboutRef = useRef();
   const serviceRef = useRef();
   // const location = useLocation();
@@ -46,12 +50,15 @@ function App() {
   return (
     <div className="App-header">
       <Router>
-        <Header />
+        <Header login={isLoggedIn} setLogIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
           <Route path="/service" element={<Service />}></Route>
-          <Route path="/login" element={<Login />}></Route>
+          <Route
+            path="/login"
+            element={<Login login={isLoggedIn} setLogIn={setIsLoggedIn} />}
+          ></Route>
 
           <Route
             path="/register-complaint"

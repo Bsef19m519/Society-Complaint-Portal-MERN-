@@ -8,7 +8,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import jwt from "jwt-decode";
 
-const Login = () => {
+const Login = (props) => {
   //creating ref to manage dom
   const passwordRef = useRef(null);
   const emailRef = useRef(null);
@@ -60,9 +60,13 @@ const Login = () => {
     }
 
     //password length validation
-    else if (passwordRef.current.value.trim().length < 8) {
+    else if (passwordRef.current.value.trim() === "") {
       // alert("invalid password length");
       setMessage("Error: Empty Password Field");
+      return false;
+    } else if (passwordRef.current.value.trim().length < 8) {
+      // alert("invalid password length");
+      setMessage("Error: Password Must Be Of Atleast 8 Length");
       return false;
     }
 
@@ -80,6 +84,8 @@ const Login = () => {
           setMessage("Error: Wrong Credentials.");
         } else {
           setMessage("");
+          props.setLogIn(true);
+          console.log(props.login);
         }
         const data = response.json();
         data
