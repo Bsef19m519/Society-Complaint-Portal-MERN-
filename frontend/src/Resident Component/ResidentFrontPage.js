@@ -15,13 +15,13 @@ const SAFrontPage = () => {
     }
   });
 
-  function logOut() {
-    // console.log(localStorage.getItem("token"));
-    localStorage.removeItem("token");
-    navigate("/login");
-    // console.log(localStorage.getItem("token"));
-    //
-  }
+  // function logOut() {
+  //   // console.log(localStorage.getItem("token"));
+  //   localStorage.removeItem("token");
+  //   navigate("/login");
+  //   // console.log(localStorage.getItem("token"));
+  //   //
+  // }
 
   const addNewResident = () => {
     navigate("/add-resident");
@@ -57,9 +57,9 @@ const SAFrontPage = () => {
           <StylishButton type="button" onClick={deleteResident}>
             Delete Resident
           </StylishButton>
-          <div className="superAdmin-logout-button">
+          {/* <div className="superAdmin-logout-button">
             <ScreenBtn onClick={logOut}>Log Out</ScreenBtn>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

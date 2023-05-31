@@ -8,7 +8,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import jwt from "jwt-decode";
 
-const Login = () => {
+const Login = (props) => {
   //creating ref to manage dom
   const passwordRef = useRef(null);
   const emailRef = useRef(null);
@@ -84,6 +84,8 @@ const Login = () => {
           setMessage("Error: Wrong Credentials.");
         } else {
           setMessage("");
+          props.setLogIn(true);
+          console.log(props.login);
         }
         const data = response.json();
         data
