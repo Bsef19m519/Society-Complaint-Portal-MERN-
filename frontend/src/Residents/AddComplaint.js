@@ -1,26 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ScreenBtn from "../components/Button/ScreenButton";
 import { useNavigate } from "react-router-dom";
 import "./AddComplaint.css";
 
+
 const AddComplaint = () => {
-  const navigate = useNavigate();
+  const complaintTypeRef = useRef(null);
+  const descriptionRef = useRef(null);
+  let navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  }, []);
+
+ 
+  const  goBack= () => {
+    navigate("/Resident-front-page");
+  };
 
   const [userInputs, setUserInputs] = useState({
     complaintType: "",
     description: "",
   });
 
-  const goBack = () => {
-    navigate("/Resident-front-page");
-  };
+  const [message, setMessage] = useState("");
+
+ 
+  
 
   // const alertMessage = () => {
   //   alert("Fake complaints will lead to a penalty against the complainer!!!");
   // };
 
+    //client side validation
+    
+
   const handleSubmit = (event) => {
+
     event.preventDefault();
+
+    if (complaintTypeRef.current.value === "" ) {
+      alert("please fill the name field ");
+     // setMessage("Error: Empty Complaint Type Field");
+      return false;
+    } else if (descriptionRef.current.value.trim() === "") {
+      //alert("email can not be empty");
+      setMessage("Error: Empty Descrition Field");
+      return false;}
+
     console.log(userInputs);
     fetch("http://localhost:3001/api/complaints", {
       method: "POST",
@@ -42,6 +70,8 @@ const AddComplaint = () => {
       })
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
+
+
     // Perform further actions with the complaintType and description values
   };
 
@@ -68,7 +98,7 @@ const AddComplaint = () => {
           <select
             value={userInputs.complaintType}
             onChange={handleComplaintTypeChange}
-            required
+required
           >
             <option value="">Select an option</option>
             <option value="maintenance issue">Maintenance issue</option>
@@ -79,7 +109,7 @@ const AddComplaint = () => {
               Parking related issues
             </option>
             <option value="complaint against any member">
-              Complaint against any member
+              Complaint against other members
             </option>
             <option value="others">Others</option>
           </select>
@@ -90,17 +120,20 @@ const AddComplaint = () => {
             name="description"
             value={userInputs.description}
             onChange={handleDescriptionChange}
-            rows="5"
+            rows = "5" 
+            cols= "28"   
             minLength={10}
             maxLength={1000}
-            required
-          />
+            required    />
         </div>
         <div className="AddComplaint-singleButton-container">
           <ScreenBtn type="button" onClick={goBack}>
             Back
           </ScreenBtn>
           <ScreenBtn type="submit">Add</ScreenBtn>
+        </div>
+        <div className="Complaint-Add-message">
+          {message && <p>{message}</p>}
         </div>
       </form>
     </div>
