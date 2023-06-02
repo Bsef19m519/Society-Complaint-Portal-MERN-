@@ -90,6 +90,7 @@ import { Button, Box } from '@mui/material';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import ScreenBtn from "../components/Button/ScreenButton";
 
 
 const ViewComplaint = () => {
@@ -108,6 +109,8 @@ const ViewComplaint = () => {
     if (!localStorage.getItem("token")) {
       navigate("/login")
     }
+
+    
     setIsPending(!isPending);
 
     const event = "pending"
@@ -151,7 +154,9 @@ const ViewComplaint = () => {
       })
   }
 
-
+  const goBack = () => {
+    navigate("/Resident-front-page");
+  };
   const formateDate = () => {
     const date = new Date();
     const year = date.getFullYear();
@@ -190,8 +195,7 @@ const ViewComplaint = () => {
           Rejected
         </Button>
 
-
-
+     
 
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center', padding: "10px", marginTop: "40px" }}>
@@ -222,10 +226,16 @@ const ViewComplaint = () => {
               )) : (alert("No Records Found"))}
 
             </TableBody>
+            
           </Table>
+          
         </TableContainer>
       </Box>
-
+      <div className="button">
+        <ScreenBtn type="button" onClick={goBack}>
+        Back
+        </ScreenBtn>
+        </div>
 
     </Box >
   );
