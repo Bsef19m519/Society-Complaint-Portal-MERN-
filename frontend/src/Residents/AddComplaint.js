@@ -11,17 +11,28 @@ const AddComplaint = () => {
     description: "",
   });
 
+  const [message, setMessage] = useState("");
+
   const goBack = () => {
     navigate("/Resident-front-page");
   };
 
-  // const alertMessage = () => {
-  //   alert("Fake complaints will lead to a penalty against the complainer!!!");
-  // };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(userInputs);
+    if (userInputs.complaintType.trim() === "") {
+      setMessage("Error: Please select a complaint type");
+      return;
+    } else if (userInputs.description.trim() === "") {
+      setMessage("Error: Please provide a description");
+      return;
+    } else if (
+      userInputs.description.length < 10 ||
+      userInputs.description.length > 1000
+    ) {
+      setMessage("Error: Description should be between 10 and 1000 characters");
+      return;
+    }
+
     fetch("http://localhost:3001/api/complaints", {
       method: "POST",
       headers: {
@@ -32,17 +43,20 @@ const AddComplaint = () => {
     })
       .then((response) => {
         if (response.ok) {
-          //setMessage("Record Inserted Successfully");
-          alert("complaint inserted succcessfully");
+          // alert("Complaint inserted successfully");
+          setMessage("Complaint Inserted Successfully");
+          setUserInputs({
+            complaintType: "",
+            description: "",
+          });
         } else {
-          //setMessage("Error: Insertion Operation Failed");
-          alert("complaint not inserted succcessfully");
+          // alert("Complaint not inserted successfully");
+          setMessage("Complaint not Inserted");
         }
         return response.json();
       })
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
-    // Perform further actions with the complaintType and description values
   };
 
   const handleComplaintTypeChange = (event) => {
@@ -68,7 +82,7 @@ const AddComplaint = () => {
           <select
             value={userInputs.complaintType}
             onChange={handleComplaintTypeChange}
-            required
+            // required
           >
             <option value="">Select an option</option>
             <option value="maintenance issue">Maintenance issue</option>
@@ -92,9 +106,7 @@ const AddComplaint = () => {
             onChange={handleDescriptionChange}
             rows="5"
             cols="28"
-            minLength={10}
-            maxLength={1000}
-            required
+            // required
           />
         </div>
         <div className="AddComplaint-singleButton-container">
@@ -103,6 +115,7 @@ const AddComplaint = () => {
           </ScreenBtn>
           <ScreenBtn type="submit">Add</ScreenBtn>
         </div>
+        {message && <p className="AddComplaint-error">{message}</p>}
       </form>
     </div>
   );
