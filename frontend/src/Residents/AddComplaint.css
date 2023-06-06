@@ -34,7 +34,7 @@
 .AddComplaint-input-container select,
 .AddComplaint-input-container textarea {
   width: 100%;
-  padding: 4px; 
+  padding: 4px;
   border: 2px solid rgb(255, 255, 255);
   border-radius: 5px;
   background-color: #ffffff;
@@ -54,7 +54,6 @@
   font-weight: bold;
 }
 
-
 .AddComplaint-singleButton-container {
   display: flex;
   justify-content: space-between;
@@ -65,5 +64,10 @@
   padding-left: 2px;
   color: red;
   margin: -10px 7px 7px 7px;
+  font-style: italic;
+}
+
+.AddComplaint-error {
+  color: red;
   font-style: italic;
 }
