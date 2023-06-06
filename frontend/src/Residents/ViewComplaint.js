@@ -169,6 +169,7 @@ const ViewComplaint = () => {
 
   return (
     <Box>
+      
       <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
         <Button
           variant={isPending ? 'outlined' : 'contained'}
@@ -231,11 +232,7 @@ const ViewComplaint = () => {
           
         </TableContainer>
       </Box>
-      <div className="button">
-        <ScreenBtn type="button" onClick={goBack}>
-        Back
-        </ScreenBtn>
-        </div>
+      
 
     </Box >
   );
