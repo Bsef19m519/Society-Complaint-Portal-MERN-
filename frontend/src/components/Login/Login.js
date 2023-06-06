@@ -150,6 +150,7 @@ const Login = (props) => {
             <input
               type="password"
               placeholder="Enter Valid Password"
+            
               name="pass"
               ref={passwordRef}
               value={password}
