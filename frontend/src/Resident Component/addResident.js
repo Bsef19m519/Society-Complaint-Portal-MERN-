@@ -16,7 +16,7 @@ const AddResident = () => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
     }
-  }, []);
+  });
 
   let navigate = useNavigate();
   const sAdminHomePage = () => {

@@ -27,8 +27,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   console.log(isLoggedIn);
 
-  const aboutRef = useRef();
-  const serviceRef = useRef();
+  // const aboutRef = useRef();
+  // const serviceRef = useRef();
   // const location = useLocation();
 
   // const goAbout = (section) => {

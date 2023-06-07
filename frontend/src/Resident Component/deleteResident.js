@@ -12,7 +12,7 @@ const DeleteResident = () => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
     }
-  }, []);
+  });
 
   //navigate to others component
   const sAdminHomePage = () => {

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import StylishButton from "../components/Button/StylishButtons";
-import ScreenBtn from "../components/Button/ScreenButton";
 import { useNavigate } from "react-router-dom";
 import "./ResidentFrontPage.css";
 import loginIcon from "../components/Header/SCP3.png";

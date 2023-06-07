@@ -83,15 +83,19 @@
 
 // export default ViewComplaint;
 
-
-
-import React, { useState } from 'react';
-import { Button, Box } from '@mui/material';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import React, { useState } from "react";
+import { Button, Box } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
-import ScreenBtn from "../components/Button/ScreenButton";
-
+import { useEffect } from "react";
 
 const ViewComplaint = () => {
   let navigate = useNavigate();
@@ -102,25 +106,24 @@ const ViewComplaint = () => {
   const [isRes, setIsRes] = useState(true);
   const [isRej, setIsRej] = useState(true);
 
-
-
-
   useEffect(() => {
     if (!localStorage.getItem("token")) {
-      navigate("/login")
+      navigate("/login");
     }
 
-    
     setIsPending(!isPending);
 
-    const event = "pending"
-    fetch(`http://localhost:3001/api/complaints/me/:${event}`, { method: "GET", headers: { "x-auth-token": localStorage.getItem("token") }, })
-      .then(response => response.json())
-      .then(data => setTableData(data))
-      .catch(error => {
-        console.log("Got an error")
-      })
-  }, [])
+    const event = "pending";
+    fetch(`http://localhost:3001/api/complaints/me/:${event}`, {
+      method: "GET",
+      headers: { "x-auth-token": localStorage.getItem("token") },
+    })
+      .then((response) => response.json())
+      .then((data) => setTableData(data))
+      .catch((error) => {
+        console.log("Got an error");
+      });
+  }, []);
 
   const handleStatus = (event) => {
     setIsAckn(true);
@@ -128,31 +131,30 @@ const ViewComplaint = () => {
     setIsRes(true);
     setIsPending(true);
     if (event === "pending") {
-      setIsPending(!isPending)
-    }
-    else if (event === "acknowledged") {
+      setIsPending(!isPending);
+    } else if (event === "acknowledged") {
       setIsAckn(!isAckn);
-    }
-    else if (event === "resolved") {
-      setIsRes(!isRes)
-    }
-    else {
-      setIsRej(!isRej)
+    } else if (event === "resolved") {
+      setIsRes(!isRes);
+    } else {
+      setIsRej(!isRej);
     }
     // console.log(event)
     if (event === "rejected" || event === "resolved") {
       setChecker(true);
-    }
-    else {
+    } else {
       setChecker(false);
     }
-    fetch(`http://localhost:3001/api/complaints/me/:${event}`, { method: "GET", headers: { "x-auth-token": localStorage.getItem("token") }, })
-      .then(response => response.json())
-      .then(data => setTableData(data))
-      .catch(error => {
-        console.log("Got an error")
-      })
-  }
+    fetch(`http://localhost:3001/api/complaints/me/:${event}`, {
+      method: "GET",
+      headers: { "x-auth-token": localStorage.getItem("token") },
+    })
+      .then((response) => response.json())
+      .then((data) => setTableData(data))
+      .catch((error) => {
+        console.log("Got an error");
+      });
+  };
 
   const goBack = () => {
     navigate("/Resident-front-page");
@@ -160,46 +162,50 @@ const ViewComplaint = () => {
   const formateDate = () => {
     const date = new Date();
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     const formattedDate = `${day}-${month}-${year}`;
     return formattedDate; // Example output: "2023-05-31"
-
-  }
+  };
 
   return (
     <Box>
-      
-      <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", marginTop: "40px" }}
+      >
         <Button
-          variant={isPending ? 'outlined' : 'contained'}
+          variant={isPending ? "outlined" : "contained"}
           onClick={() => handleStatus("pending")}
         >
           Pending
         </Button>
         <Button
-          variant={isAckn ? 'outlined' : 'contained'}
+          variant={isAckn ? "outlined" : "contained"}
           onClick={() => handleStatus("acknowledged")}
         >
           Acknowledged
         </Button>
         <Button
-          variant={isRes ? 'outlined' : 'contained'}
+          variant={isRes ? "outlined" : "contained"}
           onClick={() => handleStatus("resolved")}
         >
           Resolved
         </Button>
         <Button
-          variant={isRej ? 'outlined' : 'contained'}
+          variant={isRej ? "outlined" : "contained"}
           onClick={() => handleStatus("rejected")}
         >
           Rejected
         </Button>
-
-     
-
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center', padding: "10px", marginTop: "40px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "10px",
+          marginTop: "40px",
+        }}
+      >
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -209,33 +215,34 @@ const ViewComplaint = () => {
                 <TableCell>Genration Date</TableCell>
                 <TableCell>Acknowledged Date</TableCell>
                 <TableCell>Complaint Status</TableCell>
-                {checker && ((<TableCell>Finalize Date</TableCell>))}
+                {checker && <TableCell>Finalize Date</TableCell>}
               </TableRow>
             </TableHead>
             <TableBody>
-              {tableData ? tableData.map((c) => (
-                <TableRow key={c.complaintType}>
-                  <TableCell>{c.complaintType}</TableCell>
-                  <TableCell>{c.description}</TableCell>
-                  <TableCell>{formateDate(c.generationDate)}</TableCell>
-                  {c.complaintStatus === 'pending' ?
-                    <TableCell>Not Acknowledeged Yet</TableCell> : <TableCell>{formateDate(c.acknowledgeDate)}</TableCell>}
+              {tableData
+                ? tableData.map((c) => (
+                    <TableRow key={c.complaintType}>
+                      <TableCell>{c.complaintType}</TableCell>
+                      <TableCell>{c.description}</TableCell>
+                      <TableCell>{formateDate(c.generationDate)}</TableCell>
+                      {c.complaintStatus === "pending" ? (
+                        <TableCell>Not Acknowledeged Yet</TableCell>
+                      ) : (
+                        <TableCell>{formateDate(c.acknowledgeDate)}</TableCell>
+                      )}
 
-                  <TableCell>{c.complaintStatus}</TableCell>
-                  {checker && (<TableCell>{formateDate(c.finalizeDate)}</TableCell>)}
-                </TableRow>
-              )) : (alert("No Records Found"))}
-
+                      <TableCell>{c.complaintStatus}</TableCell>
+                      {checker && (
+                        <TableCell>{formateDate(c.finalizeDate)}</TableCell>
+                      )}
+                    </TableRow>
+                  ))
+                : alert("No Records Found")}
             </TableBody>
-            
           </Table>
-          
         </TableContainer>
       </Box>
-      
-
-    </Box >
+    </Box>
   );
 };
 export default ViewComplaint;
-

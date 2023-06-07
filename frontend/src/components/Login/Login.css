@@ -58,3 +58,10 @@ hr {
   /* align-items: center; */
   text-align: center;
 }
+
+.superAdmin-login-message {
+  padding-left: 2px;
+  color: red;
+  margin: -10px 7px 7px 7px;
+  font-style: italic;
+}

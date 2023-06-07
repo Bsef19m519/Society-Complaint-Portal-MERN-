@@ -5,21 +5,19 @@ import "./SearchResident.css";
 import loginIcon from "../components/Header/SCP3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-// import TableData from "./showTableData";
-// import getHeader from "../utils";
 
 const ViewResident = () => {
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      navigate("/login");
-    }
-  }, []);
-
   //navigate to other component
   let navigate = useNavigate();
   const sAdminHomePage = () => {
     navigate("/Admin-front-page");
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  });
 
   //managing input states
   const [email, setEmail] = useState(""); //managing email state
@@ -31,12 +29,6 @@ const ViewResident = () => {
     setEmail(event.target.value);
   }
 
-  // const getUserData = () => {
-  //   fetch(`http://localhost:3000/api/superadmin/admins/email=${email}`)
-  //     .then((response) => response.json())
-  //     .then((data) => console.log(data));
-  // };
-
   //submit handler
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -47,16 +39,13 @@ const ViewResident = () => {
     });
     if (response.ok) {
       const data = await response.json();
-      // console.log(data);
-      if (data.length === 0) {
-        setMessage("No Record Registered Against This Email.");
-      } else {
-        setMessage("");
-        setTableData([data]);
-        // console.log(data);
-      }
+
+      setMessage("");
+      setTableData([data]);
+      console.log(data);
     } else {
-      setMessage("Error: Search Operation Failed.");
+      setMessage("Error: No Such Record Exist.");
+      setTableData([]);
     }
 
     setEmail("");

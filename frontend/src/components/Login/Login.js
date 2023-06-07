@@ -150,7 +150,6 @@ const Login = (props) => {
             <input
               type="password"
               placeholder="Enter Valid Password"
-            
               name="pass"
               ref={passwordRef}
               value={password}
@@ -164,7 +163,7 @@ const Login = (props) => {
               SA
             </ScreenBtn> */}
           </div>
-          <div className="superAdmin-Add-message">
+          <div className="superAdmin-login-message">
             {message && <p>{message}</p>}
           </div>
         </form>
