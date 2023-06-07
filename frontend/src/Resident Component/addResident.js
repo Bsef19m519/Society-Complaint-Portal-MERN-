@@ -147,16 +147,14 @@ const AddResident = () => {
       .then((response) => {
         if (response.ok) {
           setMessage("Record Inserted Successfully");
-        } else {
-          setMessage("Error: Insertion Operation Failed");
+        } else if (response.status === 400) {
+          setMessage("Error: Duplication Error Occured");
         }
         return response.json();
       })
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
 
-    // console.log(userInputs);
-    // console.log(cPassword);
     //setting values to null after submit
     setUserInputs({
       name: "",
