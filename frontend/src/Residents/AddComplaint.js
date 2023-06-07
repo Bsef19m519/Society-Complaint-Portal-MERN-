@@ -43,14 +43,12 @@ const AddComplaint = () => {
     })
       .then((response) => {
         if (response.ok) {
-          // alert("Complaint inserted successfully");
           setMessage("Complaint Inserted Successfully");
           setUserInputs({
             complaintType: "",
             description: "",
           });
         } else {
-          // alert("Complaint not inserted successfully");
           setMessage("Complaint not Inserted");
         }
         return response.json();
@@ -82,7 +80,6 @@ const AddComplaint = () => {
           <select
             value={userInputs.complaintType}
             onChange={handleComplaintTypeChange}
-            // required
           >
             <option value="">Select an option</option>
             <option value="maintenance issue">Maintenance issue</option>
@@ -106,7 +103,6 @@ const AddComplaint = () => {
             onChange={handleDescriptionChange}
             rows="5"
             cols="28"
-            // required
           />
         </div>
         <div className="AddComplaint-singleButton-container">
