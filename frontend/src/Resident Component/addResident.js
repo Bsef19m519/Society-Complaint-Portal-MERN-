@@ -148,7 +148,9 @@ const AddResident = () => {
         if (response.ok) {
           setMessage("Record Inserted Successfully");
         } else if (response.status === 400) {
-          setMessage("Error: Duplication Error Occured");
+          setMessage(
+            "Error: Duplicate Email , Cnic , Phone No Are Not Allowed"
+          );
         }
         return response.json();
       })

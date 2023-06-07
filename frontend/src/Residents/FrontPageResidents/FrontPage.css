@@ -1,8 +1,10 @@
 .RcontainerDiv {
   background-image: url("../../components/Login/bg.jpg");
   background-repeat: no-repeat;
-  background-size: 100% 1000px;
+  /* background-size: 100% 2000px; */
+  background-size: cover;
   display: flex;
+  height: 600px;
   justify-content: center;
   align-items: center;
   /* border: 5px solid yellow; */
@@ -14,7 +16,7 @@
   margin-bottom: 122px;
   border-radius: 10px;
   width: 400px;
-  height: 450px;
+  height: 350px;
   background-color: #cccccc;
 }
 
