@@ -8,44 +8,18 @@ import FrontPage from "./Residents/FrontPageResidents/FrontPage";
 import ViewComplaint from "./Residents/ViewComplaint";
 import Service from "./StaticComponents/Service";
 import AddResident from "./Resident Component/addResident";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  // useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SAFrontPage from "./Resident Component/ResidentFrontPage";
 import UpdateResident from "./Resident Component/updateResident";
 import ViewResident from "./Resident Component/searchResident";
 import DeleteResident from "./Resident Component/deleteResident";
 import ComplaintOfficer from "./Resident Component/ComplaintOfficer";
 import { useRef, useState } from "react";
-// import { useLocation } from "react-router-dom";
 
 function App() {
   //managing logIn state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   console.log(isLoggedIn);
-
-  // const aboutRef = useRef();
-  // const serviceRef = useRef();
-  // const location = useLocation();
-
-  // const goAbout = (section) => {
-  //   if (section === "about") {
-  //     aboutRef.current.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: "start",
-  //       inline: "nearest",
-  //     });
-  //   } else {
-  //     serviceRef.current.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: "start",
-  //       inline: "nearest",
-  //     });
-  //   }
-  // };
 
   return (
     <div className="App-header">
