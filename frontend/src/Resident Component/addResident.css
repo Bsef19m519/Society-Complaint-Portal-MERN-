@@ -55,11 +55,19 @@
   color: red;
   margin: -10px 7px 7px 7px;
   font-style: italic;
+  font-size: 10px;
 }
 
 .superAdmin-Addsuccess-message {
   padding-left: 2px;
   color: green;
+  margin: -10px 7px 7px 7px;
+  font-style: italic;
+}
+
+.superAdmin-Error-message {
+  padding-left: 2px;
+  color: red;
   margin: -10px 7px 7px 7px;
   font-style: italic;
 }

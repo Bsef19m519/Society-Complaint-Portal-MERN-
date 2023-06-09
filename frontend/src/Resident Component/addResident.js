@@ -42,8 +42,18 @@ const AddResident = () => {
     cnic: "",
   });
   const [cPassword, setCpassword] = useState("");
-  const [message, setMessage] = useState("");
+
   const [successmessage, setsuccessMessage] = useState("");
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    address: "",
+    cnic: "",
+    confirmPassword: "",
+  });
 
   //function handlers
   function nameHandler(event) {
@@ -87,61 +97,160 @@ const AddResident = () => {
     });
   }
 
+  //error handler
+  const focusOut = (field) => () => {
+    switch (field) {
+      case "name":
+        if (nameRef.current.value.trim() === "") {
+          //alert("please fill the name field ");
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            name: "Error: Empty Name Field",
+          }));
+          return false;
+        } else {
+          setsuccessMessage("");
+
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            name: "",
+          }));
+        }
+        break;
+
+      case "email":
+        if (emailRef.current.value.trim() === "") {
+          //alert("email can not be empty");
+          setsuccessMessage("");
+
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            email: "Error: Empty Email Field",
+          }));
+          return false;
+        } else {
+          setsuccessMessage("");
+
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            email: "",
+          }));
+        }
+        break;
+
+      case "cnic":
+        if (cnicRef.current.value.trim() === "") {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            cnic: "Error: CNIC Must Be Non-Empty",
+          }));
+          return false;
+        } else if (cnicRef.current.value.length !== 13) {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            cnic: "Error: CNIC Must Contain 13 Characters",
+          }));
+        } else {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            cnic: "",
+          }));
+        }
+        break;
+
+      case "address":
+        if (addressRef.current.value.trim() === "") {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            address: "Error: Empty Address Field",
+          }));
+          return false;
+        } else {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            address: "",
+          }));
+        }
+        break;
+
+      case "phone":
+        if (phoneRef.current.value.length !== 11) {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            phone: "Phone-Number Length Must Be Of 11 Characters",
+          }));
+
+          return false;
+        } else {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            phone: "",
+          }));
+        }
+        break;
+
+      case "password":
+        if (passwordRef.current.value.trim() === "") {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            password: "Error: Empty Password Field",
+          }));
+
+          return false;
+        } else if (passwordRef.current.value.length < 8) {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            password: "Error: Password Length Must Be Atleast 8 Characters",
+          }));
+
+          return false;
+        } else {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            password: "",
+          }));
+        }
+        break;
+
+      case "confirmPassword":
+        if (passwordRef.current.value !== cnfrmpasswordRef.current.value) {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            confirmPassword:
+              "Error: Password And Confirm Password Must Be Same",
+          }));
+
+          return false;
+        } else {
+          setsuccessMessage("");
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            confirmPassword: "",
+          }));
+        }
+    }
+  };
+
   //submithandler function
   function submitHandler(event) {
     event.preventDefault();
 
-    //client side validation
-    if (nameRef.current.value.trim() === "") {
-      //alert("please fill the name field ");
-      setsuccessMessage("");
-      setMessage("Error: Empty Name Field");
-      return false;
-    } else if (emailRef.current.value.trim() === "") {
-      //alert("email can not be empty");
-      setsuccessMessage("");
-      setMessage("Error: Empty Email Field");
-      return false;
-    } else if (
-      cnicRef.current.value.trim() === "" ||
-      cnicRef.current.value.length !== 13
-    ) {
-      // alert(
-      //   "CNIC can not be empty and must be of 13 length including special characters"
-      // );
-      setsuccessMessage("");
-      setMessage("Error: CNIC Must Be Non-Empty And Of 13 Characters");
-      return false;
-    } else if (addressRef.current.value.trim() === "") {
-      // alert("address field can not be empty");
-      setsuccessMessage("");
-      setMessage("Error: Empty Address Field");
-      return false;
-    }
-    // } else if (phoneRef.current.value >= 0) {
-    //   alert(" phone number must be valid");
-    //   return false;
-    // }
-    else if (phoneRef.current.value.length !== 11) {
-      // alert(" phone number length must be of 11 characters");
-      setsuccessMessage("");
-      setMessage("Error: Phone-Number Length Must Be Of 11 Characters");
-      return false;
-    } else if (passwordRef.current.value.trim() === "") {
-      // alert("password can not be empty");
-      setsuccessMessage("");
-      setMessage("Error: Empty Password Field");
-      return false;
-    } else if (passwordRef.current.value.length < 8) {
-      //alert(" password length must be atleast of 8 characters");
-      setsuccessMessage("");
-      setMessage("Error: Password Length Must Be Atleast 8 Characters");
-      return false;
-    } else if (passwordRef.current.value !== cnfrmpasswordRef.current.value) {
-      //alert("password and confirm password must be same");
-      setsuccessMessage("");
-      setMessage("Error: Password And Confirm Password Must Be Same");
-      return false;
+    for (const key in message) {
+      if (message[key]) {
+        return false; // Do not submit the form if there are errors
+      }
     }
 
     //sending data to backend
@@ -155,7 +264,7 @@ const AddResident = () => {
     })
       .then((response) => {
         if (response.ok) {
-          setMessage("");
+          setError("");
           setsuccessMessage("Record Inserted Successfully");
           setUserInputs({
             name: "",
@@ -168,9 +277,7 @@ const AddResident = () => {
           setCpassword("");
         } else if (response.status === 400) {
           setsuccessMessage("");
-          setMessage(
-            "Error: Duplicate Email , Cnic , Phone No Are Not Allowed"
-          );
+          setError("Error: Duplicate Email , Cnic , Phone No Are Not Allowed");
           return false;
         }
         return response.json();
@@ -199,8 +306,11 @@ const AddResident = () => {
             ref={nameRef}
             value={userInputs.name}
             onChange={nameHandler}
-            autoFocus
+            onBlur={focusOut("name")}
           />
+          {message.name && (
+            <span className="superAdmin-Adderror-message">{message.name}</span>
+          )}
         </div>
         <div className="SA-Addadmin-singlediv-container">
           <FontAwesomeIcon
@@ -215,7 +325,11 @@ const AddResident = () => {
             name="adminEmail"
             value={userInputs.email}
             onChange={emailHandler}
+            onBlur={focusOut("email")}
           />
+          {message.email && (
+            <span className="superAdmin-Adderror-message">{message.email}</span>
+          )}
         </div>
         <div className="SA-Addadmin-singlediv-container">
           <FontAwesomeIcon
@@ -230,7 +344,11 @@ const AddResident = () => {
             value={userInputs.cnic}
             ref={cnicRef}
             onChange={cnicHandler}
+            onBlur={focusOut("cnic")}
           />
+          {message.cnic && (
+            <span className="superAdmin-Adderror-message">{message.cnic}</span>
+          )}
         </div>
         <div className="SA-Addadmin-singlediv-container">
           <FontAwesomeIcon
@@ -245,7 +363,13 @@ const AddResident = () => {
             value={userInputs.address}
             ref={addressRef}
             onChange={addressHandler}
+            onBlur={focusOut("address")}
           />
+          {message.address && (
+            <span className="superAdmin-Adderror-message">
+              {message.address}
+            </span>
+          )}
         </div>
         <div className="SA-Addadmin-singlediv-container">
           <FontAwesomeIcon
@@ -260,7 +384,11 @@ const AddResident = () => {
             name="adminPhone"
             value={userInputs.phone}
             onChange={phoneHandler}
+            onBlur={focusOut("phone")}
           />
+          {message.phone && (
+            <span className="superAdmin-Adderror-message">{message.phone}</span>
+          )}
         </div>
         <div className="SA-Addadmin-singlediv-container">
           <FontAwesomeIcon
@@ -275,7 +403,13 @@ const AddResident = () => {
             name="adminPassword"
             value={userInputs.password}
             onChange={passwordHandler}
+            onBlur={focusOut("password")}
           />
+          {message.password && (
+            <span className="superAdmin-Adderror-message">
+              {message.password}
+            </span>
+          )}
         </div>
         <div className="SA-Addadmin-singlediv-container">
           <FontAwesomeIcon
@@ -290,7 +424,13 @@ const AddResident = () => {
             name="confrmadminPassword"
             value={cPassword}
             onChange={CpasswordHandler}
+            onBlur={focusOut("confirmPassword")}
           />
+          {message.confirmPassword && (
+            <span className="superAdmin-Adderror-message">
+              {message.confirmPassword}
+            </span>
+          )}
         </div>
         <div className="SA-Addadmin-singleButton-container">
           <ScreenBtn type="button" onClick={sAdminHomePage}>
@@ -298,8 +438,8 @@ const AddResident = () => {
           </ScreenBtn>
           <ScreenBtn type="submit">Add </ScreenBtn>
         </div>
-        <div className="superAdmin-Adderror-message">
-          {message && <p>{message}</p>}
+        <div className="superAdmin-Error-message">
+          {error && <p>{error}</p>}
         </div>
         <div className="superAdmin-Addsuccess-message">
           {successmessage && <p>{successmessage}</p>}
