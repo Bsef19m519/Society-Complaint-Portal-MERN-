@@ -14,12 +14,18 @@ import UpdateResident from "./Resident Component/updateResident";
 import ViewResident from "./Resident Component/searchResident";
 import DeleteResident from "./Resident Component/deleteResident";
 import ComplaintOfficer from "./Resident Component/ComplaintOfficer";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 function App() {
   //managing logIn state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   console.log(isLoggedIn);
+
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     navigate("/login");
+  //   }
+  // });
 
   return (
     <div className="App-header">

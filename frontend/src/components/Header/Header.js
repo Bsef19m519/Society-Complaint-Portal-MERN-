@@ -15,12 +15,9 @@ const Header = (props) => {
   let navigate = useNavigate();
 
   function logOut() {
-    // console.log(localStorage.getItem("token"));
     localStorage.removeItem("token");
     props.setLogIn(false);
     navigate("/login");
-    // console.log(localStorage.getItem("token"));
-    //
   }
 
   if (props.login === false) {
