@@ -55,9 +55,16 @@
   margin: 10px;
 }
 
-.superAdmin-Update-message {
+.superAdmin-Updateerror-message {
   padding-left: 2px;
   color: red;
+  font-style: italic;
+  margin: -10px 7px 7px 7px;
+}
+
+.superAdmin-Updatesuccess-message {
+  padding-left: 2px;
+  color: green;
   font-style: italic;
   margin: -10px 7px 7px 7px;
 }

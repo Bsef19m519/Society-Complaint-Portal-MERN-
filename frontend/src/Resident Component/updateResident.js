@@ -43,6 +43,7 @@ const UpdateResident = () => {
   const [cPassword, setCpassword] = useState("");
   const [preEmail, setPreEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [successmessage, setsuccessMessage] = useState("");
 
   function preEmailHandler(event) {
     setPreEmail(event.target.value);
@@ -93,14 +94,17 @@ const UpdateResident = () => {
 
     if (preEmailRef.current.value.trim() === "") {
       // alert("Please Enter Already setted email");
+      setsuccessMessage("");
       setMessage("Error: Empty Email Field");
       return false;
     } else if (nameRef.current.value.trim() === "") {
       // alert("please fill the name field ");
+      setsuccessMessage("");
       setMessage("Error: Empty Name Field");
       return false;
     } else if (emailRef.current.value.trim() === "") {
       // alert("email can not be empty");
+      setsuccessMessage("");
       setMessage("Error: Empty Email Field");
       return false;
     } else if (
@@ -108,14 +112,17 @@ const UpdateResident = () => {
       cnicRef.current.value.length !== 13
     ) {
       // alert("cnic can not be empty and must be of 13 length ");
+      setsuccessMessage("");
       setMessage("Error: CNIC Must Be Non-Empty And Of 13 Characters");
       return false;
     } else if (addressRef.current.value.trim() === "") {
       // alert("address field can not be empty");
+      setsuccessMessage("");
       setMessage("Error: Empty Address Field");
       return false;
     } else if (phoneRef.current.value.length !== 11) {
       // alert(" phone number length must be of 11 characters");
+      setsuccessMessage("");
       setMessage("Error: Phone-Number Length Must Be Of 11 Characters");
       return false;
     }
@@ -125,14 +132,17 @@ const UpdateResident = () => {
     // }
     else if (passwordRef.current.value.trim() === "") {
       // alert("password field can not be empty");
+      setsuccessMessage("");
       setMessage("Error: Empty Password Field");
       return false;
     } else if (passwordRef.current.value.length < 8) {
       // alert(" password length must be atleast of 8 characters");
+      setsuccessMessage("");
       setMessage("Error: Password Length Must Be Atleast 8 Characters");
       return false;
     } else if (passwordRef.current.value !== cnfrmPasswordRef.current.value) {
       // alert("password and confirm password must be same");
+      setsuccessMessage("");
       setMessage("Error: Password And Confirm Password Must Be Same");
       return false;
     }
@@ -148,8 +158,20 @@ const UpdateResident = () => {
     })
       .then((response) => {
         if (response.ok) {
-          setMessage("Record Updated Successfully");
+          setMessage("");
+          setsuccessMessage("Record Updated Successfully");
+          setUserInputs({
+            name: "",
+            email: "",
+            phone: "",
+            password: "",
+            cnic: "",
+            address: "",
+          });
+          setCpassword("");
+          setPreEmail("");
         } else {
+          setsuccessMessage("");
           setMessage("Error: Update Operation Failed");
         }
         return response.json();
@@ -159,16 +181,6 @@ const UpdateResident = () => {
 
     // console.log(userInputs);
     // console.log(cPassword);
-    setUserInputs({
-      name: "",
-      email: "",
-      phone: "",
-      password: "",
-      cnic: "",
-      address: "",
-    });
-    setCpassword("");
-    setPreEmail("");
   }
 
   return (
@@ -319,8 +331,11 @@ const UpdateResident = () => {
             <ScreenBtn type="submit">Update </ScreenBtn>
           </div>
         </div>
-        <div className="superAdmin-Update-message">
+        <div className="superAdmin-Updateerror-message">
           {message && <p>{message}</p>}
+        </div>
+        <div className="superAdmin-Updatesuccess-message">
+          {successmessage && <p>{successmessage}</p>}
         </div>
       </form>
     </div>

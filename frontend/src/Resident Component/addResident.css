@@ -50,9 +50,16 @@
   margin: 10px;
 }
 
-.superAdmin-Add-message {
+.superAdmin-Adderror-message {
   padding-left: 2px;
   color: red;
+  margin: -10px 7px 7px 7px;
+  font-style: italic;
+}
+
+.superAdmin-Addsuccess-message {
+  padding-left: 2px;
+  color: green;
   margin: -10px 7px 7px 7px;
   font-style: italic;
 }

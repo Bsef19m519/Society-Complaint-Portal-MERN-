@@ -12,7 +12,7 @@ const DeleteResident = () => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
     }
-  });
+  }, []);
 
   //navigate to others component
   const sAdminHomePage = () => {
@@ -22,6 +22,7 @@ const DeleteResident = () => {
   //handling input state
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [successmessage, setsuccessMessage] = useState("");
   function emailHandler(event) {
     setEmail(event.target.value);
   }
@@ -40,15 +41,16 @@ const DeleteResident = () => {
       });
       if (response.ok) {
         // const data = await response.json();
-        setMessage("Record Deleted Successfully.");
+        setMessage("");
+        setsuccessMessage("Record Deleted Successfully.");
+        setEmail("");
       } else {
+        setsuccessMessage("");
         setMessage("Error: Record Not Found.");
       }
     } catch (error) {
       console.error(error);
     }
-
-    setEmail("");
   };
 
   return (
@@ -82,8 +84,11 @@ const DeleteResident = () => {
           </ScreenBtn>
           <ScreenBtn type="submit">Delete</ScreenBtn>
         </div>
-        <div className="superAdmin-delete-message">
+        <div className="superAdmin-deleteerror-message">
           {message && <p>{message}</p>}
+        </div>
+        <div className="superAdmin-deletesuccess-message">
+          {successmessage && <p>{successmessage}</p>}
         </div>
       </form>
     </div>
