@@ -61,13 +61,14 @@
 }
 
 .Complaint-Add-message {
-  padding-left: 2px;
-  color: red;
-  margin: -10px 7px 7px 7px;
+  color:green;
   font-style: italic;
+  font-size: 15px;
 }
 
 .AddComplaint-error {
+
   color: red;
   font-style: italic;
+  font-size: 10px;
 }
