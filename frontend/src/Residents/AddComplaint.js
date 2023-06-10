@@ -113,9 +113,7 @@ const AddComplaint = () => {
             <option value="parking related issues">
               Parking related issues
             </option>
-            <option value="complaint against any member
-
-">
+            <option value="complaint against any member">
               Complaint against any member
             </option>
             <option value="others">Others</option>
