@@ -13,25 +13,23 @@ const About = ({ aboutRef }) => {
         <p className="aboutPara">
           <b>
             <i>Society Complaint Portal</i>
-          </b>
+          </b>{" "}
           is a FCIT-student's owned Complaint Portal which is basically a
           website that runs on desktop. It is a tool where the residents of a
           society can registered their complaint against the other resident of
-          the society. A person can register the complaint anonymously. Actions
-          will be taken on the complaint within a week and if they are not
-          taken, the admins would be punished accordingly. The goal is to build
-          a software efficient enough to handle complaints online without any
-          inconsistency.There are three end-users of this system named super
-          Admin , Admin and Resident of the society.
+          the society or against any issue they are facing. A person can
+          register the complaint anonymously. Actions will be taken on the
+          complaint within a specific period. The goal is to build a software
+          efficient enough to handle complaints online without any
+          inconsistency.There are three end-users of this system named Admin,
+          Complaint Officer and Resident of the society.
           <br />
           <br /> Our goal is that by using this software resident can register
-          complaints, track complaints, get a penalty when registering a false
-          complaint, admin tackle complaints within a specified period.There
-          will be multiple admins and each admin will handle complaints .They
-          will be under observations by Super Admin and incase of delay that
-          particular admin get a penalty from super admin.Super admin can
-          add,delete,view and update admins , Whereas the Complainee will got
-          warning or penalty according to the case .
+          complaints, track complaints, admin will manage the residents.
+          Complaint officer will track the complaint. Based on facts and
+          reality, officer will acknowledged , resolve or reject the complaint.
+          Register Complaint, Track Complaint, Complaint status, Generate PDF of
+          complaints are the services provided by this portal.
         </p>
         <p></p>
       </div>
