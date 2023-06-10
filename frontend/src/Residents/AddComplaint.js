@@ -11,6 +11,11 @@ const AddComplaint = () => {
     description: "",
   });
 
+  const [errors, setErrors] = useState({
+    complaintType: "",
+    description: "",
+  });
+
   const [message, setMessage] = useState("");
 
   const goBack = () => {
@@ -20,16 +25,25 @@ const AddComplaint = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (userInputs.complaintType.trim() === "") {
-      setMessage("Error: Please select a complaint type");
+      setErrors((prevState) => ({
+        ...prevState,
+        complaintType: "Error: Please select a complaint type",
+      }));
       return;
     } else if (userInputs.description.trim() === "") {
-      setMessage("Error: Please provide a description");
+      setErrors((prevState) => ({
+        ...prevState,
+        description: "Error: Please provide a description",
+      }));
       return;
     } else if (
       userInputs.description.length < 10 ||
       userInputs.description.length > 1000
     ) {
-      setMessage("Error: Description should be between 10 and 1000 characters");
+      setErrors((prevState) => ({
+        ...prevState,
+        description: "Error: Description should be between 10 and 1000 characters",
+      }));
       return;
     }
 
@@ -58,17 +72,27 @@ const AddComplaint = () => {
   };
 
   const handleComplaintTypeChange = (event) => {
-    setUserInputs({
-      ...userInputs,
+    setErrors((prevState) => ({
+      ...prevState,
+      complaintType: "",
+    }));
+
+    setUserInputs((prevState) => ({
+      ...prevState,
       complaintType: event.target.value,
-    });
+    }));
   };
 
   const handleDescriptionChange = (event) => {
-    setUserInputs({
-      ...userInputs,
+    setErrors((prevState) => ({
+      ...prevState,
+      description: "",
+    }));
+
+    setUserInputs((prevState) => ({
+      ...prevState,
       description: event.target.value,
-    });
+    }));
   };
 
   return (
@@ -94,6 +118,9 @@ const AddComplaint = () => {
             </option>
             <option value="others">Others</option>
           </select>
+          {errors.complaintType && (
+            <p className="AddComplaint-error">{errors.complaintType}</p>
+          )}
         </div>
         <div className="AddComplaint-input-container">
           <label>Description:</label>
@@ -104,6 +131,9 @@ const AddComplaint = () => {
             rows="5"
             cols="28"
           />
+          {errors.description && (
+            <p className="AddComplaint-error">{errors.description}</p>
+          )}
         </div>
         <div className="AddComplaint-singleButton-container">
           <ScreenBtn type="button" onClick={goBack}>
@@ -111,10 +141,11 @@ const AddComplaint = () => {
           </ScreenBtn>
           <ScreenBtn type="submit">Add</ScreenBtn>
         </div>
-        {message && <p className="AddComplaint-error">{message}</p>}
+        {message && <p className="Complaint-Add-message">{message}</p>}
       </form>
     </div>
   );
 };
 
 export default AddComplaint;
+
