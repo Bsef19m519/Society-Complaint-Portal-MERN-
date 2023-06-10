@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 600px;
+  height: 650px;
   background-image: url("bg.jpg");
   background-repeat: no-repeat;
   background-size: 100% 800px;
@@ -26,7 +26,7 @@
   border: 2px solid white;
   border-radius: 10px;
   width: 300px;
-  height: 450px;
+  /* height: 450px; */
   background-color: #cccccc;
 }
 .login-txt {
@@ -57,6 +57,7 @@ hr {
   /* border: 2px solid yellow; */
   /* align-items: center; */
   text-align: center;
+  padding-bottom: 30px;
 }
 
 .superAdmin-login-message {
@@ -64,4 +65,13 @@ hr {
   color: red;
   margin: -10px 7px 7px 7px;
   font-style: italic;
+  font-size: 10px;
+}
+
+.superAdmin-loginSubmit-message {
+  padding-left: 2px;
+  color: red;
+  margin: -10px 7px 7px 7px;
+  font-style: italic;
+  font-size: 15px;
 }

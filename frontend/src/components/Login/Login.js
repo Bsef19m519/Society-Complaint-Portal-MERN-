@@ -17,7 +17,11 @@ const Login = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [submitMessage, setSubmitMessage] = useState("");
+  const [message, setMessage] = useState({
+    email: "",
+    password: "",
+  });
 
   const emailHandler = (event) => {
     setEmail(event.target.value);
@@ -47,28 +51,67 @@ const Login = (props) => {
     password: password,
   };
 
+  //focusOut Error handler
+  const focusOut = (field) => () => {
+    switch (field) {
+      case "email":
+        if (emailRef.current.value.trim() === "") {
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            email: "Error: Empty EmailField",
+          }));
+          return false;
+        } else {
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            email: "",
+          }));
+        }
+        break;
+
+      case "password":
+        if (passwordRef.current.value.trim() === "") {
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            password: "Error: Empty Password Field",
+          }));
+
+          return false;
+        } else if (passwordRef.current.value.trim().length < 8) {
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            password: "Error: Password Must Be Of Atleast 8 Length",
+          }));
+
+          return false;
+        } else {
+          setMessage((prevmessage) => ({
+            ...prevmessage,
+            password: "",
+          }));
+        }
+        break;
+    }
+  };
+
   //create onsubmit handler function
   const handleSubmit = (event) => {
     //Prevent page reload
     event.preventDefault();
 
-    //email validation
-    if (emailRef.current.value.trim() === "") {
-      // alert("empty email field");
-      setMessage("Error: Empty Email Field");
-      return false;
+    //submit Validation
+    const submitError = {
+      email: "",
+      password: "",
+    };
+
+    for (const key in userInputs) {
+      if (userInputs[key] === "") {
+        submitError[key] = "This Field Is Required";
+      }
     }
 
-    //password length validation
-    else if (passwordRef.current.value.trim() === "") {
-      // alert("invalid password length");
-      setMessage("Error: Empty Password Field");
-      return false;
-    } else if (passwordRef.current.value.trim().length < 8) {
-      // alert("invalid password length");
-      setMessage("Error: Password Must Be Of Atleast 8 Length");
-      return false;
-    }
+    setMessage(submitError);
 
     //fetch call
     fetch("http://localhost:3001/api/auth", {
@@ -81,9 +124,9 @@ const Login = (props) => {
       .then((response) => {
         //console.log(response);
         if (!response.ok) {
-          setMessage("Error: Wrong Credentials.");
+          setSubmitMessage("Error: Wrong Credentials.");
         } else {
-          setMessage("");
+          setSubmitMessage("");
           props.setLogIn(true);
           console.log(props.login);
         }
@@ -138,7 +181,11 @@ const Login = (props) => {
               ref={emailRef}
               value={email}
               onChange={emailHandler}
+              onBlur={focusOut("email")}
             />
+            {message.email && (
+              <span className="superAdmin-login-message">{message.email}</span>
+            )}
             <hr />
           </div>
 
@@ -154,17 +201,20 @@ const Login = (props) => {
               ref={passwordRef}
               value={password}
               onChange={passwordHandler}
+              onBlur={focusOut("password")}
             />
+            {message.password && (
+              <span className="superAdmin-login-message">
+                {message.password}
+              </span>
+            )}
             <hr />
           </div>
           <div className="loginDiv-Button">
             <ScreenBtn type="submit">Sign In</ScreenBtn>
-            {/* <ScreenBtn type="button" onClick={SAnextPage}>
-              SA
-            </ScreenBtn> */}
           </div>
-          <div className="superAdmin-login-message">
-            {message && <p>{message}</p>}
+          <div className="superAdmin-loginSubmit-message">
+            {submitMessage && <p>{submitMessage}</p>}
           </div>
         </form>
       </div>
