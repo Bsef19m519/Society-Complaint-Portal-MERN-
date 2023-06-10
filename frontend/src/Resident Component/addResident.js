@@ -277,7 +277,9 @@ const AddResident = () => {
           setCpassword("");
         } else if (response.status === 400) {
           setsuccessMessage("");
-          setError("Error: Duplicate Email , Cnic , Phone No Are Not Allowed");
+          setError(
+            "Error:Fill The Form Properly. Duplicate Email , Cnic , Phone No Are Not Allowed"
+          );
           return false;
         }
         return response.json();

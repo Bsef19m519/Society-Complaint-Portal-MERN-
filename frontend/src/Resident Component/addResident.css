@@ -63,6 +63,7 @@
   color: green;
   margin: -10px 7px 7px 7px;
   font-style: italic;
+  font-size: 15px;
 }
 
 .superAdmin-Error-message {
@@ -70,4 +71,5 @@
   color: red;
   margin: -10px 7px 7px 7px;
   font-style: italic;
+  font-size: 15px;
 }

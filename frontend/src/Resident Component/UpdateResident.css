@@ -60,6 +60,7 @@
   color: red;
   font-style: italic;
   margin: -10px 7px 7px 7px;
+  font-size: 10px;
 }
 
 .superAdmin-Updatesuccess-message {
@@ -67,4 +68,13 @@
   color: green;
   font-style: italic;
   margin: -10px 7px 7px 7px;
+  font-size: 15px;
+}
+
+.superAdmin-Update-Error-message {
+  padding-left: 2px;
+  color: red;
+  font-style: italic;
+  margin: -10px 7px 7px 7px;
+  font-size: 15px;
 }
