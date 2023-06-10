@@ -267,48 +267,31 @@ const UpdateResident = () => {
   function submitHandler(event) {
     event.preventDefault();
 
-    // if (preEmailRef.current.value.trim() === "") {
-    //   setsuccessMessage("");
-    //   setMessage("Error: Empty Email Field");
-    //   return false;
-    // } else if (nameRef.current.value.trim() === "") {
-    //   setsuccessMessage("");
-    //   setMessage("Error: Empty Name Field");
-    //   return false;
-    // } else if (emailRef.current.value.trim() === "") {
-    //   setsuccessMessage("");
-    //   setMessage("Error: Empty Email Field");
-    //   return false;
-    // } else if (
-    //   cnicRef.current.value.trim() === "" ||
-    //   cnicRef.current.value.length !== 13
-    // ) {
-    //   setsuccessMessage("");
-    //   setMessage("Error: CNIC Must Be Non-Empty And Of 13 Characters");
-    //   return false;
-    // } else if (addressRef.current.value.trim() === "") {
-    //   setsuccessMessage("");
-    //   setMessage("Error: Empty Address Field");
-    //   return false;
-    // } else if (phoneRef.current.value.length !== 11) {
-    //   setsuccessMessage("");
-    //   setMessage("Error: Phone-Number Length Must Be Of 11 Characters");
-    //   return false;
-    // } else if (passwordRef.current.value.trim() === "") {
-    //   setsuccessMessage("");
-    //   setMessage("Error: Empty Password Field");
-    //   return false;
-    // } else if (passwordRef.current.value.length < 8) {
-    //   // alert(" password length must be atleast of 8 characters");
-    //   setsuccessMessage("");
-    //   setMessage("Error: Password Length Must Be Atleast 8 Characters");
-    //   return false;
-    // } else if (passwordRef.current.value !== cnfrmPasswordRef.current.value) {
-    //   // alert("password and confirm password must be same");
-    //   setsuccessMessage("");
-    //   setMessage("Error: Password And Confirm Password Must Be Same");
-    //   return false;
-    // }
+    const submitError = {
+      prevEmail: "",
+      name: "",
+      email: "",
+      phone: "",
+      password: "",
+      address: "",
+      cnic: "",
+      confirmPassword: "",
+    };
+
+    for (const key in userInputs) {
+      if (userInputs[key] === "") {
+        submitError[key] = "This Field Is Required";
+      }
+    }
+
+    if (submitError.password !== submitError.confirmPassword) {
+      submitError.confirmPassword = "Password does not match";
+    }
+    if (submitError.prevEmail === "") {
+      submitError.prevEmail = "This Field Is Required";
+    }
+
+    setMessage(submitError);
 
     //sending data to backend
     fetch(`http://localhost:3001/api/users/${preEmail}`, {
@@ -335,9 +318,7 @@ const UpdateResident = () => {
           setPreEmail("");
         } else {
           setsuccessMessage("");
-          setError(
-            "Error: Fill The Form Properly.Previoue Email Should Be Existed. Update Operation Failed"
-          );
+          setError("");
         }
         return response.json();
       })

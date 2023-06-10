@@ -15,8 +15,11 @@ import ViewResident from "./Resident Component/searchResident";
 import DeleteResident from "./Resident Component/deleteResident";
 import ComplaintOfficer from "./Resident Component/ComplaintOfficer";
 import { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  // let navigate = useNavigate(null);
+
   //managing logIn state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   console.log(isLoggedIn);

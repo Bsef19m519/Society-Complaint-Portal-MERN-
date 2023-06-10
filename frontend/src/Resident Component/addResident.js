@@ -247,11 +247,27 @@ const AddResident = () => {
   function submitHandler(event) {
     event.preventDefault();
 
-    for (const key in message) {
-      if (message[key]) {
-        return false; // Do not submit the form if there are errors
+    const submitError = {
+      name: "",
+      email: "",
+      phone: "",
+      password: "",
+      address: "",
+      cnic: "",
+      confirmPassword: "",
+    };
+
+    for (const key in userInputs) {
+      if (userInputs[key] === "") {
+        submitError[key] = "This Field Is Required";
       }
     }
+
+    if (submitError.password !== submitError.confirmPassword) {
+      submitError.confirmPassword = "Password does not match";
+    }
+
+    setMessage(submitError);
 
     //sending data to backend
     fetch("http://localhost:3001/api/users", {
@@ -277,9 +293,7 @@ const AddResident = () => {
           setCpassword("");
         } else if (response.status === 400) {
           setsuccessMessage("");
-          setError(
-            "Error:Fill The Form Properly. Duplicate Email , Cnic , Phone No Are Not Allowed"
-          );
+          setError("");
           return false;
         }
         return response.json();

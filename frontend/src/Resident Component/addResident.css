@@ -1,17 +1,18 @@
 .SA-addAdmin-container-div {
   display: flex;
   justify-content: center;
-  height: 842px;
+  /* height: 842px; */
   background-image: url("../components/Login/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  padding-bottom: 50px;
 }
 
 .SA-addAdmin-form {
   border: 2px solid white;
   border-radius: 10px;
   width: 300px;
-  height: 630px;
+  /* height: 70%; */
   background-color: #cccccc;
   margin-top: 100px;
 }

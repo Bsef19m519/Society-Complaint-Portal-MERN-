@@ -42,7 +42,7 @@ const Service = ({ serviceRef }) => {
               </p>
             </div>
           </div>
-          <div className="servicesDiv">
+          {/* <div className="servicesDiv">
             <div className="service-Div">
               <img className="serviceImg" src={S4} alt="pic" />
               <h3>Notifications</h3>
@@ -69,7 +69,7 @@ const Service = ({ serviceRef }) => {
                 your complaint whether it is in process or not.
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
