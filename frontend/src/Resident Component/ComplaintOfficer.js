@@ -64,6 +64,9 @@ const ComplaintOfficer = () => {
             })
     }
 
+    const generatePdf = () => {
+        console.log("HE")
+    }
 
     const updateStatus = (id, status) => {
         const data = {
