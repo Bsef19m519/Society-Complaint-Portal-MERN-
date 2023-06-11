@@ -1,23 +1,36 @@
 import React, { useState } from 'react';
-import { Button, Box } from '@mui/material';
+import { Button, Box, Tab } from '@mui/material';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
-
+import { TextField } from '@mui/material'
+import jsPDF from 'jspdf';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 const ComplaintOfficer = () => {
     let navigate = useNavigate();
     const [tableData, setTableData] = useState([]);
+    const [tableData2, setTableData2] = useState([]);
     const [checker, setChecker] = useState(false);
     const [isPending, setIsPending] = useState(true);
     const [isAckn, setIsAckn] = useState(true);
     const [isRes, setIsRes] = useState(true);
     const [isRej, setIsRej] = useState(true);
+    const [buttonVariant, setButtonVariant] = useState('outlined');
 
 
 
 
 
+    useEffect(() => {
+        fetch(`http://localhost:3001/api/complaints/`, { method: "GET", headers: { "x-auth-token": localStorage.getItem("token") }, })
+            .then(response => response.json())
+            .then(data => setTableData2(data))
+            .catch(error => {
+                console.log("Got an error")
+            })
+    }, [])
     useEffect(() => {
         if (!localStorage.getItem("token")) {
             navigate("/login")
@@ -32,6 +45,93 @@ const ComplaintOfficer = () => {
                 console.log("Got an error")
             })
     }, [])
+
+    const handleMouseEnter = () => {
+        setButtonVariant('contained');
+    };
+
+    const handleMouseLeave = () => {
+        setButtonVariant('outlined');
+    };
+
+    const generatePDF = () => {
+
+        let pdfData = []
+        // pdfData.push("Complaint Type", "Generation Date", "Acknowledged Date", "Complainer Name", "Complainer Email", "Complaint Status")
+        let nestedList = []
+        for (var i = 0; i < tableData2.length; i++) {
+            const { complaintType, generationDate, acknowledgeDate, complainer, complaintStatus } = tableData2[i];
+            nestedList.push(
+                complaintType, formateDate(generationDate),
+                acknowledgeDate ? formateDate(acknowledgeDate) : "Not Acknowledged Yet",
+                complainer.name, complainer.email, complaintStatus
+            )
+            pdfData.push(nestedList)
+            nestedList = []
+        }
+
+
+
+
+
+
+
+
+
+
+
+        pdfMake.vfs = pdfFonts.pdfMake.vfs;
+        const docDefinition = {
+            content: [
+
+            ],
+            pageSize: 'A4',
+            pageOrientation: 'landscape'
+        };
+
+
+
+        const tableWidth = 200;
+        const first = {
+            table:
+            {
+                headers: 1,
+                widths: ["*", "*", "*", "*", "*", "*"],
+                body: [
+                    ["Complaint Type", "Generation Date", "Acknowledged Date", "Complainer Name", "Complainer Email", "Complaint Status"],
+                ]
+            }
+        }
+
+        docDefinition.content.push(first);
+
+
+
+        for (var i = 0; i < pdfData.length; i++) {
+            const table = {
+                table: {
+                    headers: 1,
+                    widths: ["*", "*", "*", "*", "*", "*"],
+                    body: [
+                        pdfData[i]
+                    ]
+
+                },
+            };
+
+
+            docDefinition.content.push(table);
+        }
+
+
+
+        const doc = pdfMake.createPdf(docDefinition);
+        doc.download("Complaints Report.pdf")
+
+
+
+    }
+
 
     const handleStatus = (event) => {
         setIsAckn(true);
@@ -62,11 +162,12 @@ const ComplaintOfficer = () => {
             .catch(error => {
                 console.log("Got an error")
             })
+
+
+
     }
 
-    const generatePdf = () => {
-        console.log("HE")
-    }
+
 
     const updateStatus = (id, status) => {
         const data = {
@@ -121,11 +222,32 @@ const ComplaintOfficer = () => {
                 >
                     Rejected
                 </Button>
-
+                <Button sx={{ marginLeft: "40px" }}
+                    variant={buttonVariant}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    onClick={() => { generatePDF() }}
+                >
+                    Generate PDF
+                </Button>
 
 
 
             </Box>
+            {/* <Box sx={{ display: "flex", justifyContent: 'center' }}>
+                <form>
+                    <TextField sx={{ width: "300px", height: "auto" }}
+                        label="Rejection Reason"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                    />
+                    <Button sx={{ marginLeft: "10px", marginTop: "24px" }} type="submit" variant="contained" color="primary"  >
+                        Submit
+                    </Button>
+                </form>
+            </Box> */}
+
             <Box sx={{ display: 'flex', justifyContent: 'center', padding: "10px", marginTop: "40px" }}>
                 <TableContainer component={Paper}>
                     <Table>
@@ -143,7 +265,7 @@ const ComplaintOfficer = () => {
                         </TableHead>
                         <TableBody>
                             {tableData ? tableData.map((c) => (
-                                <TableRow key={c.complaintType}>
+                                <TableRow key={c._id}>
                                     <TableCell>{c.complaintType}</TableCell>
                                     <TableCell>{c.description}</TableCell>
                                     <TableCell>{formateDate(c.generationDate)}</TableCell>

@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
  */
 module.exports = function () {
   const db =
-    "mongodb+srv://dbUser:complaintPortal2023@cluster0.l0ahg1e.mongodb.net/societyComplaintPortalDB";
+    "mongodb://127.0.0.1/societyComplaintPortalDB";
   mongoose
     .connect(db)
     .then(() => console.log(`Connected to MongoDB...`))

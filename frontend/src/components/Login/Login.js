@@ -54,6 +54,8 @@ const Login = (props) => {
   //focusOut Error handler
   const focusOut = (field) => () => {
     switch (field) {
+
+      case "default":
       case "email":
         if (emailRef.current.value.trim() === "") {
           setMessage((prevmessage) => ({
