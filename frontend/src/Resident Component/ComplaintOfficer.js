@@ -3,8 +3,10 @@ import { Button, Box, Tab } from '@mui/material';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
-import { TextField } from '@mui/material'
+import { TextField, InputLabel } from '@mui/material'
 import jsPDF from 'jspdf';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
@@ -19,14 +21,33 @@ const ComplaintOfficer = () => {
     const [isRej, setIsRej] = useState(true);
     const [buttonVariant, setButtonVariant] = useState('outlined');
 
+    const [startDate, setStartDate] = useState([]);
+    const [endDate, setEndDate] = useState([]);
+    const [pdf, setPdf] = useState(true);
 
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(startDate < formateDate(tableData2[0].generationDate) && endDate > formateDate(tableData2[0].generationDate))
+        generatePDF()
+    };
 
+    const handleStartDateChange = (e) => {
+
+        setStartDate(e.target.value)
+
+    }
+    const handleEndDateChange = (e) => {
+        setEndDate(e.target.value)
+    }
 
     useEffect(() => {
         fetch(`http://localhost:3001/api/complaints/`, { method: "GET", headers: { "x-auth-token": localStorage.getItem("token") }, })
             .then(response => response.json())
-            .then(data => setTableData2(data))
+            .then(data => {
+
+                setTableData2(data)
+            })
             .catch(error => {
                 console.log("Got an error")
             })
@@ -46,6 +67,11 @@ const ComplaintOfficer = () => {
             })
     }, [])
 
+    const pdfPage = () => {
+        setPdf(false)
+    }
+
+
     const handleMouseEnter = () => {
         setButtonVariant('contained');
     };
@@ -56,11 +82,13 @@ const ComplaintOfficer = () => {
 
     const generatePDF = () => {
 
+
         let pdfData = []
-        // pdfData.push("Complaint Type", "Generation Date", "Acknowledged Date", "Complainer Name", "Complainer Email", "Complaint Status")
+
+        var formData = tableData2.filter(item => startDate <= formateDate(item.generationDate) && endDate >= formateDate(item.generationDate))
         let nestedList = []
-        for (var i = 0; i < tableData2.length; i++) {
-            const { complaintType, generationDate, acknowledgeDate, complainer, complaintStatus } = tableData2[i];
+        for (var i = 0; i < formData.length; i++) {
+            const { complaintType, generationDate, acknowledgeDate, complainer, complaintStatus } = formData[i];
             nestedList.push(
                 complaintType, formateDate(generationDate),
                 acknowledgeDate ? formateDate(acknowledgeDate) : "Not Acknowledged Yet",
@@ -69,16 +97,6 @@ const ComplaintOfficer = () => {
             pdfData.push(nestedList)
             nestedList = []
         }
-
-
-
-
-
-
-
-
-
-
 
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
         const docDefinition = {
@@ -118,18 +136,10 @@ const ComplaintOfficer = () => {
 
                 },
             };
-
-
             docDefinition.content.push(table);
         }
-
-
-
         const doc = pdfMake.createPdf(docDefinition);
         doc.download("Complaints Report.pdf")
-
-
-
     }
 
 
@@ -185,18 +195,20 @@ const ComplaintOfficer = () => {
 
     }
 
-    const formateDate = () => {
-        const date = new Date();
+    function formateDate(d) {
+        const date = new Date(d)
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
-        const formattedDate = `${day}-${month}-${year}`;
-        return formattedDate; // Example output: "2023-05-31"
-
+        return `${year}-${month}-${day}`;
     }
 
+
     return (
-        <Box>
+        pdf ? (<Box>
+            <Button sx={{ marginLeft: "30px" }} variant={buttonVariant} onMouseEnter={handleMouseEnter} onClick={pdfPage} onMouseLeave={handleMouseLeave}>
+                Generate PDF
+            </Button>
             <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
                 <Button
                     variant={isPending ? 'outlined' : 'contained'}
@@ -222,18 +234,12 @@ const ComplaintOfficer = () => {
                 >
                     Rejected
                 </Button>
-                <Button sx={{ marginLeft: "40px" }}
-                    variant={buttonVariant}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    onClick={() => { generatePDF() }}
-                >
-                    Generate PDF
-                </Button>
 
 
 
             </Box>
+
+
             {/* <Box sx={{ display: "flex", justifyContent: 'center' }}>
                 <form>
                     <TextField sx={{ width: "300px", height: "auto" }}
@@ -247,6 +253,7 @@ const ComplaintOfficer = () => {
                     </Button>
                 </form>
             </Box> */}
+
 
             <Box sx={{ display: 'flex', justifyContent: 'center', padding: "10px", marginTop: "40px" }}>
                 <TableContainer component={Paper}>
@@ -294,7 +301,32 @@ const ComplaintOfficer = () => {
             </Box>
 
 
-        </Box >
+
+        </Box >) : (<Box>
+            <form onSubmit={handleSubmit} className="container mt-5">
+                <h5 style={{ margin: "40px" }}>Kindly give me the time duration for the complaints you want to get.</h5>
+                <div className="form-group">
+                    <label htmlFor="startDate" style={{ marginBottom: "10px" }}>Start Date</label>
+                    <input
+                        type="date" style={{ width: "230px", marginBottom: "10px" }} id="startDate"
+                        value={startDate} onChange={handleStartDateChange} className="form-control"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="endDate" style={{ marginBottom: "10px" }}>End Date</label>
+                    <input
+                        type="date" id="endDate" style={{ width: "230px", marginBottom: "10px" }} value={endDate} onChange={handleEndDateChange}
+                        className="form-control"
+                    />
+                </div>
+
+                <Button sx={{ margin: "20px" }} variant={buttonVariant} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} type="submit">
+                    Generate PDF
+                </Button>
+            </form>
+
+        </Box>)
     );
 };
 export default ComplaintOfficer;
