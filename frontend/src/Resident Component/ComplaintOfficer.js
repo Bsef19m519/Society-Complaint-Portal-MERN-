@@ -68,7 +68,13 @@ const ComplaintOfficer = () => {
     }, [])
 
     const pdfPage = () => {
-        setPdf(false)
+        if (pdf) {
+            setPdf(false)
+
+        }
+        else {
+            setPdf(true)
+        }
     }
 
 
@@ -207,7 +213,7 @@ const ComplaintOfficer = () => {
     return (
         pdf ? (<Box>
             <Button sx={{ marginLeft: "30px" }} variant={buttonVariant} onMouseEnter={handleMouseEnter} onClick={pdfPage} onMouseLeave={handleMouseLeave}>
-                Generate PDF
+                Get PDF
             </Button>
             <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
                 <Button
@@ -324,9 +330,12 @@ const ComplaintOfficer = () => {
                 <Button sx={{ margin: "20px" }} variant={buttonVariant} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} type="submit">
                     Generate PDF
                 </Button>
+                <Button sx={{ margin: "20px" }} variant="contained" onClick={pdfPage}>
+                    Back
+                </Button>
             </form>
 
-        </Box>)
+        </Box >)
     );
 };
 export default ComplaintOfficer;
