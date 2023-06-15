@@ -115,12 +115,16 @@ const ComplaintOfficer = () => {
 
 
 
+        const numColumns = 6;
+        const columnWidth = 100 / numColumns + '%';
+        const columnWidths = Array(numColumns).fill(columnWidth);
         const tableWidth = 200;
         const first = {
             table:
             {
                 headers: 1,
-                widths: ["*", "*", "*", "*", "*", "*"],
+                widths: columnWidths,
+
                 body: [
                     ["Complaint Type", "Generation Date", "Acknowledged Date", "Complainer Name", "Complainer Email", "Complaint Status"],
                 ]
@@ -131,11 +135,13 @@ const ComplaintOfficer = () => {
 
 
 
+
         for (var i = 0; i < pdfData.length; i++) {
             const table = {
                 table: {
                     headers: 1,
-                    widths: ["*", "*", "*", "*", "*", "*"],
+                    widths: columnWidths,
+
                     body: [
                         pdfData[i]
                     ]
