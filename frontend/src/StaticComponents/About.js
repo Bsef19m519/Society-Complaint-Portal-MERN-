@@ -6,7 +6,7 @@ const About = ({ aboutRef }) => {
     <>
       <div className="headingDiv" ref={aboutRef}>
         {/* <h1>Online Complaint <br/> Management System</h1> */}
-        <h1>Society Complaint Portal </h1>
+        <h1 style={{ marginBottom: "30px", marginTop: "50px" }}>Society Complaint Portal </h1>
         <p className="smallPara">Online Complaint Management System</p>
       </div>
       <div className="paraDiv">

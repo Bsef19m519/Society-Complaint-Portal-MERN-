@@ -315,25 +315,41 @@ const ComplaintOfficer = () => {
 
 
         </Box >) : (<Box>
-            <form onSubmit={handleSubmit}>
-                <h5 style={{ margin: "40px" }}>Kindly give me the time duration for the complaints you want to get.</h5>
-                <div className='form_css'>
-                    <label htmlFor="startDate" style={{ marginBottom: "10px" }}>Start Date</label>
+            <form onSubmit={handleSubmit} >
+                <h3 style={{ marginLeft: "100px" }}>Kindly give me the time duration for the complaints you want to get.</h3>
+                <div style={{ marginLeft: "100px" }}>
+                    <label htmlFor="startDate" style={{ marginBottom: "10px", marginRight: "40px" }}>Start Date</label>
                     <input
-                        type="date" style={{ width: "230px", marginBottom: "10px" }} id="startDate"
+                        type="date" style={{
+                            padding: '10px',
+                            border: '2px solid #ccc',
+                            borderRadius: '5px',
+                            fontSize: '16px',
+                            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                            transitionProperty: ' border-color 0.3s ease'
+
+                        }} id="startDate"
                         value={startDate} onChange={handleStartDateChange}
                     />
                 </div>
 
-                <div >
-                    <label htmlFor="endDate" style={{ marginBottom: "10px" }}>End Date</label>
+                <div style={{ marginLeft: "100px", marginTop: "30px" }}>
+                    <label htmlFor="endDate" style={{ marginBottom: "10px", marginRight: "40px" }}>End Date</label>
                     <input
-                        type="date" id="endDate" style={{ width: "230px", marginBottom: "10px" }} value={endDate} onChange={handleEndDateChange}
+                        type="date" id="endDate" style={{
+                            padding: '10px',
+                            border: '2px solid #ccc',
+                            borderRadius: '5px',
+                            fontSize: '16px',
+                            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                            transitionProperty: ' border-color 0.3s ease'
+
+                        }} value={endDate} onChange={handleEndDateChange}
 
                     />
                 </div>
 
-                <Button sx={{ margin: "20px" }} variant={buttonVariant} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} type="submit">
+                <Button sx={{ margin: "20px", marginLeft: "100px" }} variant={buttonVariant} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} type="submit">
                     Generate PDF
                 </Button>
                 <Button sx={{ margin: "20px" }} variant="contained" onClick={pdfPage}>

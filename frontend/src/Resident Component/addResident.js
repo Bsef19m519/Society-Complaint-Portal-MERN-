@@ -306,9 +306,9 @@ const AddResident = () => {
 
   return (
     <div className="SA-addAdmin-container-div">
-      <form className="SA-addAdmin-form" onSubmit={submitHandler}>
+      <form style={{ paddingBottom: '20px' }} className="SA-addAdmin-form" onSubmit={submitHandler}>
         <img className="SA-Addadmin-loginIcon" src={loginIcon} alt="SCP pic" />
-        <h2 className="SA-Addadmin-login-txt"> Add New Resident</h2>
+        <h4 className="SA-Addadmin-login-txt"> Add New Resident</h4>
         <div className="SA-Addadmin-singlediv-container">
           <FontAwesomeIcon
             className="SA-AddAdmin-faicons"

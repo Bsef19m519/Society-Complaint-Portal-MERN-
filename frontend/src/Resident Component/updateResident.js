@@ -331,13 +331,13 @@ const UpdateResident = () => {
 
   return (
     <div className="SA-UpdateAdmin-containerdiv">
-      <form className="SA-UpdateAdmin-form" onSubmit={submitHandler}>
+      <form style={{ paddingBottom: "20px" }} className="SA-UpdateAdmin-form" onSubmit={submitHandler}>
         <img
           className="SA-Updateadmin-loginIcon"
           src={loginIcon}
           alt="SCP pic"
         />
-        <h2 className="SA-Updateadmin-login-txt"> Update Resident</h2>
+        <h4 className="SA-Updateadmin-login-txt"> Update Resident</h4>
 
         <div className="SA-Updateadmin-singlediv-container">
           <input

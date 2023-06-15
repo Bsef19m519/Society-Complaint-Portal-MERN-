@@ -61,7 +61,7 @@ const DeleteResident = () => {
           src={loginIcon}
           alt="SCP pic"
         />
-        <h2 className="SA-DeleteAdmin-login-txt"> Delete Resident</h2>
+        <h4 className="SA-DeleteAdmin-login-txt"> Delete Resident</h4>
         <div className="SA-DeleteAdmin-singlediv-container">
           <FontAwesomeIcon
             className="SA-DeleteAdmin-faicons"

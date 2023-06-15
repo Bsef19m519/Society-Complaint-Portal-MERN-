@@ -63,7 +63,7 @@ const ViewResident = () => {
             src={loginIcon}
             alt="SCP pic"
           />
-          <h2 className="SA-searchAdmin-login-txt"> Search Resident</h2>
+          <h4 className="SA-searchAdmin-login-txt"> Search Resident</h4>
           <div className="SA-searchAdmin-singlediv-container">
             <FontAwesomeIcon
               className="SA-SearchAdmin-faicons"
