@@ -315,21 +315,21 @@ const ComplaintOfficer = () => {
 
 
         </Box >) : (<Box>
-            <form onSubmit={handleSubmit} className="container mt-5">
+            <form onSubmit={handleSubmit}>
                 <h5 style={{ margin: "40px" }}>Kindly give me the time duration for the complaints you want to get.</h5>
-                <div className="form-group">
+                <div className='form_css'>
                     <label htmlFor="startDate" style={{ marginBottom: "10px" }}>Start Date</label>
                     <input
                         type="date" style={{ width: "230px", marginBottom: "10px" }} id="startDate"
-                        value={startDate} onChange={handleStartDateChange} className="form-control"
+                        value={startDate} onChange={handleStartDateChange}
                     />
                 </div>
 
-                <div className="form-group">
+                <div >
                     <label htmlFor="endDate" style={{ marginBottom: "10px" }}>End Date</label>
                     <input
                         type="date" id="endDate" style={{ width: "230px", marginBottom: "10px" }} value={endDate} onChange={handleEndDateChange}
-                        className="form-control"
+
                     />
                 </div>
 
